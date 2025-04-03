@@ -1,0 +1,39 @@
+body {
+  font-family: "Avenir Next";
+   }
+   li {
+   list-style: none;
+   }
+  
+   .header {
+  background-color: #ceccf3;
+    height: 70px;
+   width: auto;
+   }
+    .channel-name {
+   float: left;
+   font-size: 24px;
+  padding: 20px 40px;
+ }
+   
+   .header-pagelist li{
+  float: left;
+  padding: 33px 20px;
+   }
+   /* stylesheet.css */
+  h2 {
+   text-align: left;
+  }
+   .main h1{
+  font-size: 140px; 
+   }
+  
+.footer {
+   height: 270px;
+   }
+
+   table {
+    width: 500px;
+    height: 200px;
+    text-align: left;
+  }
