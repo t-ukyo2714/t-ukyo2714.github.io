@@ -285,6 +285,77 @@
 .share-card-preview img{display:block;max-width:100%;width:min(100%,320px);height:auto;border:2px solid #313b49;box-shadow:5px 5px 0 #c1b7a7}
 @media(max-width:600px){.result{padding:12px 12px 17px}.veil{padding:9px}.review-head span{max-width:150px;text-align:right}.result .result-actions{display:grid;grid-template-columns:1fr 1fr}.result .result-actions button:last-child{grid-column:auto}.result .metric{padding:10px 12px}.photo-watermark{font-size:8px}}
 
+
+/* v16: fullscreen portrait editing scene with floating translucent controls. */
+@media(max-width:650px){
+ body.editing-paris{overflow:hidden;overscroll-behavior:none}
+ #editor.editor-page{position:fixed;inset:0;z-index:5;display:block;width:100%;max-width:none;height:100vh;height:100dvh;margin:0;padding:0;overflow:hidden;background:#e5eee8}
+ #editor.editor-page[hidden]{display:none!important}
+ #editor>.intro,#editor>h1,#editor>.foot{display:none!important}
+ #editor .stage-wrap{position:absolute;inset:0;z-index:0;width:100%!important;height:100%!important;max-width:none;margin:0!important;padding:0;border:0;border-radius:0;background:#e5eee8;box-shadow:none;overflow:hidden;transition:none}
+ #editor .stage-wrap canvas{display:block;width:100%;height:100%;aspect-ratio:auto;touch-action:none;cursor:grab}
+ #editor .editor-head{position:absolute;z-index:8;top:calc(8px + env(safe-area-inset-top,0px));left:11px;right:11px;display:flex;justify-content:space-between;align-items:center;gap:9px;min-height:43px;padding:6px 9px;border:1px solid #ffffffa8;border-radius:13px;background:#fff8e8c5;box-shadow:0 3px 14px #23333617;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+ #editor .editor-head .brand{font-size:13px;font-weight:900;letter-spacing:-.03em;gap:6px}
+ #editor .editor-head .brand-mark{width:27px;height:27px;font-size:14px;border:1px solid #303741;border-radius:8px}
+ #editor .back-cover{background:#ffffff73;border:1px solid #ffffff72;padding:7px 8px;color:#515e63;border-radius:9px;font-size:10px}
+ #editor .setup{position:absolute;z-index:7;top:calc(59px + env(safe-area-inset-top,0px));left:11px;right:11px;display:flex;justify-content:space-between;align-items:center;gap:7px;min-height:43px;padding:6px 10px;border:1px solid #ffffff9c;border-radius:12px;background:#fff9e6ba;box-shadow:0 3px 14px #21303015;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+ #editor .setup .brief{display:flex;gap:5px;align-items:center;font-size:10px;min-width:0;flex:1}
+ #editor .setup .brief .pill{font-size:8px;padding:5px 7px}
+ #editor .setup .brief>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #editor .setup .freebtn{border-color:#9a9d92ad;background:#ffffffb5;color:#53606a;padding:7px 8px;font-size:10px}
+ #editor .setup .freebtn.active{background:#344754d9;color:#fff}
+ #editor .setup .timer{font-size:19px;color:#2c3844}
+ #editor .stage-actions{position:absolute;z-index:5;top:calc(123px + env(safe-area-inset-top,0px));right:10px;display:flex;flex-direction:column;gap:7px}
+ #editor .stage-actions button{width:43px;height:45px;gap:1px;border:1px solid #ffffffb7;border-radius:12px;background:#fffaf0c9;color:#263642;font-size:21px;box-shadow:0 4px 12px #21344027;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+ #editor .stage-actions button:disabled{opacity:.36}
+ #editor .stage-actions .mobile-camera{display:flex}
+ #editor .stage-actions button small{color:#5c626a;font-size:9px}
+ #editor .stage-actions .mobile-camera.is-camera{background:#f8de90d9}
+ #editor .incident-bar{position:absolute;z-index:3;left:11px;right:65px;bottom:calc(var(--dock-height,210px) + 23px + env(safe-area-inset-bottom,0px));max-width:none;margin:0;padding:6px 10px;border:1px solid #ffffff80;border-radius:999px;background:#2c3b45b8;color:#fff9dd;box-shadow:0 3px 11px #162b2e28;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+ #editor .incident-meta{width:100%;display:flex;align-items:center;justify-content:space-between;gap:5px;min-width:0;font-size:10px}
+ #editor .incident-meta span{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #editor .incident-meta span:last-child{display:none}
+ #editor .editor-dock{position:absolute;z-index:8;left:11px;right:11px;bottom:calc(9px + env(safe-area-inset-bottom,0px));width:auto;max-width:none;margin:0;padding:10px 10px 9px;border:1px solid #ffffffe0;border-radius:20px;background:#fff9ebc4;box-shadow:0 9px 29px #23383e36;backdrop-filter:blur(18px) saturate(1.05);-webkit-backdrop-filter:blur(18px) saturate(1.05);display:flex;flex-direction:column;gap:0;overflow:visible}
+ #editor .editor-dock .tool-title{font-size:12px;color:#283743;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center}
+ #editor .editor-dock .tool-title small{font-size:9px;color:#69777c}
+ #editor .editor-dock .categorytabs{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:3px 0 6px;padding:0;scrollbar-width:none}
+ #editor .editor-dock .categorytabs button{background:#ffffff80;border:1px solid #ffffffa8;color:#475563;border-radius:999px;font-size:10px;font-weight:850;padding:6px 11px;min-height:31px}
+ #editor .editor-dock .categorytabs button.active{background:#303d4cde;color:white;border-color:#303d4cde}
+ #editor .editor-dock .tools{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;gap:7px;padding:2px 0 5px;margin:0;scrollbar-width:none}
+ #editor .editor-dock .tool{flex:0 0 73px;min-height:79px;padding:4px 3px;gap:4px;background:#fffdf8b3;border:1px solid #ffffffd2;border-radius:12px;box-shadow:0 2px 5px #5e645219;scroll-snap-align:start;touch-action:pan-x}
+ #editor .editor-dock .tool:active{background:#fff7dc}
+ #editor .editor-dock .tool .tool-icon.watercolor-icon{height:49px;width:49px}
+ #editor .editor-dock .tool .tool-label{font-size:10px;color:#384651}
+ #editor .editor-dock .advanced-controls{margin:3px 0 0;background:transparent;border:0}
+ #editor .editor-dock .advanced-controls summary{min-height:27px;padding:5px 2px;color:#53656e;font-size:10px}
+ #editor .editor-dock .advanced-body{background:#fff8ecdb;border-radius:11px;max-height:38dvh;overflow:auto;padding:7px}
+ #editor .editor-dock .advanced-body .edit{background:#f1f2e2e5}
+ #editor .editor-dock .actions{display:flex;gap:7px;position:relative;z-index:1;margin:4px 0 0;padding:0;background:none;bottom:auto}
+ #editor .editor-dock .actions .secondary{min-width:80px;min-height:44px;padding:9px 8px;border:1px solid #ffffffdb;border-radius:12px;background:#fff9e9c9;font-size:11px;color:#394855}
+ #editor .editor-dock .actions .primary{flex:1;min-height:46px;padding:9px 10px;border:1px solid #ffb4a2;border-radius:12px;background:#e96b5de9;box-shadow:0 3px 9px #7a3d3231;color:white;font-size:13px}
+ #editor .editor-dock .camera-panel{background:#fff9e4ae;border:1px solid #ffffffbd;border-radius:12px;padding:9px 10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+ #editor.camera-phase .dock-main,#editor.camera-phase .advanced-controls{display:none!important}
+ #editor.camera-phase .stage-actions{display:none!important}
+ #editor.camera-phase .camera-panel{display:grid}
+ #editor.camera-phase .incident-bar{display:none}
+}
+@media(max-width:650px) and (max-height:680px){
+ #editor .editor-head{min-height:38px}
+ #editor .setup{top:calc(54px + env(safe-area-inset-top,0px));min-height:37px}
+ #editor .stage-actions{top:calc(109px + env(safe-area-inset-top,0px))}
+ #editor .editor-dock{padding:7px 8px}
+ #editor .editor-dock .categorytabs{margin:2px 0 4px}
+ #editor .editor-dock .categorytabs button{min-height:27px;padding:5px 8px}
+ #editor .editor-dock .tool{min-height:68px;flex-basis:69px}
+ #editor .editor-dock .tool .tool-icon.watercolor-icon{width:42px;height:42px}
+ #editor .editor-dock .actions .primary,#editor .editor-dock .actions .secondary{min-height:40px}
+}
+@media(min-width:651px){
+ #editor .editor-head{background:#fff8e8c5;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #ffffffbc;border-radius:12px;padding:9px 12px}
+ #editor .setup{background:#fff8e8c5;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #ffffffbc;border-radius:12px;padding:10px 13px}
+ #editor .editor-dock{background:#fff9e7c7;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid #ffffffd9;border-radius:19px;padding:12px}
+ #editor .editor-dock .tool{background:#ffffffb0;border-color:#ffffffd9}
+}
 </style>
 </head>
 <body>
