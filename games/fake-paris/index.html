@@ -493,7 +493,7 @@
     <div class="cover-copy">
       <span class="cover-kicker">旅の証拠は、自分でつくる。</span>
       <h1>パリ、<br><span>行ったことにする。</span></h1>
-      <p class="cover-lead">「昨日までパリにいた」<br>と見栄を張ってしまった。<br>でも今いるのは、<strong>埼玉の実家。</strong></p>
+      <p class="cover-lead">「昨日までパリにいた」<br>と見栄を張ってしまった。<br>でも撮影場所は、<strong>埼玉。</strong></p>
       <p class="cover-description">ニセのエッフェル塔、フランスパン、猫まで並べて、友達に送る旅行写真をでっちあげよう。</p>
       <button type="button" id="startGame" class="cover-start">はじめる <span aria-hidden="true">→</span></button>
       <p class="cover-note">約90秒のバカゲー ／ 時間無制限でも遊べます<br>登録不要・スマホでプレイ</p>
@@ -557,7 +557,7 @@
   <div class="hero-photo"><img id="photo" class="photo" alt="あなたが撮影した偽パリ写真"/><canvas id="resultReplay" class="photo replay-canvas" width="1000" height="680" hidden></canvas><span class="photo-watermark">PARIS? / ALIBI STUDIO</span></div>
   <button id="instantReplay" type="button" class="result-replay-btn" hidden disabled>▶ 直前の事件を再生（約1.5秒）</button>
   <div class="verdict-intro"><span id="verdictBadge" class="verdict-badge">写真審査中</span><h2 id="resultTitle">まさかの、パリ。</h2><p id="quip" class="quip"></p></div>
-  <div class="metrics"><div class="metric"><b id="score">00%</b><span>パリっぽさ</span></div><div class="metric"><b id="home">00%</b><span>実家感</span></div></div>
+  <div class="metrics"><div class="metric"><b id="score">00%</b><span>パリっぽさ</span></div><div class="metric"><b id="home">00%</b><span id="homeLabel">実家感</span></div></div>
   <div class="friend-shell"><div class="friend-icon">友</div><div><span class="friend-name">友達からの返信</span><div id="friend" class="friend"></div></div></div>
   <details class="result-details"><summary>写真の審査メモ・珍事件を見る</summary><section class="review-receipt" aria-label="写真の審査理由"><div class="review-head"><strong>📋 写真審査メモ</strong><span>写り込み・配置から判定</span></div><ul id="reviewReasons" class="review-reasons"></ul></section><div id="evidence" class="details"></div><div id="incidentResult" class="incident-result"></div><div id="collection" class="collection"></div><p class="rules-note">※実際の画像認識ではなく、小道具の配置・写真の範囲に基づいたゲーム内判定です。</p></details>
   <div class="result-actions"><button id="share" class="share">↗ 結果カードをシェア</button><button id="save" class="save">↓ 結果カードを保存</button><button id="previewCard" class="again" aria-expanded="false">結果カードを見る</button><button id="retry" class="again">↻ もう一回</button></div>
@@ -1605,6 +1605,8 @@ function propFrameShare(p){
  return bw*bh>0?visibleW*visibleH/(bw*bh):0;
 }
 function evaluate(){
+ const localLabel=sceneKind==='park'?'地元':'実家';
+ const localPlace=sceneKind==='park'?'近所の公園':'実家';
  const visibleProps=props.filter(p=>propFrameShare(p)>.22);
  const counts={};visibleProps.forEach(p=>counts[p.type]=(counts[p.type]||0)+1);
  const C=t=>counts[t]||0;
@@ -1624,20 +1626,20 @@ function evaluate(){
  if(zoom>1.75)score-=Math.round((zoom-1.75)*24);
  if(!visibleProps.length)score-=22;
  score=Math.round(clamp(score,2,99));
- let ending={id:'12',title:'パリ郊外（実家）',quip:'一瞬だけパリっぽい。よく見ると、全部実家。',reply:'え、これってどこで撮ったの？'};
- if(!visibleProps.length)ending={id:'01',title:'写真、撮る意味あった？',quip:'カメラだけ起動して、パリに行ったことにした。',reply:'いや、普通に実家なんだけど。'};
+ let ending={id:'12',title:'パリ郊外（'+localPlace+'）',quip:'一瞬だけパリっぽい。よく見ると、ただの'+localPlace+'。',reply:'え、これってどこで撮ったの？'};
+ if(!visibleProps.length)ending={id:'01',title:'写真、撮る意味あった？',quip:'カメラだけ起動して、パリに行ったことにした。',reply:sceneKind==='park'?'いや、それ近所の公園なんだけど。':'いや、普通に実家なんだけど。'};
  else if(C('ufo')&&C('tower'))ending={id:'02',title:'パリ、宇宙人に占拠される。',quip:'観光写真を捏造するはずが、未確認飛行物体のスクープになった。',reply:'パリよりまずUFOを説明して。'};
  else if(C('dinosaur'))ending={id:'03',title:'ジュラシック・パリ。',quip:'フランス旅行の話が、突然6500万年前になった。',reply:'エッフェル塔より後ろの恐竜が気になる。'};
  else if(C('cat')>=2)ending={id:'04',title:'パリ、猫共和国になる。',quip:'人間が観光する場所ではなくなった。',reply:'旅行っていうか、猫カフェの宣伝写真？'};
  else if(C('pigeon')>=2&&C('bread'))ending={id:'05',title:'パリ、鳩に乗っ取られる。',quip:'フランスパンを置いた結果、鳩が大集合。',reply:'パリじゃなくて鳩の集会じゃん。'};
- else if(C('cafe')&&C('croissant')&&C('coffee'))ending={id:'06',title:'実家の一角でパリカフェ開業。',quip:'観光写真というより、家で開いたカフェの宣伝。',reply:'メニューどこ？ 今日営業してる？'};
+ else if(C('cafe')&&C('croissant')&&C('coffee'))ending={id:'06',title:localPlace+'の一角でパリカフェ開業。',quip:'観光写真というより、地元で開いたカフェの宣伝。',reply:'メニューどこ？ 今日営業してる？'};
  else if(C('tower')>=3)ending={id:'07',title:'エッフェル塔、繁殖する。',quip:'1つでよかったのに、なぜ3つも作ってしまったのか。',reply:'パリって塔こんなに生えてたっけ？'};
- else if(C('hat')&&C('sunglasses')&&C('perfume'))ending={id:'08',title:'パリコレ（実家会場）。',quip:'旅行の証拠より、ファッションへの情熱が強い。',reply:'パリに行ったというより、服を着替えただけでは。'};
+ else if(C('hat')&&C('sunglasses')&&C('perfume'))ending={id:'08',title:'パリコレ（'+localPlace+'会場）。',quip:'旅行の証拠より、ファッションへの情熱が強い。',reply:'パリに行ったというより、服を着替えただけでは。'};
  else if(C('postcard')>=2)ending={id:'09',title:'旅行写真の中で旅行写真を撮る。',quip:'本物のパリを一度も見ずに、写真だけが無限に増殖。',reply:'背景の写真、写真じゃない？'};
  else if(C('sign')>=3||C('flag')>=3)ending={id:'10',title:'パリと言い張る力、世界一。',quip:'看板と国旗の物量で地理をねじ曲げようとしている。',reply:'PARISって書けばパリになると思ってる？'};
- else if(exposed.length>=3)ending={id:'11',title:'実家の証拠、流出事件。',quip:'隠す気があるようで、全部バレている。',reply:exposed[0].reply};
- else if(score>=85)ending={id:'12',title:'その嘘、ギリギリ通る。',quip:'実家からの出国に成功。あなたには才能がある。',reply:'……待って、本当にパリ？ ちょっと信じた。'};
- else if(score<35)ending={id:'12',title:'完全に実家です。',quip:'異国情緒より、生活感の勝利。',reply:exposed.length?exposed[0].reply:'海外旅行、どこの部屋で撮った？'};
+ else if(exposed.length>=3)ending={id:'11',title:localLabel+'の証拠、流出事件。',quip:'隠す気があるようで、全部バレている。',reply:exposed[0].reply};
+ else if(score>=85)ending={id:'12',title:'その嘘、ギリギリ通る。',quip:localLabel+'からの出国に成功。あなたには才能がある。',reply:'……待って、本当にパリ？ ちょっと信じた。'};
+ else if(score<35)ending={id:'12',title:'完全に'+localLabel+'です。',quip:'異国情緒より、生活感の勝利。',reply:exposed.length?exposed[0].reply:'海外旅行、どこの'+(sceneKind==='park'?'公園':'部屋')+'で撮った？'};
 
  const funny=
   C('ufo')&&C('tower')?'エッフェル塔がUFOに連れ去られてるんだけど、フランスどうなった？':
@@ -1646,7 +1648,7 @@ function evaluate(){
   C('pigeon')>=2&&C('bread')?'フランスパンの奪い合いで観光どころじゃないじゃん。':
   C('cat')>=2?'猫の旅行写真になってるけど、あなたはどこ？':
   C('postcard')>=2?'背景のパリが写真なの、さすがに分かるよ。':
-  C('cafe')&&C('croissant')&&C('coffee')?'旅行って言ってたのに、実家でカフェ始めた？':
+  C('cafe')&&C('croissant')&&C('coffee')?'旅行って言ってたのに、'+localPlace+'でカフェ始めた？':
   C('hat')&&C('sunglasses')&&C('perfume')?'旅先よりもコーディネートが主役じゃない？':
   C('sign')>=3||C('flag')>=3?'PARISって3回書けばパリになると思ってる？':'';
  if(exposed.length){
@@ -1660,9 +1662,9 @@ function evaluate(){
  const report=[];
  if(C('tower')||C('arch'))report.push({type:'good',text:(C('tower')?'エッフェル塔':'凱旋門')+'が写真内に。パリの手がかりとして有効。'});
  else report.push({type:'bad',text:'パリだと分かる建物がほぼ写っていない。'});
- if(exposed.length)report.push({type:'bad',text:exposed.length+'件の実家の証拠が露出。特に「'+exposed[0].name+'」が致命的。'});
- if(covered.length)report.push({type:'good',text:covered.length+'件の実家の証拠を小道具で隠せた。'});
- if(!exposed.length&&!covered.length)report.push({type:'neutral',text:'実家の証拠は撮影枠の外に避けられている。'});
+ if(exposed.length)report.push({type:'bad',text:exposed.length+'件の'+localLabel+'の証拠が露出。特に「'+exposed[0].name+'」が致命的。'});
+ if(covered.length)report.push({type:'good',text:covered.length+'件の'+localLabel+'の証拠を小道具で隠せた。'});
+ if(!exposed.length&&!covered.length)report.push({type:'neutral',text:localLabel+'の証拠は撮影枠の外に避けられている。'});
  if(C('tower')>=3)report.push({type:'bad',text:'エッフェル塔を'+C('tower')+'本設置。物量が逆に嘘っぽい。'});
  else if(C('ufo')||C('dinosaur'))report.push({type:'bad',text:'UFOや恐竜が旅行写真の信憑性を崩している。'});
  else if(C('pigeon')>=2&&C('bread'))report.push({type:'neutral',text:'パンに集まった鳩が主役を奪っている。'});
@@ -1713,7 +1715,7 @@ function makePhoto(stats){
   c.fillStyle='#d86452';c.font='900 26px system-ui,sans-serif';c.fillText('撮影判定 / END '+stats.ending.id,47,tail);
   c.fillStyle='#29323d';c.font='900 40px system-ui,sans-serif';
   drawTextWrapped(c,stats.title,45,tail+66,988,47,2);
-  c.font='900 26px system-ui,sans-serif';c.fillText('パリっぽさ '+stats.score+'%   ／   実家感 '+stats.home+'%',45,tail+144);
+  c.font='900 26px system-ui,sans-serif';c.fillText('パリっぽさ '+stats.score+'%   ／   '+(sceneKind==='park'?'地元':'実家')+'感 '+stats.home+'%',45,tail+144);
   c.fillStyle='#e2eedc';c.beginPath();c.roundRect(40,tail+185,1000,174,17);c.fill();
   c.fillStyle='#40564b';c.font='900 23px system-ui,sans-serif';c.fillText('友達からの返信',64,tail+226);
   c.fillStyle='#26372c';c.font='800 28px system-ui,sans-serif';drawTextWrapped(c,'「'+stats.reply+'」',64,tail+273,930,38,3);
@@ -1733,7 +1735,7 @@ function makePhoto(stats){
  c.fillStyle='#29323d';c.font='900 43px system-ui,sans-serif';
  drawTextWrapped(c,stats.title,45,919,986,49,2);
  c.fillStyle='#303b43';c.font='900 26px system-ui,sans-serif';
- c.fillText('パリっぽさ '+stats.score+'%   ／   実家感 '+stats.home+'%',46,1024);
+ c.fillText('パリっぽさ '+stats.score+'%   ／   '+(sceneKind==='park'?'地元':'実家')+'感 '+stats.home+'%',46,1024);
  c.fillStyle='#e2eedc';c.beginPath();c.roundRect(40,1070,1000,191,17);c.fill();
  c.fillStyle='#40564b';c.font='900 23px system-ui,sans-serif';c.fillText('友達からの返信',64,1114);
  c.fillStyle='#26372c';c.font='800 30px system-ui,sans-serif';
@@ -1753,8 +1755,9 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  document.getElementById('quip').textContent=stats.quip;
  document.getElementById('score').textContent=stats.score+'%';
  document.getElementById('home').textContent=stats.home+'%';
+ document.getElementById('homeLabel').textContent=sceneKind==='park'?'地元感':'実家感';
  document.getElementById('friend').textContent='「'+stats.reply+'」';
- document.getElementById('evidence').textContent=stats.exposed.length?'写ってしまった実家の証拠：'+stats.exposed.map(p=>p.name).join('・'):'実家の証拠は全部フレーム外か小道具で隠せた！';
+ document.getElementById('evidence').textContent=stats.exposed.length?'写ってしまった'+(sceneKind==='park'?'地元':'実家')+'の証拠：'+stats.exposed.map(p=>p.name).join('・') :(sceneKind==='park'?'地元':'実家')+'の証拠は全部フレーム外か小道具で隠せた！';
  document.getElementById('incidentResult').textContent=incidents.length?'⚡ 撮影中の珍事件：'+[...new Set(incidents.map(i=>i.name))].join(' ／ '):'撮影中に予期せぬ出来事は起きませんでした。';
  const photoSet=makePhoto(stats);
  const replayCanvas=document.getElementById('resultReplay');
