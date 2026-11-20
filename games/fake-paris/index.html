@@ -273,7 +273,7 @@ function endDrag(e){
  const dropped=drag&&drag.kind!=='camera-pan'?drag.p:(gesture&&gesture.kind==='object'?gesture.p:null);
  pointers.delete(e.pointerId);
  const completedGesture=gesture&&gesture.kind==='object'?gesture.p:null;
- if(pointers.size<2)gesture=null;
+ if(pointers.size<2){gesture=null;if(completedGesture&&!finished)checkReactions(completedGesture)}
  if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}
  if(pointers.size===0){drag=null;canvas.classList.remove('dragging');if((dropped||completedGesture)&&!finished)checkReactions(dropped||completedGesture)}
 }
