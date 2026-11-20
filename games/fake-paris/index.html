@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v3</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v4</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -25,21 +25,24 @@
 .details{margin:10px 0 0;background:#eee9df;border-radius:10px;padding:9px 12px;font-size:11px;line-height:1.7;color:#4f5962}
 .modebtn:focus-visible,.zoomwrap input:focus-visible{outline:3px solid #e47a65}
 @media(max-width:600px){.modebar{align-items:stretch}.modes{width:100%}.modebtn{flex:1}.zoomwrap{width:100%;justify-content:space-between}.zoomwrap input{flex:1}.feedback{font-size:11px}.result-actions button{min-height:42px}}
-/* V3 interactive tools */.categorytabs{display:flex;gap:6px;margin:8px 0 10px;flex-wrap:wrap}.categorytabs button{font-weight:850;font-size:12px;border:1px solid #c9cecb;border-radius:20px;padding:8px 12px;background:white}.categorytabs button.active{background:#29303e;color:white}.tool[hidden]{display:none!important}#propCount{font-size:10px;border-radius:15px;padding:3px 7px;background:#ffe19b}.freebtn{white-space:nowrap;font-size:10px;font-weight:800;background:white;border-radius:15px;border:1px solid #999;padding:7px 10px}.freebtn.active{background:#29303e;color:white}.collection{background:#fff0cb;padding:12px;border-radius:10px;font-size:12px;font-weight:850;margin:10px 0}.result-actions .share{background:#29303e;color:white}.control-buttons{max-width:430px}@media(max-width:600px){.edit{flex-direction:column;align-items:stretch}.control-buttons{justify-content:flex-start}.mini{min-width:33px}.categorytabs{flex-wrap:nowrap;overflow-x:auto}.categorytabs button{white-space:nowrap}.result-actions{display:grid;grid-template-columns:1fr 1fr}.result-actions button:last-child{grid-column:1/-1}}</style>
+/* V3 interactive tools */.categorytabs{display:flex;gap:6px;margin:8px 0 10px;flex-wrap:wrap}.categorytabs button{font-weight:850;font-size:12px;border:1px solid #c9cecb;border-radius:20px;padding:8px 12px;background:white}.categorytabs button.active{background:#29303e;color:white}.tool[hidden]{display:none!important}#propCount{font-size:10px;border-radius:15px;padding:3px 7px;background:#ffe19b}.freebtn{white-space:nowrap;font-size:10px;font-weight:800;background:white;border-radius:15px;border:1px solid #999;padding:7px 10px}.freebtn.active{background:#29303e;color:white}.collection{background:#fff0cb;padding:12px;border-radius:10px;font-size:12px;font-weight:850;margin:10px 0}.result-actions .share{background:#29303e;color:white}.control-buttons{max-width:430px}@media(max-width:600px){.edit{flex-direction:column;align-items:stretch}.control-buttons{justify-content:flex-start}.mini{min-width:33px}.categorytabs{flex-wrap:nowrap;overflow-x:auto}.categorytabs button{white-space:nowrap}.result-actions{display:grid;grid-template-columns:1fr 1fr}.result-actions button:last-child{grid-column:1/-1}}
+/* v4: touch editing */
+.object-zoom{display:flex;gap:9px;align-items:center;flex:1 1 195px;font-size:11px;font-weight:800;white-space:nowrap}.object-zoom[hidden]{display:none!important}.object-zoom input{min-width:70px;flex:1;width:100%;accent-color:#ec6c5c;touch-action:pan-x}.object-zoom span{min-width:43px;text-align:right;font-variant-numeric:tabular-nums}.edit{flex-wrap:wrap}.edit .control-buttons{max-width:100%;flex:1 1 275px}.stage-wrap canvas{touch-action:none;overscroll-behavior:contain}button:focus-visible,input:focus-visible{outline:3px solid #ec6c5c;outline-offset:2px}@media(max-width:600px){.object-zoom{flex:1 1 100%;padding:4px 0 2px}.edit .control-buttons{flex:1 1 100%}}
+</style>
 </head>
 <body>
 <main class="shell">
-<header class="eyebrow"><div class="brand"><span class="brand-mark">✈</span> <span>ALIBI STUDIO <span class="micro">/ 001</span></span></div><span class="micro">触れるバカゲー / PLAY v3</span></header>
+<header class="eyebrow"><div class="brand"><span class="brand-mark">✈</span> <span>ALIBI STUDIO <span class="micro">/ 001</span></span></div><span class="micro">触れるバカゲー / PLAY v4</span></header>
 <h1>パリ、<span>行ったことにする。</span></h1>
 <p class="intro">「昨日までパリにいた」と見栄を張ってしまった。<br>友達に写真を送るまで、あと90秒。<strong>実家の一角でパリを捏造せよ。写真に写ったものしか判定されない。</strong></p>
 <div class="setup"><div class="brief"><span class="pill">MISSION 01</span><span>それっぽい旅の写真を撮れ</span></div><div style="display:flex;gap:7px;align-items:center"><button id="freeplay" class="freebtn">∞ 時間無制限</button><div id="timer" class="timer">01:30</div></div></div>
 <div class="stage-wrap"><canvas id="scene" width="1000" height="680" aria-label="自由に小道具を配置できる撮影スタジオ" role="img"></canvas><span class="hud">LIVE / 実家から中継</span></div>
-<div class="modebar"><div class="modes" role="group" aria-label="操作モード"><button id="propMode" class="modebtn active" aria-pressed="true">✋ 小道具を動かす</button><button id="cameraMode" class="modebtn" aria-pressed="false">📷 カメラを動かす</button></div><label class="zoomwrap" for="zoom">ズーム <input id="zoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="zoomlabel">1.35×</span></label></div>
+<div class="modebar"><div class="modes" role="group" aria-label="操作モード"><button id="propMode" class="modebtn active" aria-pressed="true">✋ 小道具を動かす</button><button id="cameraMode" class="modebtn" aria-pressed="false">📷 カメラを動かす</button></div><label class="zoomwrap" for="zoom">📷 撮影ズーム <input id="zoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="zoomlabel">1.35×</span></label></div>
 <div id="feedback" class="feedback" aria-live="polite">まずは小道具を置いて、カメラで「実家の証拠」を隠そう。</div>
-<div class="howto">✋ 小道具は指でドラッグ。2本指で拡大・回転も可能。📷 モードでは画角を移動。</div>
+<div class="howto">✋ 小道具をタップして選択→ドラッグで移動。右下 ↗ をスワイプで拡大、上の ↻ で回転。2本指でも拡大・回転できます。📷 モードでは画角を移動、2本指で撮影ズーム。</div>
 <div class="tool-title"><span>小道具を選ぶ <span id="propCount">0個</span></span><small>全24種類</small></div><div id="categorytabs" class="categorytabs"><button class="active" data-filter="scenery">🏙 背景</button><button data-filter="item">🥖 小物</button><button data-filter="chaos">🫠 大事故</button><button data-filter="all">すべて</button></div>
 <div class="tools" id="tools"></div>
-<div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint">選んだ小道具を編集</span></div><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div>
+<div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint" id="editHint">小道具をタップして操作</span></div><label id="objzoomwrap" class="object-zoom" hidden>小道具の大きさ <input id="objectZoom" aria-label="小道具の拡大縮小" type="range" min="0.3" max="3.5" step="0.05" value="1"><span id="objZoomVal">100%</span></label><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div>
 <div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📸 これでパリに行ったことにする</button></div>
 <div class="foot">撮影写真だけで判定。通信不要・登録不要。組み合わせで変わる12の結末。</div>
 </main>
@@ -117,11 +120,58 @@ function drawProp(p){const {type,x,y,rot=0,scale=1}=p;ctx.save();ctx.translate(x
  case 'hat':{ellipse(0,14,49,12,'#263a50');ellipse(0,0,39,23,'#3e5871');ellipse(-12,-12,28,15,'#455e75');ellipse(12,-14,4,9,'#263a50');break}
  default:{const d=defs[type];if(type==='postcard'){shapeRect(-d.w/2,-d.h/2,d.w,d.h,'#fff9e5',4,'#736458',2);shapeRect(-d.w/2+9,-d.h/2+9,d.w-18,d.h-35,'#9bc9d8',2);txt('PARIS',0,d.h/2-14,16,'#bc514d','900','center')}else{ctx.font='70px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(d.emoji,0,0)}break}
  }
- if(selected===p&&!finished){const d=defs[p.type];ctx.save();ctx.rotate(-rot*Math.PI/180);ctx.strokeStyle='#f9d163';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.strokeRect(-d.w*scale/2-8,-d.h*scale/2-8,d.w*scale+16,d.h*scale+16);ctx.setLineDash([]);ctx.restore()}
+ 
  ctx.restore();}
 function framing(){const vw=W/zoom,vh=H/zoom;return{x:clamp(cam.x-vw/2,0,W-vw),y:clamp(cam.y-vh/2,0,H-vh),w:vw,h:vh}}
 function drawFrame(){const f=framing();ctx.save();ctx.fillStyle='rgba(12,19,27,.55)';ctx.fillRect(0,0,W,f.y);ctx.fillRect(0,f.y+f.h,W,H-(f.y+f.h));ctx.fillRect(0,f.y,f.x,f.h);ctx.fillRect(f.x+f.w,f.y,W-(f.x+f.w),f.h);ctx.strokeStyle=mode==='camera'?'#ffdf75':'#fffdfa';ctx.lineWidth=2;ctx.strokeRect(f.x,f.y,f.w,f.h);const corners=[[f.x,f.y,1,1],[f.x+f.w,f.y,-1,1],[f.x,f.y+f.h,1,-1],[f.x+f.w,f.y+f.h,-1,-1]];ctx.strokeStyle=mode==='camera'?'#ffe270':'#fff';ctx.lineWidth=4;corners.forEach(([x,y,sx,sy])=>{ctx.beginPath();ctx.moveTo(x+sx*22,y);ctx.lineTo(x,y);ctx.lineTo(x,y+sy*22);ctx.stroke()});ctx.fillStyle='#20282be6';ctx.fillRect(f.x+7,f.y+7,82,21);txt('📷 FRAME',f.x+48,f.y+18,10,'#fff','900','center');ctx.restore()}
-function render({clean=false,noFrame=false}={}){ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();let old=selected;if(clean)selected=null;props.forEach(drawProp);selected=old;if(!clean&&!noFrame)drawFrame();if(!clean){shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center')}}
+// A selection box always follows the rotated prop. The handles stay finger-sized
+// even when an object is very small. They are UI only, never in photos.
+function selectionGeometry(p){
+ const d=defs[p.type],w=d.w*p.scale,h=d.h*p.scale;
+ const a=p.rot*Math.PI/180,c=Math.cos(a),sn=Math.sin(a);
+ const point=(lx,ly)=>({x:p.x+lx*c-ly*sn,y:p.y+lx*sn+ly*c});
+ return {w,h,resize:point(w/2+8,h/2+8),rotate:point(0,-h/2-34)};
+}
+function selectionHandleAt(pt){
+ if(!selected||mode!=='prop'||finished)return null;
+ const g=selectionGeometry(selected);
+ if(Math.hypot(pt.x-g.resize.x,pt.y-g.resize.y)<22)return 'resize';
+ if(Math.hypot(pt.x-g.rotate.x,pt.y-g.rotate.y)<22)return 'rotate';
+ return null;
+}
+function drawSelection(){
+ if(!selected||finished||mode!=='prop')return;
+ const p=selected,g=selectionGeometry(p);
+ ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+ ctx.strokeStyle='#f5bf49';ctx.lineWidth=2.5;ctx.setLineDash([6,4]);
+ ctx.strokeRect(-g.w/2-5,-g.h/2-5,g.w+10,g.h+10);
+ ctx.setLineDash([]);ctx.strokeStyle='#f5bf49';ctx.lineWidth=2;
+ ctx.beginPath();ctx.moveTo(0,-g.h/2-6);ctx.lineTo(0,-g.h/2-33);ctx.stroke();
+ ctx.restore();
+ for(const [spot,label,color] of [[g.resize,'↗','#f6c34f'],[g.rotate,'↻','#fff9e8']]){
+  ctx.save();ctx.beginPath();ctx.arc(spot.x,spot.y,18,0,Math.PI*2);
+  ctx.fillStyle=color;ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#27303b';ctx.stroke();
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 22px system-ui,sans-serif';
+  ctx.fillStyle='#28313b';ctx.fillText(label,spot.x,spot.y+1);ctx.restore();
+ }
+}
+function updateObjectZoom(){
+ const wrap=document.getElementById('objzoomwrap');
+ const val=document.getElementById('objZoomVal'),input=document.getElementById('objectZoom');
+ wrap.hidden=!selected||mode!=='prop'||finished;
+ if(selected&&mode==='prop'&&!finished){
+  input.value=String(clamp(selected.scale,.3,3.5));
+  val.textContent=Math.round(selected.scale*100)+'%';
+  document.getElementById('editHint').textContent='指で移動・↗サイズ・↻角度・2本指もOK';
+ }else document.getElementById('editHint').textContent='小道具をタップして操作';
+}
+function render({clean=false,noFrame=false}={}){
+ ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();
+ const old=selected;if(clean)selected=null;props.forEach(drawProp);selected=old;
+ if(!clean&&!noFrame)drawFrame();
+ if(!clean){drawSelection();shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center');}
+ updateObjectZoom();
+}
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
 function hit(p,x,y){const t=-(p.rot||0)*Math.PI/180,dx=x-p.x,dy=y-p.y,c=Math.cos(t),s=Math.sin(t),xx=(dx*c-dy*s)/p.scale,yy=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(xx)<d.w/2+9&&Math.abs(yy)<d.h/2+9}
 function choose(p){selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';render()}
@@ -135,25 +185,89 @@ document.getElementById('freeplay').addEventListener('click',()=>{if(finished)re
 function add(type){if(finished||!defs[type])return;setMode('prop');go();const n=props.length,p={type,x:clamp(160+(n*37)%195,70,425),y:clamp(135+(n*23)%100,65,285),rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};props.push(p);choose(p);document.getElementById('feedback').textContent=defs[type].label+'を配置。好きな場所へ動かそう。'}
 document.getElementById('tools').addEventListener('click',e=>{const b=e.target.closest('button[data-type]');if(b)add(b.dataset.type)});
 canvas.addEventListener('pointerdown',e=>{
- if(finished)return;const p=pos(e);pointers.set(e.pointerId,p);
+ if(finished)return;
+ const pt=pos(e);pointers.set(e.pointerId,pt);
  try{canvas.setPointerCapture(e.pointerId)}catch(_){}
- if(pointers.size===2&&mode==='prop'&&selected){const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y;gesture={p:selected,dist:Math.max(1,Math.hypot(dx,dy)),angle:Math.atan2(dy,dx),scale:selected.scale,rot:selected.rot,mid:{x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2},x:selected.x,y:selected.y};drag=null;go();e.preventDefault();return}
+ if(pointers.size===2){
+  const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,dist=Math.max(1,Math.hypot(dx,dy)),angle=Math.atan2(dy,dx),mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};
+  if(mode==='camera'){
+   gesture={kind:'camera',dist,zoom,mid,cam:{...cam}};
+   drag=null;go();e.preventDefault();return;
+  }
+  // A pinch only affects the object being dragged, never a distant object.
+  if(mode==='prop'&&selected&&drag&&drag.kind==='move'&&drag.p===selected){
+   gesture={kind:'object',p:selected,dist,angle,mid,scale:selected.scale,rot:selected.rot,x:selected.x,y:selected.y};
+   drag=null;go();e.preventDefault();return;
+  }
+ }
  if(pointers.size>1){drag=null;e.preventDefault();return}
- if(mode==='camera'){go();drag={camera:true,dx:p.x-cam.x,dy:p.y-cam.y,id:e.pointerId};canvas.classList.add('dragging');e.preventDefault();return}
- for(let i=props.length-1;i>=0;i--){if(hit(props[i],p.x,p.y)){go();const o=props[i];props.splice(i,1);props.push(o);choose(o);drag={p:o,dx:p.x-o.x,dy:p.y-o.y,id:e.pointerId};canvas.classList.add('dragging');e.preventDefault();return}}
- choose(null)
+ if(mode==='camera'){
+  go();drag={kind:'camera-pan',dx:pt.x-cam.x,dy:pt.y-cam.y,id:e.pointerId};
+  canvas.classList.add('dragging');e.preventDefault();return;
+ }
+ const handle=selectionHandleAt(pt);
+ if(handle&&selected){
+  go();
+  if(handle==='resize')drag={kind:'resize',p:selected,dist:Math.max(8,Math.hypot(pt.x-selected.x,pt.y-selected.y)),scale:selected.scale,id:e.pointerId};
+  else drag={kind:'rotate',p:selected,angle:Math.atan2(pt.y-selected.y,pt.x-selected.x),rot:selected.rot,id:e.pointerId};
+  e.preventDefault();return;
+ }
+ for(let i=props.length-1;i>=0;i--){
+  if(hit(props[i],pt.x,pt.y)){
+   go();const o=props[i];
+   props.splice(i,1);props.push(o);choose(o);
+   drag={kind:'move',p:o,dx:pt.x-o.x,dy:pt.y-o.y,id:e.pointerId};
+   canvas.classList.add('dragging');e.preventDefault();return;
+  }
+ }
+ choose(null);
 });
 canvas.addEventListener('pointermove',e=>{
  if(!pointers.has(e.pointerId))return;
  const pt=pos(e);pointers.set(e.pointerId,pt);
- if(gesture&&pointers.size>=2){const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};const g=gesture;g.p.scale=clamp(g.scale*Math.hypot(dx,dy)/g.dist,.3,3.5);g.p.rot=g.rot+(Math.atan2(dy,dx)-g.angle)*180/Math.PI;g.p.x=clamp(g.x+mid.x-g.mid.x,-80,580);g.p.y=clamp(g.y+mid.y-g.mid.y,-75,430);render();e.preventDefault();return}
+ if(gesture&&pointers.size>=2){
+  const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,
+  dist=Math.max(1,Math.hypot(dx,dy)),mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};
+  if(gesture.kind==='camera'){
+   zoom=clamp(gesture.zoom*dist/gesture.dist,1,2.2);
+   const f=framing();
+   cam.x=clamp(gesture.cam.x+mid.x-gesture.mid.x,f.w/2,W-f.w/2);
+   cam.y=clamp(gesture.cam.y+mid.y-gesture.mid.y,f.h/2,H-f.h/2);
+   document.getElementById('zoom').value=String(zoom);
+   document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
+  }else{
+   const g=gesture;
+   g.p.scale=clamp(g.scale*dist/g.dist,.3,3.5);
+   g.p.rot=g.rot+(Math.atan2(dy,dx)-g.angle)*180/Math.PI;
+   g.p.x=clamp(g.x+mid.x-g.mid.x,-80,580);
+   g.p.y=clamp(g.y+mid.y-g.mid.y,-75,430);
+  }
+  render();e.preventDefault();return;
+ }
  if(!drag||drag.id!==e.pointerId)return;
- if(drag.camera){const f=framing();cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2)}
- else{drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,430)}
- render();e.preventDefault()
+ if(drag.kind==='camera-pan'){
+  const f=framing();cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2);
+ }else if(drag.kind==='move'){
+  drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,430);
+ }else if(drag.kind==='resize'){
+  drag.p.scale=clamp(drag.scale*Math.hypot(pt.x-drag.p.x,pt.y-drag.p.y)/drag.dist,.3,3.5);
+ }else if(drag.kind==='rotate'){
+  drag.p.rot=drag.rot+(Math.atan2(pt.y-drag.p.y,pt.x-drag.p.x)-drag.angle)*180/Math.PI;
+ }
+ render();e.preventDefault();
 });
-function endDrag(e){pointers.delete(e.pointerId);if(pointers.size<2)gesture=null;if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}}
-canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
+function endDrag(e){
+ pointers.delete(e.pointerId);
+ if(pointers.size<2)gesture=null;
+ if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}
+ if(pointers.size===0){drag=null;canvas.classList.remove('dragging')}
+}
+canvas.addEventListener('pointerup',endDrag);
+canvas.addEventListener('pointercancel',endDrag);
+document.getElementById('objectZoom').addEventListener('input',e=>{
+ if(!selected||finished)return;
+ go();selected.scale=clamp(Number(e.target.value),.3,3.5);render();
+});
 function mutate(id,f){document.getElementById(id).addEventListener('click',()=>{if(!selected||finished)return;f(selected);render()})}
 mutate('left',p=>p.rot-=15);mutate('right',p=>p.rot+=15);mutate('small',p=>p.scale=clamp(p.scale*.85,.35,3.2));mutate('large',p=>p.scale=clamp(p.scale*1.15,.35,3.2));mutate('flip',p=>p.flip=-(p.flip||1));mutate('duplicate',p=>{const copy={...p,x:p.x+20,y:p.y+16};props.push(copy);choose(copy)});mutate('front',p=>{props=props.filter(x=>x!==p);props.push(p)});mutate('back',p=>{props=props.filter(x=>x!==p);props.unshift(p)});mutate('del',p=>{props=props.filter(x=>x!==p);choose(null)});
 function isCovered(point){
@@ -201,7 +315,7 @@ function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const 
  c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
  c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
  c.fillStyle='#66727b';c.font='19px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
- c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v3',969,866);
+ c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v4',969,866);
  return off.toDataURL('image/png')}
 function shoot(){if(finished)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
  document.getElementById('resultTitle').textContent=stats.title;
