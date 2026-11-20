@@ -381,6 +381,7 @@ function paintCoverPreview(){
  render();
 }
 function enterGame(){
+ document.body.classList.add('editing-paris');
  document.getElementById('cover').hidden=true;
  document.getElementById('editor').hidden=false;
  gameEntered=true;
@@ -392,6 +393,8 @@ function enterGame(){
 function returnToCover(){
  reset();
  gameEntered=false;
+ document.body.classList.remove('editing-paris');
+ resizeWorld(560);
  document.getElementById('cover').hidden=false;
  document.getElementById('editor').hidden=true;
  paintCoverPreview();
@@ -408,31 +411,35 @@ document.querySelectorAll('[data-quick]').forEach(btn=>{
 });
 
 
-/* The editor stage resizes within the visible mobile area.
-   This prevents the dock from covering interactive parts of the room.
-   The underlying 500x560 world and all game coordinates stay unchanged. */
+/* v16: mobile portrait stage uses the whole viewport with uniform scale.
+   Extend the room vertically, shifting objects and home clues together. */
 let fitQueued=false;
+function resizeWorld(nextHeight){
+ const nextH=Math.max(560,Math.round(nextHeight));
+ if(nextH===H)return;
+ const newShift=Math.round((nextH-340)/2),delta=newShift-ROOM_SHIFT;
+ H=nextH;ROOM_SHIFT=newShift;
+ evidencePoints.forEach(p=>p.y+=delta);
+ props.forEach(p=>p.y+=delta);
+ fx.forEach(f=>{if(typeof f.y==='number')f.y+=delta});
+ if(impact&&typeof impact.y==='number')impact.y+=delta;
+ cam.y+=delta;
+ canvas.height=H*SCALE;
+ render();
+}
 function fitStageToViewport(){
  fitQueued=false;
  const stage=document.querySelector('.stage-wrap');
  if(!gameEntered||!stage)return;
- if(typeof window.innerWidth!=='number'||window.innerWidth>650){
-  stage.style.width='';stage.style.marginLeft='';stage.style.marginRight='';
-  return;
- }
- const dock=document.getElementById('propDock');
- const canvasTop=stage.getBoundingClientRect().top;
- const dockTop=dock.getBoundingClientRect().top;
- const viewportBottom=window.visualViewport
-  ?window.visualViewport.offsetTop+window.visualViewport.height
-  :window.innerHeight;
- const usable=Math.min(dockTop,viewportBottom)-canvasTop-8;
- if(!Number.isFinite(usable)||usable<150)return;
- const maxWidth=Math.max(190,window.innerWidth-8);
- const width=Math.min(maxWidth,Math.max(195,Math.floor(usable*W/H)));
- stage.style.width=width+'px';
- stage.style.marginLeft='auto';
- stage.style.marginRight='auto';
+ const width=typeof window.innerWidth==='number'?window.innerWidth:390;
+ if(width<=650){
+  const r=stage.getBoundingClientRect();
+  const cw=r.width||width;
+  const ch=r.height||(window.visualViewport?window.visualViewport.height:window.innerHeight);
+  if(cw>0&&ch>0)resizeWorld(W*ch/cw);
+ }else resizeWorld(560);
+ const dock=document.getElementById('propDock').getBoundingClientRect();
+ if(dock.height>0)document.getElementById('editor').style.setProperty('--dock-height',Math.ceil(dock.height)+'px');
 }
 function scheduleStageFit(){
  if(fitQueued)return;
@@ -447,7 +454,7 @@ if(typeof ResizeObserver!=='undefined'){
  ro.observe(document.getElementById('propDock'));
 }
 
-const SCALE=2,W=500,H=560,SHOT_H=340,ROOM_SHIFT=110;const defs={tower:{label:'ニセ塔',w:115,h:198},cloth:{label:'青空の布',w:215,h:160},sign:{label:'パリ看板',w:165,h:85},plant:{label:'観葉植物',w:95,h:145},bread:{label:'フランスパン',w:105,h:42},hat:{label:'ベレー帽',w:99,h:52}};
+const SCALE=2,W=500,SHOT_H=340;let H=560,ROOM_SHIFT=110;const defs={tower:{label:'ニセ塔',w:115,h:198},cloth:{label:'青空の布',w:215,h:160},sign:{label:'パリ看板',w:165,h:85},plant:{label:'観葉植物',w:95,h:145},bread:{label:'フランスパン',w:105,h:42},hat:{label:'ベレー帽',w:99,h:52}};
 let props=[],selected=null,drag=null,started=false,finished=false,left=90,interval=null,shootCount=0,photoUrl='';
 let mode='prop',zoom=1.35,cam={x:255,y:ROOM_SHIFT+172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
 let nextPropId=1,fx=[],incidents=[],triggered=new Set(),toastHide=null;
