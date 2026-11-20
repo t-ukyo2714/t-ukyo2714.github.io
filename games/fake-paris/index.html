@@ -97,7 +97,7 @@ const vectorImages={},vectorSources={};
 for(const type of Object.keys(defs)){
  const raw='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><g stroke="#403c3a" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">'+vectorParts[type]+'</g></svg>';
  vectorSources[type]='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(raw);
- const im=new Image();vectorImages[type]=im;im.onload=()=>{queueMicrotask(()=>render())};im.src=vectorSources[type];
+ const im=new Image();vectorImages[type]=im;im.onload=()=>{Promise.resolve().then(()=>render())};im.src=vectorSources[type];
 }
 const toolsEl=document.getElementById('tools');Object.entries(defs).forEach(([type,d])=>{const b=document.createElement('button');b.type='button';b.className='tool';b.dataset.type=type;b.dataset.family=d.family;b.innerHTML='<span class="tool-icon"><img src="'+vectorSources[type]+'" alt="" draggable="false"/></span><span class="tool-label">'+d.label+'</span>';toolsEl.appendChild(b)});
 document.getElementById('categorytabs').addEventListener('click',e=>{const b=e.target.closest('button[data-filter]');if(!b)return;const f=b.dataset.filter;document.querySelectorAll('#categorytabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('#tools button').forEach(x=>x.hidden=f!=='all'&&x.dataset.family!==f)});
