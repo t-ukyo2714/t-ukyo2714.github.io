@@ -511,7 +511,7 @@
 <header class="eyebrow editor-head"><div class="brand"><span class="brand-mark">✈</span><span>パリ、行ったことにする。</span></div><button id="backToCover" type="button" class="back-cover">⌂ タイトルへ</button></header>
 <h1>パリ、<span>行ったことにする。</span></h1>
 <p class="intro">「昨日までパリにいた」と見栄を張ってしまった。<br>友達に写真を送るまで、あと90秒。<strong>実家の一角でパリを捏造せよ。写真に写ったものしか判定されない。</strong></p>
-<div class="setup"><div class="brief"><span class="pill">MISSION 01</span><span>それっぽい旅の写真を撮れ</span></div><div style="display:flex;gap:7px;align-items:center"><button id="freeplay" class="freebtn">∞ 時間無制限</button><div id="timer" class="timer">01:30</div></div></div>
+<div class="setup"><div class="brief"><span>それっぽい旅の写真を撮れ</span></div><div class="timer" id="timer" aria-label="残り時間">01:30</div></div>
 <div class="stage-wrap"><canvas id="scene" width="1000" height="1120" aria-label="自由に小道具を配置できる撮影スタジオ" role="img"></canvas>
 <div class="camera-preview-wrap" id="cameraPreviewWrap" hidden>
  <div class="camera-preview-head"><span><span class="camera-live-dot">●</span> LIVE / 全画面で撮影</span><span id="cameraStatus">FULL FRAME</span></div>
@@ -593,12 +593,13 @@ function enterGame(){
  gameEntered=true;
  setMode('prop');
  scheduleStageFit();
+ go();
  try{window.scrollTo({top:0,behavior:'instant'})}catch(_){}
  render();
 }
 function returnToCover(){
- reset();
  gameEntered=false;
+ reset();
  document.body.classList.remove('editing-paris');
  resizeWorld(560);
  document.getElementById('cover').hidden=false;
@@ -662,7 +663,7 @@ if(typeof ResizeObserver!=='undefined'){
 
 const SCALE=2,W=500,SHOT_H=340;let H=560,ROOM_SHIFT=110;const defs={tower:{label:'ニセ塔',w:115,h:198},cloth:{label:'青空の布',w:215,h:160},sign:{label:'パリ看板',w:165,h:85},plant:{label:'観葉植物',w:95,h:145},bread:{label:'フランスパン',w:105,h:42},hat:{label:'ベレー帽',w:99,h:52}};
 let props=[],selected=null,drag=null,started=false,finished=false,left=90,interval=null,shootCount=0,photoUrl='';
-let mode='prop',cropEnabled=false,zoom=1,cam={x:255,y:ROOM_SHIFT+172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
+let mode='prop',cropEnabled=false,zoom=1,cam={x:255,y:ROOM_SHIFT+172},lastStats=null;const pointers=new Map();let gesture=null;
 let nextPropId=1,fx=[],incidents=[],triggered=new Set(),toastHide=null;
 let animationClock=0;const animating=new Set();let recording=null,lastReplay=null,replaying=false,replayScene=null,impact=null,gameEntered=false;
 /* Each local location has independent photographic evidence. Scene randomizes
@@ -1144,9 +1145,8 @@ modeButtons[0].addEventListener('click',()=>setMode('prop'));
 modeButtons[1].addEventListener('click',()=>setMode('camera'));
 document.getElementById('mobileCamera').addEventListener('click',()=>setMode(mode==='camera'?'prop':'camera'));
 document.getElementById('zoom').addEventListener('input',e=>{if(finished)return;go();syncZoom(e.target.value)});
-function clockText(){return freeMode?'∞':String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0')}
-function go(){if(!gameEntered||started)return;started=true;if(freeMode)return;interval=setInterval(()=>{if(finished||replaying)return;left--;timerEl.textContent=clockText();timerEl.classList.toggle('urgent',left<=10);if(left<=0)shoot()},1000)}
-document.getElementById('freeplay').addEventListener('click',()=>{if(finished)return;freeMode=!freeMode;const b=document.getElementById('freeplay');b.classList.toggle('active',freeMode);b.setAttribute('aria-pressed',String(freeMode));clearInterval(interval);interval=null;started=false;left=90;timerEl.textContent=clockText();timerEl.classList.remove('urgent');document.getElementById('feedback').textContent=freeMode?'時間無制限。納得いくまでパリを捏造しよう。':'90秒でパリを捏造せよ！'});
+function clockText(){return String(Math.floor(Math.max(0,left)/60)).padStart(2,'0')+':'+String(Math.max(0,left)%60).padStart(2,'0')}
+function go(){if(!gameEntered||started||finished)return;started=true;interval=setInterval(()=>{if(finished||replaying)return;left=Math.max(0,left-1);timerEl.textContent=clockText();timerEl.classList.toggle('urgent',left<=10);if(left===0)shoot()},1000)}
 /* Tapping the tray must put a manipulable object ABOVE floating controls,
    not behind the incident bar or palette. Direct drag retains its exact drop. */
 function tapPlacement(type){
@@ -1706,7 +1706,7 @@ function makePhoto(stats){
   c.fillStyle='#faf6ec';c.fillRect(0,0,card.width,card.height);
   c.fillStyle='#303746';c.font='900 29px system-ui,sans-serif';
   c.fillText('ALIBI STUDIO / 偽旅行の証拠',45,78);
-  c.textAlign='right';c.fillStyle='#a35f4f';c.font='900 23px system-ui,sans-serif';c.fillText('MISSION 01',1034,78);c.textAlign='left';
+  c.textAlign='left';
   c.fillStyle='#d7d0c4';c.fillRect(37,112,1007,photoH+9);
   c.drawImage(raw,42,116,photoW,photoH);
   const tail=photoH+175;
@@ -1724,7 +1724,6 @@ function makePhoto(stats){
  const c=card.getContext('2d');
  c.fillStyle='#faf6ec';c.fillRect(0,0,1080,1350);
  c.fillStyle='#303746';c.font='900 29px system-ui,sans-serif';c.fillText('ALIBI STUDIO / 偽旅行の証拠',45,80);
- c.textAlign='right';c.fillStyle='#a35f4f';c.font='900 23px system-ui,sans-serif';c.fillText('MISSION 01',1034,80);
  c.textAlign='left';
  c.fillStyle='#d7d0c4';c.fillRect(37,123,1007,688);
  c.drawImage(raw,42,121,996,678);
@@ -1781,7 +1780,7 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
  render()}
 document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
-function reset(){cropEnabled=false;previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;randomScene();zoom=1;cam={x:W/2,y:H/2};document.getElementById('zoom').value='1';document.getElementById('zoomlabel').textContent='1.00×';document.getElementById('cameraZoom').value='1';document.getElementById('cameraZoomText').textContent='1.00×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+function reset(){cropEnabled=false;previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;randomScene();zoom=1;cam={x:W/2,y:H/2};document.getElementById('zoom').value='1';document.getElementById('zoomlabel').textContent='1.00×';document.getElementById('cameraZoom').value='1';document.getElementById('cameraZoomText').textContent='1.00×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null);if(gameEntered)go()}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
