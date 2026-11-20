@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v23</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v24</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -59,8 +59,8 @@
 
 /* Real watercolor sprites – one optimized transparent WebP file, no SVG props. */
 .watercolor-icon{display:block;flex-shrink:0;width:56px;height:56px;
- background-image:url('./assets/watercolor-props-v1.webp');
- background-size:600% 400%;background-repeat:no-repeat;
+ background-image:url('./assets/watercolor-room-props-v24.avif');
+ background-size:400% 400%;background-repeat:no-repeat;
  filter:drop-shadow(0 2px 1px rgba(68,48,34,.18))}
 .tool .tool-icon.watercolor-icon{width:56px;height:56px;display:block;max-width:none}
 .tool{min-height:92px}
@@ -488,7 +488,7 @@
 /* v23: one complete distinct gallery per scene; park uses 12 custom SVG sprites. */
 #tools .tool[hidden]{display:none!important}
 .watercolor-icon.park-art{
- background-image:url('./assets/watercolor-park-props-v1.svg');
+ background-image:url('./assets/watercolor-park-props-v24.avif');
  background-size:400% 300%;
  filter:drop-shadow(0 2px 1px rgba(64,52,39,.19));
 }
@@ -580,7 +580,7 @@ const canvas=document.getElementById('scene'), ctx=canvas.getContext('2d');
 const timerEl=document.getElementById('timer'), selEl=document.getElementById('sel'), veil=document.getElementById('veil');
 
 function paintCoverPreview(){
- if(!atlasReady||gameEntered)return;
+ if(!roomReady||gameEntered)return;
  const out=document.getElementById('coverCanvas');
  if(!out)return;
  ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();
@@ -712,75 +712,65 @@ Object.keys(initialFamily).forEach(type=>Object.assign(defs[type],{family:initia
 
 /* Scene-specific inventory: no prop is selectable in both places.
    Room retains the original watercolor artwork; park has 12 original SVGs. */
-const roomInventory=['tower','cloth','sign','plant','bread','hat','cafe',
- 'postcard','coffee','croissant','perfume','cat','ufo','pigeon'];
-const parkInventory=[
- ['parkTower','折りたたみのニセ塔',115,198,'scenery','🗼'],
- ['parkFountain','石造りの噴水',149,137,'scenery','⛲'],
- ['parkLamp','パリ風ガス灯',89,175,'scenery','💡'],
- ['parkBistro','ビストロ屋台',156,145,'scenery','🥐'],
- ['parkTable','テラスのカフェ席',142,135,'scenery','☕'],
- ['parkPoster','パリ観光ポスター',132,156,'scenery','🖼️'],
- ['parkFlag','フランス国旗',118,142,'item','🇫🇷'],
- ['parkFlower','バラのアーチ',161,169,'scenery','🌹'],
- ['parkBike','レトロ自転車',158,112,'item','🚲'],
- ['parkDog','フレンチブルドッグ',111,110,'item','🐕'],
- ['parkPigeon','公園の鳩',94,87,'item','🐦'],
- ['parkBaguette','バゲットの籠',125,109,'item','🥖']
+
+/* v24 - distinct room and park inventories with original generated transparent art. */
+const roomInventory=[
+ ['tower','ミニエッフェル塔',98,132,'scenery','🗼'],
+ ['postcard','パリの大判ポスター',158,142,'scenery','🖼️'],
+ ['roomPostcard','パリのポストカード',133,97,'item','💌'],
+ ['roomCurtain','レースカーテン',189,157,'scenery','🪟'],
+ ['roomTablecloth','白いテーブルクロス',176,135,'scenery','🧺'],
+ ['croissant','クロワッサン',98,72,'item','🥐'],
+ ['coffee','エスプレッソ',91,78,'item','☕'],
+ ['hat','ベレー帽',102,62,'item','🎩'],
+ ['perfume','香水',88,104,'item','🧴'],
+ ['flowers','花束',118,122,'item','💐'],
+ ['suitcase','旅行トランク',117,112,'item','🧳'],
+ ['sunglasses','サングラス',122,70,'item','🕶️'],
+ ['cat','猫',115,110,'item','🐈'],
+ ['ufo','UFO',143,106,'item','🛸']
 ];
-for(const type of roomInventory)defs[type].stage='room';
+const parkInventory=[
+ ['parkTower','折りたたみニセ塔',128,180,'scenery','🗼'],
+ ['parkPoster','パリ観光ポスター',144,164,'scenery','🖼️'],
+ ['parkFlag','フランス国旗',123,147,'item','🇫🇷'],
+ ['parkBike','レトロ自転車',169,125,'item','🚲'],
+ ['parkBaguette','バゲットの籠',127,119,'item','🥖'],
+ ['parkTable','テラス席セット',165,155,'scenery','☕'],
+ ['parkFountain','石造りの噴水',174,151,'scenery','⛲'],
+ ['parkLamp','パリ風ガス灯',106,174,'scenery','💡'],
+ ['parkFlower','バラのアーチ',181,174,'scenery','🌹'],
+ ['parkDog','フレンチブルドッグ',122,126,'item','🐕'],
+ ['parkPigeon','公園の鳩',103,104,'item','🐦'],
+ ['parkPicnic','ピクニッククロス',186,151,'scenery','🧺']
+];
+for(const [type,label,w,h,family,emoji] of roomInventory)
+ defs[type]={label,w,h,family,emoji,stage:'room'};
 for(const [type,label,w,h,family,emoji] of parkInventory)
  defs[type]={label,w,h,family,emoji,stage:'park'};
-const parkOrder=parkInventory.map(row=>row[0]);
-const parkCells={};
-parkOrder.forEach((type,i)=>parkCells[type]={column:i%4,row:Math.floor(i/4)});
-let parkReady=false;
-const parkAtlas=new Image();
-parkAtlas.onload=()=>{
- parkReady=true;
- updateSceneGallery();
- requestAnimationFrame(render);
-};
-parkAtlas.onerror=()=>{
- parkReady=false;
- updateSceneGallery();
-};
-parkAtlas.src='./assets/watercolor-park-props-v1.svg';
+const roomCells={},parkCells={};
+roomInventory.forEach(([type],i)=>roomCells[type]={column:i%4,row:Math.floor(i/4)});
+parkInventory.forEach(([type],i)=>parkCells[type]={column:i%4,row:Math.floor(i/4)});
+let roomReady=false,parkReady=false;
+const roomAtlas=new Image(),parkAtlas=new Image();
+roomAtlas.onload=()=>{roomReady=true;updateSceneGallery();requestAnimationFrame(()=>{render();paintCoverPreview()})};
+parkAtlas.onload=()=>{parkReady=true;updateSceneGallery();requestAnimationFrame(render)};
+roomAtlas.onerror=()=>{roomReady=false;updateSceneGallery()};
+parkAtlas.onerror=()=>{parkReady=false;updateSceneGallery()};
+roomAtlas.src='./assets/watercolor-room-props-v24.avif';
+parkAtlas.src='./assets/watercolor-park-props-v24.avif';
 function updateSceneGallery(){
  const total=sceneKind==='park'?parkInventory.length:roomInventory.length;
- const ready=sceneKind==='park'?parkReady:atlasReady;
- const status=document.getElementById('assetState');
- if(status)status.textContent=(sceneKind==='park'?'🌳 公園':'🏠 部屋')+' 専用イラスト '+(ready?total:0)+'/'+total;
- const tabs=document.querySelectorAll('#categorytabs button');
- let current='all';
- tabs.forEach(btn=>{
-  btn.classList.toggle('active',btn.dataset.filter==='all');
- });
- for(const btn of document.querySelectorAll('#tools button')){
-  btn.hidden=btn.dataset.stage!==sceneKind;
- }
- const tools=document.getElementById('tools');
- if(tools)tools.scrollLeft=0;
+ const ready=sceneKind==='park'?parkReady:roomReady;
+ document.getElementById('assetState').textContent=
+  (sceneKind==='park'?'🌳 公園':'🏠 部屋')+' 専用水彩イラスト '+(ready?total:0)+'/'+total;
+ for(const b of document.querySelectorAll('#categorytabs button'))
+  b.classList.toggle('active',b.dataset.filter==='all');
+ for(const b of document.querySelectorAll('#tools button'))
+  b.hidden=b.dataset.stage!==sceneKind;
+ document.getElementById('tools').scrollLeft=0;
 }
 
-const ATLAS_URL='./assets/watercolor-props-v1.webp';
-const atlasOrder=['tower','cloth','sign','plant','bread','hat',
- 'arch','lamp','cafe','fountain','postcard','flag',
- 'croissant','coffee','cheese','bicycle','suitcase','flowers',
- 'sunglasses','perfume','pigeon','cat','dinosaur','ufo'];
-const atlasCells={};
-atlasOrder.forEach((type,i)=>{atlasCells[type]={column:i%6,row:Math.floor(i/6)}});
-let atlasReady=false;
-const artAtlas=new Image();
-artAtlas.onload=()=>{
- atlasReady=true;
- updateSceneGallery();
- requestAnimationFrame(()=>{render();paintCoverPreview()});
-};
-artAtlas.onerror=()=>{
- updateSceneGallery();
-};
-artAtlas.src=ATLAS_URL;
 const toolsEl=document.getElementById('tools');
 Object.entries(defs).forEach(([type,d])=>{
  if(!d.stage)return;
@@ -788,8 +778,8 @@ Object.entries(defs).forEach(([type,d])=>{
  b.type='button';b.className='tool';b.dataset.type=type;
  b.dataset.family=d.family;b.dataset.stage=d.stage;
  const park=d.stage==='park';
- const cell=park?parkCells[type]:atlasCells[type];
- const px=cell.column*(park?100/3:20);
+ const cell=park?parkCells[type]:roomCells[type];
+ const px=cell.column*100/3;
  const py=cell.row*(park?50:100/3);
  b.innerHTML='<span class="tool-icon watercolor-icon'+(park?' park-art':'')+
   '" aria-hidden="true"></span><span class="tool-label">'+d.label+'</span>';
@@ -1076,47 +1066,27 @@ function background(){
  ctx.restore();
 }
 function drawProp(p){
- const {type,x,y,rot=0,scale=1}=p,d=defs[type],cell=d.stage==='park'?parkCells[type]:atlasCells[type];
+ const {type,x,y,rot=0,scale=1}=p,d=defs[type];
+ if(!d)return;
+ const park=d.stage==='park';
+ const cell=park?parkCells[type]:roomCells[type];
+ const atlas=park?parkAtlas:roomAtlas,ready=park?parkReady:roomReady;
  ctx.save();ctx.translate(x,y);ctx.rotate(rot*Math.PI/180);
  ctx.scale(scale*(p.flip||1),scale);
- if(d.stage==='park'&&parkReady&&cell){
-  // Transparent 4-by-3 SVG sprite atlas, each new illustration 240px square.
-  const sw=220,sh=220;
-  const fit=Math.min(d.w/sw,d.h/sh);
-  const dw=sw*fit,dh=sh*fit;
-  ctx.shadowColor='rgba(64,52,43,.17)';ctx.shadowBlur=4;ctx.shadowOffsetY=2;
-  ctx.drawImage(parkAtlas,cell.column*240+10,cell.row*240+10,
-   sw,sh,-dw/2,-dh/2,dw,dh);
+ if(ready&&cell){
+  const tile=110; // 440px wide atlas, 4 columns
+  const fit=Math.min(d.w/tile,d.h/tile);
+  const dw=tile*fit,dh=tile*fit;
+  ctx.shadowColor='rgba(52,38,26,.16)';ctx.shadowBlur=3;ctx.shadowOffsetY=2;
+  ctx.drawImage(atlas,cell.column*tile,cell.row*tile,tile,tile,-dw/2,-dh/2,dw,dh);
   ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
   if(type==='parkPoster'&&p.french){
-   // The flag incident physically changes the sign in the exported photo.
-   shapeRect(-d.w*.30,d.h*.07,d.w*.60,23,'#f9edda',3);
-   txt('BONJOUR!',0,d.h*.07+15,13,'#a65f57','900','center');
-  }
- }else if(d.stage==='room'&&atlasReady&&cell){
-  const sx=cell.column*120,sy=cell.row*120;
-  // Preserve the approved illustration's proportions, do not stretch the art.
-  const crop={tower:[21,6,113,115],cloth:[13,20,116,108],sign:[10,21,120,108],
-   plant:[13,8,112,111],bread:[9,20,110,108],hat:[2,29,113,103],
-   arch:[13,10,117,104],lamp:[26,1,99,112],cafe:[2,7,112,118],
-   fountain:[3,7,114,118],postcard:[6,5,104,117],flag:[3,12,109,108],
-   croissant:[12,17,119,102],coffee:[12,16,115,102],cheese:[8,15,120,102],
-   bicycle:[0,14,117,105],suitcase:[6,8,112,103],flowers:[12,5,110,113],
-   sunglasses:[8,31,120,80],perfume:[0,0,105,109],pigeon:[3,4,93,111],
-   cat:[11,3,108,111],dinosaur:[7,6,117,111],ufo:[3,3,107,111]}[type]||[0,0,120,120];
-  const sw=crop[2]-crop[0],sh=crop[3]-crop[1],fit=Math.min(d.w/sw,d.h/sh);
-  const dw=sw*fit,dh=sh*fit;
-  ctx.shadowColor='rgba(52,38,26,.18)';ctx.shadowBlur=4;ctx.shadowOffsetY=2;ctx.drawImage(artAtlas,sx+crop[0],sy+crop[1],sw,sh,-dw/2,-dh/2,dw,dh);ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  if(type==='sign'){
-   ctx.font='900 14px system-ui,sans-serif';
-   ctx.textAlign='center';ctx.textBaseline='middle';
-   ctx.fillStyle='#6b4b3c';
-   ctx.fillText(p.french?'BONJOUR!':'PARIS',0,-8,d.w*.67);
+   shapeRect(-d.w*.3,d.h*.06,d.w*.6,24,'#fff3de',4);
+   txt('BONJOUR!',0,d.h*.06+16,12,'#a45856','900','center');
   }
  }else{
-  // Brief loading placeholder; all 24 assets arrive together.
-  shapeRect(-d.w*.28,-d.h*.28,d.w*.56,d.h*.56,'#e9cfb0',8,'#947458',2);
-  txt(d.emoji||'…',0,0,27,'#6b5548','900','center');
+  shapeRect(-d.w*.3,-d.h*.27,d.w*.6,d.h*.54,'#eee1cc',8,'#b8a18f',1);
+  txt(d.emoji||'…',0,0,29,'#6b5548','900','center');
  }
  ctx.restore();
 }
@@ -2000,7 +1970,7 @@ function makePhoto(stats){
  c.textAlign='right';c.font='700 17px system-ui,sans-serif';c.fillText('t-ukyo2714.github.io',1034,1311);
  return{photo:raw.toDataURL('image/png'),card:card.toDataURL('image/png')};
 }
-function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
+function shoot(){if(!gameEntered||finished||replaying||!(sceneKind==='park'?parkReady:roomReady))return;
  for(const task of animating){Object.assign(task.prop,task.to)}animating.clear();
  if(recording){recording.frames.push(snapshot(recording.length));lastReplay=recording;recording=null}
  finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
