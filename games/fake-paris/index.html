@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v27</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v28</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -719,6 +719,29 @@ body.surprise-playback #propDragGhost{
  #editor.surprise-active .editor-head,
  #editor.surprise-active .setup{
   transition:none!important;
+ }
+}
+
+/* v28: an in-place cinematic push-in on the incident, no gameplay mutation.
+   Stage clipping and movement clamps keep the zoomed image edge-to-edge. */
+#editor .stage-wrap > canvas#scene{
+ transform:translate3d(0,0,0) scale(1);
+ transition:transform .44s cubic-bezier(.2,.72,.2,1);
+}
+#editor.surprise-zoom .stage-wrap > canvas#scene{
+ transform-origin:var(--surprise-origin-x,50%) var(--surprise-origin-y,50%);
+ transform:translate3d(var(--surprise-shift-x,0px),var(--surprise-shift-y,0px),0) scale(1.38);
+ transition-duration:.40s;
+}
+#editor.surprise-active .stage-wrap > canvas#scene{
+ pointer-events:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #editor .stage-wrap > canvas#scene{
+  transition:none!important;
+ }
+ #editor.surprise-zoom .stage-wrap > canvas#scene{
+  transform:none!important;
  }
 }
 </style>
@@ -2015,12 +2038,13 @@ function drawIncidentEffects(items=fx){
 /* A one-shot visual reveal; no clues, controls or categories are exposed
    before an event. Kept outside the canvas so exported photos stay clean. */
 const surpriseOverlay=document.getElementById('surpriseOverlay');
-let surpriseHideTimer=null;
+let surpriseHideTimer=null,surpriseZoomTimer=null;
 function hideSurprise(){
  clearTimeout(surpriseHideTimer);surpriseHideTimer=null;
+ clearTimeout(surpriseZoomTimer);surpriseZoomTimer=null;
  surpriseOverlay.hidden=true;
  surpriseOverlay.classList.remove('show');
- document.getElementById('editor').classList.remove('surprise-active');
+ document.getElementById('editor').classList.remove('surprise-zoom','surprise-active');
  document.body.classList.remove('surprise-playback');
 }
 function showSurprise(rule,x,y){
@@ -2031,14 +2055,32 @@ function showSurprise(rule,x,y){
  const screenY=bounds.top+(y/H)*bounds.height;
  const viewportWidth=window.innerWidth||bounds.right||390;
  const viewportHeight=window.innerHeight||bounds.bottom||780;
+ // Zoom into the active object group, not the entire page. Clamp panning
+ // to the enlarged canvas bounds so no empty edges appear near corners.
+ const zoomScale=1.38;
+ const localX=x/W*bounds.width,localY=y/H*bounds.height;
+ const desiredX=bounds.left+bounds.width*.5-screenX;
+ const desiredY=bounds.top+bounds.height*.57-screenY;
+ const shiftX=clamp(desiredX,-(zoomScale-1)*(bounds.width-localX),(zoomScale-1)*localX);
+ const shiftY=clamp(desiredY,-(zoomScale-1)*(bounds.height-localY),(zoomScale-1)*localY);
+ const canvasStyle=canvas.style;
+ canvasStyle.setProperty('--surprise-origin-x',(x/W*100)+'%');
+ canvasStyle.setProperty('--surprise-origin-y',(y/H*100)+'%');
+ canvasStyle.setProperty('--surprise-shift-x',shiftX.toFixed(1)+'px');
+ canvasStyle.setProperty('--surprise-shift-y',shiftY.toFixed(1)+'px');
  const focus=document.getElementById('surpriseFocus');
- focus.style.left=clamp(screenX,56,viewportWidth-56)+'px';
- focus.style.top=clamp(screenY,72,viewportHeight-85)+'px';
+ focus.style.left=clamp(screenX+shiftX,56,viewportWidth-56)+'px';
+ focus.style.top=clamp(screenY+shiftY,72,viewportHeight-85)+'px';
  document.getElementById('surpriseTitle').textContent=rule.emoji+' '+rule.name+'！';
- // Hide the floating tool tray for the entire event, without changing
- // dockManuallyClosed or dockGestureActive. Normal open/tuck state survives.
- document.getElementById('editor').classList.add('surprise-active');
+ // The inventory stays hidden through both zoom-in and zoom-out.
+ const editor=document.getElementById('editor');
+ editor.classList.add('surprise-active','surprise-zoom');
  document.body.classList.add('surprise-playback');
+ clearTimeout(surpriseZoomTimer);
+ surpriseZoomTimer=setTimeout(()=>{
+  editor.classList.remove('surprise-zoom');
+  surpriseZoomTimer=null;
+ },1780);
  surpriseOverlay.hidden=false;
  surpriseOverlay.classList.remove('show');
  // Restart the CSS effect for a second distinct event.
