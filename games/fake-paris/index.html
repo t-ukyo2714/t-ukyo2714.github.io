@@ -487,7 +487,7 @@ canvas.addEventListener('pointermove',e=>{
    g.p.scale=clamp(g.scale*dist/g.dist,.3,3.5);
    g.p.rot=g.rot+(Math.atan2(dy,dx)-g.angle)*180/Math.PI;
    g.p.x=clamp(g.x+mid.x-g.mid.x,-80,580);
-   g.p.y=clamp(g.y+mid.y-g.mid.y,-75,430);
+   g.p.y=clamp(g.y+mid.y-g.mid.y,-75,H+80);
   }
   render();e.preventDefault();return;
  }
@@ -495,7 +495,7 @@ canvas.addEventListener('pointermove',e=>{
  if(drag.kind==='camera-pan'){
   const f=framing();cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2);
  }else if(drag.kind==='move'){
-  drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,430);
+  drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,H+80);
  }else if(drag.kind==='resize'){
   drag.p.scale=clamp(drag.scale*Math.hypot(pt.x-drag.p.x,pt.y-drag.p.y)/drag.dist,.3,3.5);
  }else if(drag.kind==='rotate'){
