@@ -228,6 +228,19 @@
  #editor.camera-phase .camera-panel{display:grid}
  #editor.camera-phase .actions{margin-top:6px}
 }
+
+/* v13 final mobile viewport adjustments */
+@media(max-width:650px){
+ #editor .stage-wrap{margin-left:auto!important;margin-right:auto!important}
+ #editor .stage-wrap canvas{display:block;width:100%;height:auto}
+ .editor-page .setup{margin:0 0 2px}
+ .editor-head{padding:5px 0 2px}
+ #editor.camera-phase .camera-panel{padding:8px 10px 9px}
+ #editor.camera-phase .actions{display:flex}
+ .editor-page .stage-wrap{transition:width .12s ease-out}
+ .editor-dock .tools .tool{touch-action:pan-x}
+}
+@media(prefers-reduced-motion:reduce){.editor-page .stage-wrap{transition:none}}
 </style>
 </head>
 <body>
@@ -310,6 +323,7 @@ function enterGame(){
  document.getElementById('editor').hidden=false;
  gameEntered=true;
  setMode('prop');
+ scheduleStageFit();
  try{window.scrollTo({top:0,behavior:'instant'})}catch(_){}
  render();
 }
@@ -330,6 +344,46 @@ document.querySelectorAll('[data-quick]').forEach(btn=>{
   document.getElementById(btn.dataset.quick).click();
  });
 });
+
+
+/* The editor stage resizes within the visible mobile area.
+   This prevents the dock from covering interactive parts of the room.
+   The underlying 500x560 world and all game coordinates stay unchanged. */
+let fitQueued=false;
+function fitStageToViewport(){
+ fitQueued=false;
+ const stage=document.querySelector('.stage-wrap');
+ if(!gameEntered||!stage)return;
+ if(typeof window.innerWidth!=='number'||window.innerWidth>650){
+  stage.style.width='';stage.style.marginLeft='';stage.style.marginRight='';
+  return;
+ }
+ const dock=document.getElementById('propDock');
+ const canvasTop=stage.getBoundingClientRect().top;
+ const dockTop=dock.getBoundingClientRect().top;
+ const viewportBottom=window.visualViewport
+  ?window.visualViewport.offsetTop+window.visualViewport.height
+  :window.innerHeight;
+ const usable=Math.min(dockTop,viewportBottom)-canvasTop-8;
+ if(!Number.isFinite(usable)||usable<150)return;
+ const maxWidth=Math.max(190,window.innerWidth-8);
+ const width=Math.min(maxWidth,Math.max(195,Math.floor(usable*W/H)));
+ stage.style.width=width+'px';
+ stage.style.marginLeft='auto';
+ stage.style.marginRight='auto';
+}
+function scheduleStageFit(){
+ if(fitQueued)return;
+ fitQueued=true;
+ requestAnimationFrame(fitStageToViewport);
+}
+window.addEventListener('resize',scheduleStageFit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleStageFit);
+document.getElementById('advancedControls').addEventListener('toggle',scheduleStageFit);
+if(typeof ResizeObserver!=='undefined'){
+ const ro=new ResizeObserver(()=>scheduleStageFit());
+ ro.observe(document.getElementById('propDock'));
+}
 
 const SCALE=2,W=500,H=560,SHOT_H=340,ROOM_SHIFT=110;const defs={tower:{label:'ニセ塔',w:115,h:198},cloth:{label:'青空の布',w:215,h:160},sign:{label:'パリ看板',w:165,h:85},plant:{label:'観葉植物',w:95,h:145},bread:{label:'フランスパン',w:105,h:42},hat:{label:'ベレー帽',w:99,h:52}};
 let props=[],selected=null,drag=null,started=false,finished=false,left=90,interval=null,shootCount=0,photoUrl='';
@@ -369,6 +423,7 @@ document.getElementById('categorytabs').addEventListener('click',e=>{const b=e.t
 const modeButtons=[document.getElementById('propMode'),document.getElementById('cameraMode')];
 function cameraUI(){
  const camera=mode==='camera';
+ if(gameEntered)scheduleStageFit();
  document.getElementById('editor').classList.toggle('camera-phase',camera);
  document.getElementById('cameraPanel').hidden=!camera;
  document.getElementById('snap').textContent=camera?'📸 写真を撮る':'📷 撮影へ →';
