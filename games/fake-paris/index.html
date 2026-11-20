@@ -963,7 +963,7 @@ function tapPlacement(type){
  const upper=valid?clamp((topUI.bottom-r.top+25)*H/r.height,90,H-120):ROOM_SHIFT-115;
  const lowerPx=Math.min(bar.top||Infinity,dock.top||Infinity,r.bottom)-45;
  const lower=valid&&Number.isFinite(lowerPx)?clamp((lowerPx-r.top)*H/r.height,upper+70,H-25):ROOM_SHIFT+175;
- const top=Math.max(upper,Math.min(lower-75,ROOM_SHIFT-50));
+ const top=Math.max(upper,Math.min(lower-75,ROOM_SHIFT+15));
  const bottom=Math.max(top+45,lower);
  const candidates=[];
  const xcoords=[155,274,210,335,130,260];
