@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v5</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v6</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -38,24 +38,34 @@
 .incident-result:empty{display:none}
 @keyframes incident-pop{from{opacity:0;transform:translate(-50%,-15px) scale(.86)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
 @media(max-width:600px){.incident-bar{font-size:10px;gap:5px}.incident-bar span:last-child{font-size:10px}}
+
+/* v6: cinematic reactions + scene replay */
+.incident-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;min-width:0;flex:1}
+.instant-replay{border:1.5px solid #ecc16d;background:#ffdd91;color:#29303e;font-size:11px;font-weight:900;border-radius:9px;min-height:40px;padding:9px 13px;white-space:nowrap;cursor:pointer}
+.instant-replay:disabled{opacity:.45;cursor:not-allowed}
+.stage-wrap.replaying{box-shadow:0 0 0 4px #f6cd7baa,8px 8px 0 #d4dbd9;border-color:#eab563}
+.stage-wrap.shaking{animation:parisShake .28s ease-out}
+@keyframes parisShake{0%{transform:translate(0)}20%{transform:translate(-4px,2px) rotate(-.3deg)}40%{transform:translate(4px,-2px)}65%{transform:translate(-2px,2px)}85%{transform:translate(2px,0)}100%{transform:translate(0)}}
+@media(prefers-reduced-motion:reduce){.stage-wrap.shaking{animation:none}}
+@media(max-width:600px){.incident-meta{width:100%}.instant-replay{width:100%}}
 </style>
 </head>
 <body>
 <main class="shell">
-<header class="eyebrow"><div class="brand"><span class="brand-mark">✈</span> <span>ALIBI STUDIO <span class="micro">/ 001</span></span></div><span class="micro">触れるバカゲー / PLAY v5</span></header>
+<header class="eyebrow"><div class="brand"><span class="brand-mark">✈</span> <span>ALIBI STUDIO <span class="micro">/ 001</span></span></div><span class="micro">触れるバカゲー / PLAY v6</span></header>
 <h1>パリ、<span>行ったことにする。</span></h1>
 <p class="intro">「昨日までパリにいた」と見栄を張ってしまった。<br>友達に写真を送るまで、あと90秒。<strong>実家の一角でパリを捏造せよ。写真に写ったものしか判定されない。</strong></p>
 <div class="setup"><div class="brief"><span class="pill">MISSION 01</span><span>それっぽい旅の写真を撮れ</span></div><div style="display:flex;gap:7px;align-items:center"><button id="freeplay" class="freebtn">∞ 時間無制限</button><div id="timer" class="timer">01:30</div></div></div>
 <div class="stage-wrap"><canvas id="scene" width="1000" height="680" aria-label="自由に小道具を配置できる撮影スタジオ" role="img"></canvas><span class="hud">LIVE / 実家から中継</span><div id="incidentToast" class="incident-toast" role="status" aria-live="polite" hidden></div></div>
-<div class="incident-bar"><span>⚡ 事件発生ログ <b id="incidentCount">0/8</b></span><span id="incidentLatest">小道具を近づけてみよう</span></div>
+<div class="incident-bar"><div class="incident-meta"><span>⚡ 事件発生ログ <b id="incidentCount">0/8</b></span><span id="incidentLatest">小道具を近づけてみよう</span></div><button id="instantReplay" class="instant-replay" disabled type="button">↻ 直前の事件を再生</button></div>
 <div class="modebar"><div class="modes" role="group" aria-label="操作モード"><button id="propMode" class="modebtn active" aria-pressed="true">✋ 小道具を動かす</button><button id="cameraMode" class="modebtn" aria-pressed="false">📷 カメラを動かす</button></div><label class="zoomwrap" for="zoom">📷 撮影ズーム <input id="zoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="zoomlabel">1.35×</span></label></div>
 <div id="feedback" class="feedback" aria-live="polite">まずは小道具を置いて、カメラで「実家の証拠」を隠そう。</div>
-<div class="howto">✋ 小道具をドラッグして近づけると事件発生！ ↗で拡大、↻で回転、2本指でも操作可能。📷モードでは撮影ズーム。</div>
+<div class="howto">✋ 小道具を近づけると事件発生。下の「↻ 再生」で見返せる！ ↗で拡大、↻で回転、2本指操作もOK。</div>
 <div class="tool-title"><span>小道具を選ぶ <span id="propCount">0個</span></span><small>全24種類</small></div><div id="categorytabs" class="categorytabs"><button class="active" data-filter="scenery">🏙 背景</button><button data-filter="item">🥖 小物</button><button data-filter="chaos">🫠 大事故</button><button data-filter="all">すべて</button></div>
 <div class="tools" id="tools"></div>
 <div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint" id="editHint">小道具をタップして操作</span></div><label id="objzoomwrap" class="object-zoom" hidden>小道具の大きさ <input id="objectZoom" aria-label="小道具の拡大縮小" type="range" min="0.3" max="3.5" step="0.05" value="1"><span id="objZoomVal">100%</span></label><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div>
 <div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📸 これでパリに行ったことにする</button></div>
-<div class="foot">撮影写真だけで判定。通信不要・登録不要。組み合わせで変わる12の結末と8つの珍事件。</div>
+<div class="foot">撮影写真だけで判定。通信不要・登録不要。8つの珍事件。直前の事件を見逃したらリプレイ！</div>
 </main>
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="resultTitle"><div class="result"><div class="result-top"><span>MISSION RESULT / PHOTO CHECK</span><span id="endingTag" class="stamp">BON VOYAGE?</span></div><h2 id="resultTitle">まさかの、パリ。</h2><img id="photo" class="photo" alt="あなたが撮影した偽パリ写真"/><div class="metrics"><div class="metric"><b id="score">00%</b><span>パリっぽさ</span><div class="score-sub">独自ルールによるゲーム内判定</div></div><div class="metric"><b id="home">00%</b><span>実家感</span><div class="score-sub">画角＆隠し方で変動</div></div></div><div id="friend" class="friend"></div><p id="quip" class="quip"></p><div id="evidence" class="details"></div><div id="incidentResult" class="incident-result"></div><div id="collection" class="collection"></div><div class="result-actions"><button id="save" class="save">📷 写真を保存</button><button id="share" class="share">↗ シェアする</button><button id="copy" class="again">結果をコピー</button><button id="retry" class="again">↻ もう一回</button></div></div></div>
 <script>
@@ -67,7 +77,7 @@ const SCALE=2,W=500,H=340;const defs={tower:{label:'ニセ塔',w:115,h:198},clot
 let props=[],selected=null,drag=null,started=false,finished=false,left=90,interval=null,shootCount=0,photoUrl='';
 let mode='prop',zoom=1.35,cam={x:255,y:172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
 let nextPropId=1,fx=[],incidents=[],triggered=new Set(),toastHide=null;
-let animationClock=0;const animating=new Set();
+let animationClock=0;const animating=new Set();let recording=null,lastReplay=null,replaying=false,replayScene=null,impact=null;
 const evidencePoints=[{name:'TOKYOカレンダー',x:225,y:70,penalty:21,reply:'え、カレンダーにTOKYOって書いてない？'},{name:'洗濯物',x:357,y:93,penalty:15,reply:'フランスで部屋干ししてるの？'},{name:'電子レンジ',x:418,y:209,penalty:22,reply:'え、その電子レンジ実家のと同じなんだけど。'},{name:'宅配の箱',x:53,y:303,penalty:12,reply:'パリで「宅配」って書いた段ボールあるんだ。'},{name:'埼玉の表記',x:419,y:327,penalty:15,reply:'お土産に埼玉って書いてあるんだけど。'}];
 const extraDefs={"arch":{label:"自作の凱旋門",w:130,h:165,emoji:"🏛️",family:"scenery"},"lamp":{label:"パリ風街灯",w:70,h:160,emoji:"💡",family:"scenery"},"cafe":{label:"オープンカフェ",w:110,h:105,emoji:"🪑",family:"scenery"},"fountain":{label:"噴水",w:130,h:120,emoji:"⛲",family:"scenery"},"postcard":{label:"巨大パリ写真",w:180,h:130,emoji:"🖼️",family:"scenery"},"flag":{label:"フランス国旗",w:105,h:88,emoji:"🇫🇷",family:"item"},"croissant":{label:"クロワッサン",w:89,h:70,emoji:"🥐",family:"item"},"coffee":{label:"エスプレッソ",w:72,h:68,emoji:"☕",family:"item"},"cheese":{label:"チーズ",w:86,h:71,emoji:"🧀",family:"item"},"bicycle":{label:"自転車",w:140,h:100,emoji:"🚲",family:"item"},"suitcase":{label:"旅行カバン",w:90,h:103,emoji:"🧳",family:"item"},"flowers":{label:"バラの花束",w:98,h:108,emoji:"💐",family:"item"},"sunglasses":{label:"サングラス",w:98,h:61,emoji:"🕶️",family:"item"},"perfume":{label:"香水",w:68,h:87,emoji:"🧴",family:"item"},"pigeon":{label:"パリの鳩",w:90,h:85,emoji:"🐦",family:"chaos"},"cat":{label:"なぜか猫",w:104,h:105,emoji:"🐈",family:"chaos"},"dinosaur":{label:"恐竜",w:158,h:145,emoji:"🦖",family:"chaos"},"ufo":{label:"UFO",w:135,h:91,emoji:"🛸",family:"chaos"}};Object.assign(defs,extraDefs);
 const initialFamily={tower:'scenery',cloth:'scenery',sign:'scenery',plant:'item',bread:'item',hat:'item'};
@@ -180,9 +190,9 @@ function updateObjectZoom(){
 }
 function render({clean=false,noFrame=false}={}){
  ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();
- const old=selected;if(clean)selected=null;props.forEach(drawProp);drawIncidentEffects();selected=old;
+ const old=selected;if(clean)selected=null;(replayScene?replayScene.props:props).forEach(drawProp);drawIncidentEffects(replayScene?replayScene.fx:fx);selected=old;
  if(!clean&&!noFrame)drawFrame();
- if(!clean){drawSelection();shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center');}
+ if(!clean){if(!replaying)drawSelection();drawComicMoment();shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt(replaying?'REPLAY ▶':'REC ●',49,22,10,'#fff','900','center');}
  updateObjectZoom();
 }
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
@@ -193,12 +203,12 @@ modeButtons[0].addEventListener('click',()=>setMode('prop'));
 modeButtons[1].addEventListener('click',()=>setMode('camera'));
 document.getElementById('zoom').addEventListener('input',e=>{if(finished)return;zoom=Number(e.target.value);document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';go();render()});
 function clockText(){return freeMode?'∞':String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0')}
-function go(){if(started)return;started=true;if(freeMode)return;interval=setInterval(()=>{if(finished)return;left--;timerEl.textContent=clockText();timerEl.classList.toggle('urgent',left<=10);if(left<=0)shoot()},1000)}
+function go(){if(started)return;started=true;if(freeMode)return;interval=setInterval(()=>{if(finished||replaying)return;left--;timerEl.textContent=clockText();timerEl.classList.toggle('urgent',left<=10);if(left<=0)shoot()},1000)}
 document.getElementById('freeplay').addEventListener('click',()=>{if(finished)return;freeMode=!freeMode;const b=document.getElementById('freeplay');b.classList.toggle('active',freeMode);b.setAttribute('aria-pressed',String(freeMode));clearInterval(interval);interval=null;started=false;left=90;timerEl.textContent=clockText();timerEl.classList.remove('urgent');document.getElementById('feedback').textContent=freeMode?'時間無制限。納得いくまでパリを捏造しよう。':'90秒でパリを捏造せよ！'});
-function add(type){if(finished||!defs[type])return;setMode('prop');go();const n=props.length,p={uid:nextPropId++,type,x:clamp(160+(n*37)%195,70,425),y:clamp(135+(n*23)%100,65,285),rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};props.push(p);choose(p);document.getElementById('feedback').textContent=defs[type].label+'を配置。好きな場所へ動かそう。'}
+function add(type){if(finished||replaying||!defs[type])return;setMode('prop');go();const n=props.length,p={uid:nextPropId++,type,x:clamp(160+(n*37)%195,70,425),y:clamp(135+(n*23)%100,65,285),rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};props.push(p);choose(p);document.getElementById('feedback').textContent=defs[type].label+'を配置。好きな場所へ動かそう。'}
 document.getElementById('tools').addEventListener('click',e=>{const b=e.target.closest('button[data-type]');if(b)add(b.dataset.type)});
 canvas.addEventListener('pointerdown',e=>{
- if(finished)return;
+ if(finished||replaying)return;
  const pt=pos(e);pointers.set(e.pointerId,pt);
  try{canvas.setPointerCapture(e.pointerId)}catch(_){}
  if(pointers.size===2){
@@ -286,6 +296,67 @@ document.getElementById('objectZoom').addEventListener('input',e=>{
 function mutate(id,f){document.getElementById(id).addEventListener('click',()=>{if(!selected||finished)return;f(selected);render()})}
 mutate('left',p=>p.rot-=15);mutate('right',p=>p.rot+=15);mutate('small',p=>p.scale=clamp(p.scale*.85,.35,3.2));mutate('large',p=>p.scale=clamp(p.scale*1.15,.35,3.2));mutate('flip',p=>p.flip=-(p.flip||1));mutate('duplicate',p=>{const copy={...p,uid:nextPropId++,x:p.x+20,y:p.y+16};props.push(copy);choose(copy)});mutate('front',p=>{props=props.filter(x=>x!==p);props.push(p)});mutate('back',p=>{props=props.filter(x=>x!==p);props.unshift(p)});mutate('del',p=>{props=props.filter(x=>x!==p);choose(null)});
 
+
+function snapshot(ms=0){
+ return {ms,props:props.map(p=>({...p})),fx:fx.map(f=>({...f})),impact:impact?{...impact}:null};
+}
+function recordIncident(rule){
+ const start=performance.now(),session={name:rule.name,frames:[snapshot(0)],length:1550,start};
+ recording=session;lastReplay=null;
+ document.getElementById('instantReplay').disabled=true;
+ function capture(now){
+  if(recording!==session||finished)return;
+  const elapsed=Math.max(0,now-start);
+  if(elapsed-session.frames.at(-1).ms>=34||elapsed>=session.length){
+   session.frames.push(snapshot(Math.min(elapsed,session.length)));
+  }
+  if(elapsed<session.length){requestAnimationFrame(capture)}
+  else{recording=null;lastReplay=session;document.getElementById('instantReplay').disabled=false;render()}
+ }
+ if(typeof requestAnimationFrame==='function')requestAnimationFrame(capture);
+ else{recording=null;session.frames.push(snapshot(session.length));lastReplay=session;document.getElementById('instantReplay').disabled=false}
+}
+function replayIncident(){
+ if(!lastReplay||replaying||finished)return;
+ replaying=true;
+ const clip=lastReplay,frames=clip.frames,btn=document.getElementById('instantReplay');
+ btn.disabled=true;btn.textContent='▶ 再生中…';
+ const wrap=document.querySelector('.stage-wrap');wrap.classList.add('replaying');
+ const start=performance.now();
+ function frame(now){
+  if(!replaying)return;
+  const ms=Math.max(0,now-start);let index=0;
+  while(index<frames.length-1&&frames[index+1].ms<=ms)index++;
+  replayScene=frames[index];render();
+  if(ms<clip.length+150)requestAnimationFrame(frame);
+  else{
+   replayScene=null;replaying=false;btn.disabled=false;btn.textContent='↻ 直前の事件を再生';
+   wrap.classList.remove('replaying');render();
+  }
+ }
+ requestAnimationFrame(frame);
+}
+document.getElementById('instantReplay').addEventListener('click',replayIncident);
+function drawComicMoment(){
+ const event=replayScene?replayScene.impact:impact;
+ if(!event)return;
+ const elapsed=replayScene?replayScene.ms:performance.now()-event.start;
+ if(elapsed>1150||elapsed<0)return;
+ const t=elapsed/1150;
+ const alpha=t<.16?t/.16:t>.73?(1-t)/.27:1;
+ ctx.save();ctx.translate(event.x,event.y);ctx.globalAlpha=Math.max(0,alpha);
+ for(let i=0;i<12;i++){
+   const a=i*Math.PI/6;const inner=25,outer=54+30*t;
+   ctx.strokeStyle=i%2?'#ffcc60':'#e97053';ctx.lineWidth=i%3===0?5:3;
+   ctx.beginPath();ctx.moveTo(Math.cos(a)*inner,Math.sin(a)*inner);
+   ctx.lineTo(Math.cos(a)*outer,Math.sin(a)*outer);ctx.stroke();
+ }
+ const growth=.8+.25*Math.min(1,t*6);ctx.scale(growth,growth);
+ ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=8;ctx.lineJoin='round';
+ ctx.font='900 37px sans-serif';ctx.strokeStyle='#27313e';ctx.strokeText(event.sfx,0,-37,245);
+ ctx.fillStyle='#fff9e2';ctx.fillText(event.sfx,0,-37,245);ctx.restore();
+}
+
 /* Pairwise reactions fire on release, not when items are first added.
    Their positions and transformations persist in the exported photograph. */
 const reactionCatalog=[
@@ -319,8 +390,8 @@ function tweenProp(prop,to,duration=600){
  }
  requestAnimationFrame(frame);
 }
-function drawIncidentEffects(){
- for(const f of fx){
+function drawIncidentEffects(items=fx){
+ for(const f of items){
   ctx.save();ctx.translate(f.x,f.y);
   switch(f.kind){
    case 'debris':for(const [x,y] of [[-41,-13],[24,-27],[51,11],[-18,14]]){ctx.fillStyle='#b28755';ctx.fillRect(x,y,12,7);ctx.strokeStyle='#69553b';ctx.lineWidth=1;ctx.strokeRect(x,y,12,7)}break;
@@ -339,8 +410,15 @@ function updateIncidentUI(){
  document.getElementById('incidentCount').textContent=ids.length+'/8';
  document.getElementById('incidentLatest').textContent=incidents.length?incidents.at(-1).name:'小道具を近づけてみよう';
 }
-function showIncident(rule){
+function showIncident(rule,x=250,y=160){
  incidents.push({id:rule.id,name:rule.name,emoji:rule.emoji});
+ impact={sfx:({'cat-tower':'ガシャーン!','pigeon-bread':'バサバサ!','ufo-tower':'ビーーーム!','dinosaur-arch':'ドシーン!','cafe-coffee':'ほっこり','fountain-cafe':'びしゃー!','hat-person':'キラーン!','flag-sign':'BONJOUR!'})[rule.id],x,y,start:performance.now()};
+ recordIncident(rule);
+ if(['cat-tower','dinosaur-arch','fountain-cafe'].includes(rule.id)){
+ const wrap=document.querySelector('.stage-wrap');
+ wrap.classList.remove('shaking');void wrap.offsetWidth;wrap.classList.add('shaking');
+ setTimeout(()=>wrap.classList.remove('shaking'),320);
+ }
  updateIncidentUI();
  const toast=document.getElementById('incidentToast');
  toast.textContent='⚡ '+rule.emoji+' '+rule.name+'！';
@@ -361,7 +439,7 @@ function checkReactions(active){
    const key=rule.id+':'+active.uid;
    if(triggered.has(key))continue;
    if(Math.hypot(active.x-215,active.y-185)<68){
-    triggered.add(key);showIncident(rule);rule.action(active);render();return;
+    triggered.add(key);showIncident(rule,active.x,active.y);rule.action(active);render();return;
    }
    continue;
   }
@@ -372,7 +450,7 @@ function checkReactions(active){
    const first=active.type===rule.first?active:partner,second=first===active?partner:active;
    const key=rule.id+':'+Math.min(first.uid,second.uid)+':'+Math.max(first.uid,second.uid);
    if(triggered.has(key)||!isNearProps(first,second,rule.radius))continue;
-   triggered.add(key);showIncident(rule);rule.action(first,second);render();return;
+   triggered.add(key);showIncident(rule,(first.x+second.x)/2,(first.y+second.y)/2);rule.action(first,second);render();return;
   }
  }
 }
@@ -423,9 +501,9 @@ function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const 
  c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
  c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
  c.fillStyle='#66727b';c.font='19px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
- c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v5',969,866);
+ c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v6',969,866);
  return off.toDataURL('image/png')}
-function shoot(){if(finished)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
+function shoot(){if(finished||replaying)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
  document.getElementById('resultTitle').textContent=stats.title;
  document.getElementById('quip').textContent=stats.quip;
  document.getElementById('score').textContent=stats.score+'%';
@@ -435,7 +513,7 @@ function shoot(){if(finished)return;finished=true;clearInterval(interval);const 
  document.getElementById('incidentResult').textContent=incidents.length?'⚡ 撮影中の珍事件：'+[...new Set(incidents.map(i=>i.name))].join(' ／ '):'⚡ 珍事件：なし（小道具同士を近づけると起きるかも）';
  photoUrl=makePhoto(stats);document.getElementById('photo').src=photoUrl;veil.classList.add('open');render()}
 document.getElementById('snap').addEventListener('click',shoot);
-function reset(){finished=false;started=false;left=90;clearInterval(interval);props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+function reset(){finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').textContent='↻ 直前の事件を再生';document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',reset);document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-photo.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
