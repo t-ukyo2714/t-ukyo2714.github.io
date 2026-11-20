@@ -775,8 +775,8 @@ function updateSceneGallery(){
 }
 
 const toolsEl=document.getElementById('tools');
-Object.entries(defs).forEach(([type,d])=>{
- if(!d.stage)return;
+[...roomInventory,...parkInventory].forEach(([type])=>{
+ const d=defs[type];
  const b=document.createElement('button');
  b.type='button';b.className='tool';b.dataset.type=type;
  b.dataset.family=d.family;b.dataset.stage=d.stage;
