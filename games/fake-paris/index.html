@@ -610,7 +610,7 @@ document.getElementById('backToCover').addEventListener('click',returnToCover);
 document.querySelectorAll('[data-quick]').forEach(btn=>{
  btn.disabled=true;
  btn.addEventListener('click',()=>{
-  if(!gameEntered||finished||!selected)return;
+  if(!gameEntered||finished||!selected||selected.lockedBy)return;
   document.getElementById(btn.dataset.quick).click();
  });
 });
@@ -852,14 +852,14 @@ function selectionGeometry(p){
  return {w,h,resize:point(w/2+8,h/2+8),rotate:point(0,-h/2-34)};
 }
 function selectionHandleAt(pt){
- if(!selected||mode!=='prop'||finished)return null;
+ if(!selected||selected.lockedBy||mode!=='prop'||finished)return null;
  const g=selectionGeometry(selected);
  if(Math.hypot(pt.x-g.resize.x,pt.y-g.resize.y)<22)return 'resize';
  if(Math.hypot(pt.x-g.rotate.x,pt.y-g.rotate.y)<22)return 'rotate';
  return null;
 }
 function drawSelection(){
- if(!selected||finished||mode!=='prop')return;
+ if(!selected||selected.lockedBy||finished||mode!=='prop')return;
  const p=selected,g=selectionGeometry(p);
  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
  ctx.strokeStyle='#f5bf49';ctx.lineWidth=2.5;ctx.setLineDash([6,4]);
@@ -874,11 +874,26 @@ function drawSelection(){
   ctx.fillStyle='#28313b';ctx.fillText(label,spot.x,spot.y+1);ctx.restore();
  }
 }
+function drawLockedMarkers(){
+ if(mode!=='prop')return;
+ for(const p of props){
+  if(!p.lockedBy)continue;
+  const d=defs[p.type];
+  const x=clamp(p.x+d.w*p.scale*.29,15,W-15);
+  const y=clamp(p.y-d.h*p.scale*.32,18,H-18);
+  ctx.save();ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,249,233,.91)';ctx.fill();
+  ctx.strokeStyle='rgba(38,48,56,.8)';ctx.lineWidth=1.4;ctx.stroke();
+  ctx.font='14px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('🔒',x,y+1);
+  ctx.restore();
+ }
+}
 function updateObjectZoom(){
  const wrap=document.getElementById('objzoomwrap');
  const val=document.getElementById('objZoomVal'),input=document.getElementById('objectZoom');
- wrap.hidden=!selected||mode!=='prop'||finished;
- if(selected&&mode==='prop'&&!finished){
+ wrap.hidden=!selected||!!selected.lockedBy||mode!=='prop'||finished;
+ if(selected&&!selected.lockedBy&&mode==='prop'&&!finished){
   input.value=String(clamp(selected.scale,.3,3.5));
   val.textContent=Math.round(selected.scale*100)+'%';
   document.getElementById('editHint').textContent='指で移動・↗サイズ・↻角度・2本指もOK';
@@ -983,12 +998,12 @@ function render({clean=false,noFrame=false}={}){
  const old=selected;if(clean)selected=null;(replayScene?replayScene.props:props).forEach(drawProp);drawIncidentEffects(replayScene?replayScene.fx:fx);selected=old;
  if(!clean&&mode==='camera')drawCameraPreview();
  if(!clean&&!noFrame&&mode==='camera'&&window.innerWidth>650)drawFrame();
- if(!clean){if(!replaying)drawSelection();drawComicMoment();if(mode==='camera'){shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center')}}
+ if(!clean){if(!replaying){drawSelection();drawLockedMarkers()}drawComicMoment();if(mode==='camera'){shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center')}}
  updateObjectZoom();
 }
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
 function hit(p,x,y){const t=-(p.rot||0)*Math.PI/180,dx=x-p.x,dy=y-p.y,c=Math.cos(t),s=Math.sin(t),xx=(dx*c-dy*s)/p.scale,yy=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(xx)<d.w/2+9&&Math.abs(yy)<d.h/2+9}
-function choose(p){selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';document.querySelectorAll('[data-quick]').forEach(b=>{b.disabled=!p});render()}
+function choose(p){p=p&&!p.lockedBy?p:null;selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';document.querySelectorAll('[data-quick]').forEach(b=>{b.disabled=!p});render()}
 function setMode(next){
  mode=next;
  // Entering and leaving the camera should never silently preserve a crop.
@@ -1176,6 +1191,7 @@ canvas.addEventListener('pointerdown',e=>{
  }
  for(let i=props.length-1;i>=0;i--){
   if(hit(props[i],pt.x,pt.y)){
+   if(props[i].lockedBy){choose(null);notifyLocked(props[i]);e.preventDefault();return}
    go();const o=props[i];props.splice(i,1);props.push(o);choose(o);
    drag={kind:'move',p:o,dx:pt.x-o.x,dy:pt.y-o.y,id:e.pointerId,start:pt};
    canvas.classList.add('dragging');e.preventDefault();return;
@@ -1253,10 +1269,10 @@ function endDrag(e){
 canvas.addEventListener('pointerup',endDrag);
 canvas.addEventListener('pointercancel',endDrag);
 document.getElementById('objectZoom').addEventListener('input',e=>{
- if(!selected||finished)return;
+ if(!selected||selected.lockedBy||finished)return;
  go();selected.scale=clamp(Number(e.target.value),.3,3.5);render();
 });
-function mutate(id,f){document.getElementById(id).addEventListener('click',()=>{if(!selected||finished)return;f(selected);render()})}
+function mutate(id,f){document.getElementById(id).addEventListener('click',()=>{if(!selected||selected.lockedBy||finished)return;f(selected);render()})}
 mutate('left',p=>p.rot-=15);mutate('right',p=>p.rot+=15);mutate('small',p=>p.scale=clamp(p.scale*.85,.35,3.2));mutate('large',p=>p.scale=clamp(p.scale*1.15,.35,3.2));mutate('flip',p=>p.flip=-(p.flip||1));mutate('duplicate',p=>{const copy={...p,uid:nextPropId++,x:p.x+20,y:p.y+16};props.push(copy);choose(copy)});mutate('front',p=>{props=props.filter(x=>x!==p);props.push(p)});mutate('back',p=>{props=props.filter(x=>x!==p);props.unshift(p)});mutate('del',p=>{props=props.filter(x=>x!==p);choose(null)});
 
 
@@ -1397,26 +1413,47 @@ function isNearProps(a,b,factor){
  const rb=Math.min(110,Math.max(db.w,db.h)*b.scale*.34);
  return Math.hypot(a.x-b.x,a.y-b.y)<(ra+rb)*factor;
 }
+function notifyLocked(p){
+ const toast=document.getElementById('incidentToast');
+ toast.textContent='🔒 '+defs[p.type].label+'は動かせない！';
+ toast.hidden=false;clearTimeout(toastHide);
+ toastHide=setTimeout(()=>{toast.hidden=true},1650);
+}
+function lockIncidentProps(rule,participants,beforeUids){
+ for(const p of props){
+  if(participants.includes(p)||(p.spawned&&!beforeUids.has(p.uid)))p.lockedBy=rule.id;
+ }
+ if(selected&&selected.lockedBy)choose(null);
+}
 function checkReactions(active){
- if(!active||!props.includes(active)||finished)return;
+ if(!active||active.lockedBy||!props.includes(active)||finished)return;
  for(const rule of reactionCatalog){
   if(rule.special==='person'){
    if(active.type!=='hat')continue;
    const key=rule.id+':'+active.uid;
    if(triggered.has(key))continue;
    if(Math.hypot(active.x-215,active.y-ROOM_SHIFT-185)<68){
-    triggered.add(key);showIncident(rule,active.x,active.y);rule.action(active);render();return;
+    const before=new Set(props.map(p=>p.uid));
+    triggered.add(key);showIncident(rule,active.x,active.y);
+    rule.action(active);
+    lockIncidentProps(rule,[active],before);
+    render();return;
    }
    continue;
   }
   if(active.type!==rule.first&&active.type!==rule.second)continue;
   const otherType=active.type===rule.first?rule.second:rule.first;
   for(const partner of [...props].reverse()){
-   if(partner===active||partner.type!==otherType||partner.spawned)continue;
+   if(partner===active||partner.type!==otherType||partner.spawned||partner.lockedBy)continue;
    const first=active.type===rule.first?active:partner,second=first===active?partner:active;
    const key=rule.id+':'+Math.min(first.uid,second.uid)+':'+Math.max(first.uid,second.uid);
    if(triggered.has(key)||!isNearProps(first,second,rule.radius))continue;
-   triggered.add(key);showIncident(rule,(first.x+second.x)/2,(first.y+second.y)/2);rule.action(first,second);render();return;
+   const before=new Set(props.map(p=>p.uid));
+   triggered.add(key);
+   showIncident(rule,(first.x+second.x)/2,(first.y+second.y)/2);
+   rule.action(first,second);
+   lockIncidentProps(rule,[first,second],before);
+   render();return;
   }
  }
 }
