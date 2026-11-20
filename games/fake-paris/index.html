@@ -1030,11 +1030,9 @@ function hit(p,x,y){const t=-(p.rot||0)*Math.PI/180,dx=x-p.x,dy=y-p.y,c=Math.cos
 function choose(p){selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';document.querySelectorAll('[data-quick]').forEach(b=>{b.disabled=!p});render()}
 function setMode(next){
  mode=next;
- if(next==='camera'){
-  // A camera session starts in a full-viewport composition.
-  cropEnabled=false;zoom=1;cam={x:W/2,y:H/2};
-  previewPointers.clear();previewDrag=null;previewPinch=null;
- }
+ // Entering and leaving the camera should never silently preserve a crop.
+ cropEnabled=false;zoom=1;cam={x:W/2,y:H/2};
+ previewPointers.clear();previewDrag=null;previewPinch=null;
  selected=null;choose(null);cameraUI();modeButtons.forEach((b,i)=>{const active=(i===0)===(mode==='prop');b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.getElementById('feedback').textContent=mode==='camera'?'画面全体を撮影できます。ドラッグ・ピンチで画角を変えることもできます。':'小道具を動かして、パリっぽく偽装しよう。';
  const mobile=document.getElementById('mobileCamera');mobile.setAttribute('aria-pressed',String(mode==='camera'));mobile.classList.toggle('is-camera',mode==='camera');mobile.innerHTML=mode==='camera'?'✋<small>配置</small>':'📷<small>画角変更</small>';
 }
