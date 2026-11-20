@@ -36,7 +36,7 @@
 <div class="stage-wrap"><canvas id="scene" width="1000" height="680" aria-label="自由に小道具を配置できる撮影スタジオ" role="img"></canvas><span class="hud">LIVE / 実家から中継</span></div>
 <div class="modebar"><div class="modes" role="group" aria-label="操作モード"><button id="propMode" class="modebtn active" aria-pressed="true">✋ 小道具を動かす</button><button id="cameraMode" class="modebtn" aria-pressed="false">📷 カメラを動かす</button></div><label class="zoomwrap" for="zoom">ズーム <input id="zoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="zoomlabel">1.35×</span></label></div>
 <div id="feedback" class="feedback" aria-live="polite">まずは小道具を置いて、カメラで「実家の証拠」を隠そう。</div>
-<div class="howto">📷 カメラモードでは画面をドラッグして撮影範囲を移動。ズームで実家の写り込みを減らせます。</div>
+<div class="howto">✋ 小道具は指でドラッグ。2本指で拡大・回転も可能。📷 モードでは画角を移動。</div>
 <div class="tool-title"><span>小道具を選ぶ <span id="propCount">0個</span></span><small>全24種類</small></div><div id="categorytabs" class="categorytabs"><button class="active" data-filter="scenery">🏙 背景</button><button data-filter="item">🥖 小物</button><button data-filter="chaos">🫠 大事故</button><button data-filter="all">すべて</button></div>
 <div class="tools" id="tools"></div>
 <div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint">選んだ小道具を編集</span></div><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div>
@@ -134,45 +134,76 @@ function go(){if(started)return;started=true;if(freeMode)return;interval=setInte
 document.getElementById('freeplay').addEventListener('click',()=>{if(finished)return;freeMode=!freeMode;const b=document.getElementById('freeplay');b.classList.toggle('active',freeMode);b.setAttribute('aria-pressed',String(freeMode));clearInterval(interval);interval=null;started=false;left=90;timerEl.textContent=clockText();timerEl.classList.remove('urgent');document.getElementById('feedback').textContent=freeMode?'時間無制限。納得いくまでパリを捏造しよう。':'90秒でパリを捏造せよ！'});
 function add(type){if(finished||!defs[type])return;setMode('prop');go();const n=props.length,p={type,x:clamp(160+(n*37)%195,70,425),y:clamp(135+(n*23)%100,65,285),rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};props.push(p);choose(p);document.getElementById('feedback').textContent=defs[type].label+'を配置。好きな場所へ動かそう。'}
 document.getElementById('tools').addEventListener('click',e=>{const b=e.target.closest('button[data-type]');if(b)add(b.dataset.type)});
-canvas.addEventListener('pointerdown',e=>{if(finished)return;const {x,y}=pos(e);if(mode==='camera'){go();drag={camera:true,dx:x-cam.x,dy:y-cam.y,id:e.pointerId};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');e.preventDefault();return}for(let i=props.length-1;i>=0;i--){if(hit(props[i],x,y)){go();let p=props[i];props.splice(i,1);props.push(p);choose(p);drag={p,dx:x-p.x,dy:y-p.y,id:e.pointerId};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');e.preventDefault();return}}choose(null)});
-canvas.addEventListener('pointermove',e=>{if(!drag)return;let {x,y}=pos(e);if(drag.camera){const f=framing();cam.x=clamp(x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(y-drag.dy,f.h/2,H-f.h/2)}else{drag.p.x=clamp(x-drag.dx,-80,580);drag.p.y=clamp(y-drag.dy,-75,430)}render();e.preventDefault()});
-function endDrag(e){if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}}canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
+canvas.addEventListener('pointerdown',e=>{
+ if(finished)return;const p=pos(e);pointers.set(e.pointerId,p);
+ try{canvas.setPointerCapture(e.pointerId)}catch(_){}
+ if(pointers.size===2&&mode==='prop'&&selected){const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y;gesture={p:selected,dist:Math.max(1,Math.hypot(dx,dy)),angle:Math.atan2(dy,dx),scale:selected.scale,rot:selected.rot,mid:{x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2},x:selected.x,y:selected.y};drag=null;go();e.preventDefault();return}
+ if(pointers.size>1){drag=null;e.preventDefault();return}
+ if(mode==='camera'){go();drag={camera:true,dx:p.x-cam.x,dy:p.y-cam.y,id:e.pointerId};canvas.classList.add('dragging');e.preventDefault();return}
+ for(let i=props.length-1;i>=0;i--){if(hit(props[i],p.x,p.y)){go();const o=props[i];props.splice(i,1);props.push(o);choose(o);drag={p:o,dx:p.x-o.x,dy:p.y-o.y,id:e.pointerId};canvas.classList.add('dragging');e.preventDefault();return}}
+ choose(null)
+});
+canvas.addEventListener('pointermove',e=>{
+ if(!pointers.has(e.pointerId))return;
+ const pt=pos(e);pointers.set(e.pointerId,pt);
+ if(gesture&&pointers.size>=2){const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};const g=gesture;g.p.scale=clamp(g.scale*Math.hypot(dx,dy)/g.dist,.3,3.5);g.p.rot=g.rot+(Math.atan2(dy,dx)-g.angle)*180/Math.PI;g.p.x=clamp(g.x+mid.x-g.mid.x,-80,580);g.p.y=clamp(g.y+mid.y-g.mid.y,-75,430);render();e.preventDefault();return}
+ if(!drag||drag.id!==e.pointerId)return;
+ if(drag.camera){const f=framing();cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2)}
+ else{drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,430)}
+ render();e.preventDefault()
+});
+function endDrag(e){pointers.delete(e.pointerId);if(pointers.size<2)gesture=null;if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}}
+canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
 function mutate(id,f){document.getElementById(id).addEventListener('click',()=>{if(!selected||finished)return;f(selected);render()})}
 mutate('left',p=>p.rot-=15);mutate('right',p=>p.rot+=15);mutate('small',p=>p.scale=clamp(p.scale*.85,.35,3.2));mutate('large',p=>p.scale=clamp(p.scale*1.15,.35,3.2));mutate('flip',p=>p.flip=-(p.flip||1));mutate('duplicate',p=>{const copy={...p,x:p.x+20,y:p.y+16};props.push(copy);choose(copy)});mutate('front',p=>{props=props.filter(x=>x!==p);props.push(p)});mutate('back',p=>{props=props.filter(x=>x!==p);props.unshift(p)});mutate('del',p=>{props=props.filter(x=>x!==p);choose(null)});
 function isCovered(point){
  // The prop needs to actually cover the evidence on screen, not merely exist nearby.
  return props.some(p=>{const dx=point.x-p.x,dy=point.y-p.y,angle=-p.rot*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle),lx=(dx*c-dy*s)/p.scale,ly=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(lx)<d.w*.39&&Math.abs(ly)<d.h*.39})}
 function inFrame(x,y){const f=framing();return x>=f.x&&x<=f.x+f.w&&y>=f.y&&y<=f.y+f.h}
-function evaluate(){const counts={};props.forEach(p=>counts[p.type]=(counts[p.type]||0)+1);
- const exposed=evidencePoints.filter(p=>inFrame(p.x,p.y)&&!isCovered(p));
- const hidden=evidencePoints.filter(p=>!inFrame(p.x,p.y)||isCovered(p));
+function evaluate(){
  const visibleProps=props.filter(p=>inFrame(p.x,p.y));
- const values={tower:23,cloth:9,sign:12,plant:7,bread:5,hat:7};
- const kinds=new Set(visibleProps.map(p=>p.type));
- let score=25+visibleProps.reduce((n,p)=>n+values[p.type]*Math.min(1.3,Math.max(.3,p.scale)),0);
- score+=hidden.length*7;
- score-=exposed.reduce((n,p)=>n+p.penalty,0);
- score+=kinds.size*3;
- if(!visibleProps.some(p=>p.type==='tower'))score-=20;
- if(visibleProps.filter(p=>p.type==='tower').length>=2)score-=17;
- if(visibleProps.filter(p=>p.type==='sign').length>=3)score-=17;
- if(zoom>1.65&&visibleProps.length===0)score-=14;
+ const counts={};visibleProps.forEach(p=>counts[p.type]=(counts[p.type]||0)+1);
+ const C=t=>counts[t]||0;
+ const exposed=evidencePoints.filter(p=>inFrame(p.x,p.y)&&!isCovered(p)).sort((a,b)=>b.penalty-a.penalty);
+ const hidden=evidencePoints.filter(p=>!inFrame(p.x,p.y)||isCovered(p));
+ const unique=[...new Set(visibleProps.map(p=>p.type))];
+ const values={tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,pigeon:2,cat:2,dinosaur:-12,ufo:-12};
+ let score=27+hidden.length*6-exposed.reduce((n,p)=>n+p.penalty,0);
+ score+=unique.reduce((n,type)=>n+(values[type]||0),0);
+ if(C('tower')+C('arch')===0)score-=18;
+ if(C('tower')>=3)score-=15;
+ if(C('sign')>=3||C('flag')>=3)score-=12;
+ if(C('pigeon')+C('cat')>=4)score-=12;
+ if(visibleProps.length>10)score-=4*(visibleProps.length-10);
+ if(visibleProps.length===0)score-=22;
  score=Math.round(clamp(score,2,99));
- let title,quip;if(score>=85){title='もうパリってことでいい？';quip='だいぶそれっぽい。信じるかは友達の優しさ次第。'}else if(score>=60){title='パリの概念が揺らぐ一枚。';quip='一瞬騙されそう。でも、何かが決定的におかしい。'}else if(score>=35){title='パリ郊外（実家）';quip='頑張りは伝わる。パスポートのスタンプはたぶん押されない。'}else{title='これは完全に実家。';quip='加工ゼロの生活感。写真の向こうからお母さんが出てきそう。'}
- if((counts.bread||0)>=3)quip='パンでフランスを証明しようとするな。';
- if((counts.tower||0)>=3)quip='エッフェル塔が増殖している。パリより不安。';
- let reply=exposed.length?exposed.sort((a,b)=>b.penalty-a.penalty)[0].reply:score>=80?'えっ、めっちゃパリっぽい！…背景の塔、段ボール？':'え、これってどこで撮ったの？';
- return{score,home:100-score,title,quip,reply,exposed,hidden,zoom};}
+ let ending={id:'12',title:'パリ郊外（実家）',quip:'一瞬だけパリっぽい。よく見ると、全部実家。',reply:'え、これってどこで撮ったの？'};
+ if(visibleProps.length===0)ending={id:'01',title:'写真、撮る意味あった？',quip:'カメラだけ起動して、パリに行ったことにした。',reply:'いや、普通に実家なんだけど。'};
+ else if(C('ufo')&&C('tower'))ending={id:'02',title:'パリ、宇宙人に占拠される。',quip:'観光写真を捏造するはずが、未確認飛行物体のスクープになった。',reply:'パリよりまずUFOを説明して。'};
+ else if(C('dinosaur'))ending={id:'03',title:'ジュラシック・パリ。',quip:'フランス旅行の話が、突然6500万年前になった。',reply:'エッフェル塔より後ろの恐竜が気になる。'};
+ else if(C('cat')>=2)ending={id:'04',title:'パリ、猫共和国になる。',quip:'人間が観光する場所ではなくなった。',reply:'旅行っていうか、猫カフェの宣伝写真？'};
+ else if(C('pigeon')>=2&&C('bread'))ending={id:'05',title:'パリ、鳩に乗っ取られる。',quip:'フランスパンを置いた結果、鳩が大集合。',reply:'パリじゃなくて鳩の集会じゃん。'};
+ else if(C('cafe')&&C('croissant')&&C('coffee'))ending={id:'06',title:'実家の一角でパリカフェ開業。',quip:'観光写真というより、家で開いたカフェの宣伝。',reply:'メニューどこ？ 今日営業してる？'};
+ else if(C('tower')>=3)ending={id:'07',title:'エッフェル塔、繁殖する。',quip:'1つでよかったのに、なぜ3つも作ってしまったのか。',reply:'パリって塔こんなに生えてたっけ？'};
+ else if(C('hat')&&C('sunglasses')&&C('perfume'))ending={id:'08',title:'パリコレ（実家会場）。',quip:'旅行の証拠より、ファッションへの情熱が強い。',reply:'パリに行ったというより、服を着替えただけでは。'};
+ else if(C('postcard')>=2)ending={id:'09',title:'旅行写真の中で旅行写真を撮る。',quip:'本物のパリを一度も見ずに、写真だけが無限に増殖。',reply:'背景の写真、写真じゃない？'};
+ else if(C('sign')>=3||C('flag')>=3)ending={id:'10',title:'パリと言い張る力、世界一。',quip:'看板と国旗の物量で地理をねじ曲げようとしている。',reply:'PARISって書けばパリになると思ってる？'};
+ else if(exposed.length>=3)ending={id:'11',title:'実家の証拠、流出事件。',quip:'隠す気があるようで、全部バレている。',reply:exposed[0].reply};
+ else if(score>=85)ending={id:'12',title:'その嘘、ギリギリ通る。',quip:'実家からの出国に成功。あなたには才能がある。',reply:'……待って、本当にパリ？ ちょっと信じた。'};
+ else if(score<35)ending={id:'12',title:'完全に実家です。',quip:'異国情緒より、生活感の勝利。',reply:exposed.length?exposed[0].reply:'海外旅行、どこの部屋で撮った？'};
+ if(ending.id==='12'&&exposed.length&&score<85)ending.reply=exposed[0].reply;
+ return{score,home:100-score,title:ending.title,quip:ending.quip,reply:ending.reply,ending,exposed,hidden,zoom};
+}
 function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const f=framing();const off=document.createElement('canvas');off.width=1000;off.height=885;const c=off.getContext('2d');c.fillStyle='#fffdf8';c.fillRect(0,0,1000,885);
  // Only the viewfinder contents appear in the exported image.
  c.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
  c.fillStyle='#fffdf8';c.fillRect(0,680,1000,205);
  c.fillStyle='#252a35';c.font='bold 41px sans-serif';c.fillText('パリ、行ったことにする。',34,746);
- c.fillStyle='#d55e50';c.font='bold 32px sans-serif';c.fillText('パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802);
- c.fillStyle='#66727b';c.font='20px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841);
+ c.fillStyle='#d55e50';c.font='bold 32px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
+ c.fillStyle='#66727b';c.font='20px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
  c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v3',969,866);
  return off.toDataURL('image/png')}
-function shoot(){if(finished)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;
+function shoot(){if(finished)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
  document.getElementById('resultTitle').textContent=stats.title;
  document.getElementById('quip').textContent=stats.quip;
  document.getElementById('score').textContent=stats.score+'%';
@@ -184,6 +215,7 @@ document.getElementById('snap').addEventListener('click',shoot);
 function reset(){finished=false;started=false;left=90;clearInterval(interval);props=[];selected=null;drag=null;pointers.clear();gesture=null;zoom=1.35;cam={x:255,y:172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',reset);document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-photo.png';document.body.appendChild(a);a.click();a.remove()});
+document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
 document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」';try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
 ['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=true);
 render();
