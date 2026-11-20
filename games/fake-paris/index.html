@@ -1611,73 +1611,90 @@ function drawComicMoment(){
 
 /* Pairwise reactions fire on release, not when items are first added.
    Their positions and transformations persist in the exported photograph. */
-const reactionCatalog=[
- {id:'cat-tower',name:'猫の塔倒し',emoji:'🐈',first:'cat',second:'tower',radius:1.0,
-  action:(cat,tower)=>{const sign=tower.x<cat.x?-1:1;tweenProp(tower,{rot:tower.rot+sign*72,x:tower.x+sign*24,y:tower.y+13},900,'bounce');fx.push({kind:'debris',x:tower.x,y:tower.y+45});}},
- {id:'pigeon-bread',name:'パンに鳩が大集合',emoji:'🐦',first:'pigeon',second:'bread',radius:.92,
-  action:(bird,bread)=>{for(let j=0;j<2;j++){const p={uid:nextPropId++,type:'pigeon',x:bread.x+(-1+j*2)*86,y:bread.y+(-22+j*16),rot:(j===0?-18:16),scale:.54,flip:j===0?-1:1,spawned:true};props.push(p);tweenProp(p,{x:bread.x+(-1+j*2)*39,y:bread.y-19+j*24},720+j*140,'spring')}fx.push({kind:'crumbs',x:bread.x,y:bread.y});}},
- {id:'ufo-tower',name:'エッフェル塔、誘拐される',emoji:'🛸',first:'ufo',second:'tower',radius:1.10,
-  action:(ufo,tower)=>{const x=ufo.x;fx.push({kind:'beam',x,y:ufo.y+26,base:tower.y+50});tweenProp(tower,{x,y:ufo.y+54,rot:tower.rot+23,scale:Math.max(.36,tower.scale*.64)},1350,'float');}},
- {id:'dinosaur-arch',name:'凱旋門、踏みつぶされる',emoji:'🦖',first:'dinosaur',second:'arch',radius:1.12,
-  action:(dino,arch)=>{tweenProp(arch,{scale:Math.max(.3,arch.scale*.46),y:arch.y+42,rot:arch.rot-12},780,'bounce');fx.push({kind:'dust',x:arch.x,y:arch.y+39});}},
- {id:'cafe-coffee',name:'実家に本格パリカフェ誕生',emoji:'☕',first:'coffee',second:'croissant',radius:.97,
-  action:(coffee,croissant)=>{fx.push({kind:'steam',x:coffee.x,y:coffee.y-26});tweenProp(croissant,{x:coffee.x+64,y:coffee.y+12,rot:-18},850,'spring');}},
- {id:'fountain-cafe',name:'カフェ、噴水で水没',emoji:'⛲',first:'fountain',second:'cafe',radius:1.00,
-  action:(fountain,cafe)=>{fx.push({kind:'water',x:(fountain.x+cafe.x)/2,y:(fountain.y+cafe.y)/2+25});tweenProp(cafe,{rot:cafe.rot+12,x:cafe.x+26,y:cafe.y+12},800,'spring');}},
- {id:'hat-person',name:'本人、急にパリジェンヌになる',emoji:'🎩',first:'hat',special:'person',
-  action:(hat)=>{tweenProp(hat,{x:215,y:ROOM_SHIFT+160,scale:.63,rot:-16},670,'spring');fx.push({kind:'glitter',x:215,y:ROOM_SHIFT+165});}},
- {id:'flag-sign',name:'看板、急にフランス国籍を取得',emoji:'🇫🇷',first:'flag',second:'sign',radius:1.0,
-  action:(flag,sign)=>{sign.french=true;fx.push({kind:'glitter',x:sign.x,y:sign.y-22});tweenProp(sign,{rot:-8},520,'spring');}}
-];
 
-/* Surprise events unique to the park. Scene-specific assets never leak into
-   the room; all participants and newly spawned pigeons lock on activation. */
-reactionCatalog.push(
- {scene:'park',id:'park-dog-tower',name:'犬、ニセ塔をなぎ倒す',emoji:'🐕',first:'parkDog',second:'parkTower',radius:1.09,
-  action:(dog,tower)=>{
-   fx.push({kind:'debris',x:tower.x,y:tower.y+45});
-   tweenProp(tower,{x:tower.x+29,y:tower.y+23,rot:tower.rot+68},900,'bounce');
-   tweenProp(dog,{x:dog.x-19,rot:dog.rot-12},600,'spring');
+/* Stage-specific, unrevealed surprise accidents.
+   Event assets are restricted to that room / park inventory. */
+const reactionCatalog=[
+ {scene:'room',id:'cat-tower',name:'猫がミニ塔を倒した',emoji:'🐈',first:'cat',second:'tower',radius:1,
+  action:(cat,tower)=>{
+   const sign=tower.x<cat.x?-1:1;
+   tweenProp(tower,{rot:tower.rot+sign*73,x:tower.x+sign*27,y:tower.y+12},820,'bounce');
+   fx.push({kind:'debris',x:tower.x,y:tower.y+24});
   }},
- {scene:'park',id:'park-pigeon-bread',name:'バゲット争奪！鳩が大集合',emoji:'🐦',first:'parkPigeon',second:'parkBaguette',radius:1.00,
+ {scene:'room',id:'ufo-tower',name:'ミニ塔、UFOに誘拐される',emoji:'🛸',first:'ufo',second:'tower',radius:1.1,
+  action:(ufo,tower)=>{
+   fx.push({kind:'beam',x:ufo.x,y:ufo.y+26,base:tower.y+44});
+   tweenProp(tower,{x:ufo.x,y:ufo.y+54,rot:tower.rot+28,scale:Math.max(.35,tower.scale*.64)},1300,'float');
+  }},
+ {scene:'room',id:'hat-person',name:'本人、急にパリジェンヌになる',emoji:'🎩',first:'hat',special:'person',
+  action:hat=>{tweenProp(hat,{x:215,y:ROOM_SHIFT+160,scale:.7,rot:-15},670,'spring');
+   fx.push({kind:'glitter',x:215,y:ROOM_SHIFT+163});
+  }},
+ {scene:'room',id:'coffee-croissant',name:'エスプレッソが大惨事',emoji:'☕',first:'coffee',second:'croissant',radius:1.04,
+  action:(coffee,croissant)=>{
+   fx.push({kind:'spill',x:(coffee.x+croissant.x)/2,y:coffee.y+20});
+   tweenProp(coffee,{rot:coffee.rot+55,x:coffee.x-19,y:coffee.y+9},650,'bounce');
+   tweenProp(croissant,{x:croissant.x+30,y:croissant.y+16,rot:croissant.rot-11},700,'spring');
+  }},
+ {scene:'room',id:'cat-flowers',name:'猫、花束を散らかす',emoji:'🐈',first:'cat',second:'flowers',radius:1,
+  action:(cat,flowers)=>{
+   fx.push({kind:'petals',x:flowers.x,y:flowers.y-22});
+   tweenProp(flowers,{rot:flowers.rot+65,x:flowers.x+23,y:flowers.y+16},820,'bounce');
+  }},
+ {scene:'room',id:'suitcase-postcard',name:'トランクからパリが飛び出す',emoji:'🧳',first:'suitcase',second:'roomPostcard',radius:1,
+  action:(bag,card)=>{
+   fx.push({kind:'glitter',x:card.x,y:card.y-20});
+   tweenProp(card,{x:card.x+33,y:card.y-93,rot:card.rot-28,scale:1.15},900,'spring');
+  }},
+ {scene:'park',id:'park-dog-tower',name:'犬、ニセ塔をなぎ倒す',emoji:'🐕',first:'parkDog',second:'parkTower',radius:1.06,
+  action:(dog,tower)=>{
+   fx.push({kind:'debris',x:tower.x,y:tower.y+42});
+   tweenProp(tower,{x:tower.x+28,y:tower.y+21,rot:tower.rot+65},870,'bounce');
+   tweenProp(dog,{x:dog.x-18,rot:dog.rot-10},560,'spring');
+  }},
+ {scene:'park',id:'park-pigeon-bread',name:'バゲット争奪！鳩が大集合',emoji:'🐦',first:'parkPigeon',second:'parkBaguette',radius:1,
   action:(bird,bread)=>{
    for(let i=0;i<2;i++){
-    const p={uid:nextPropId++,type:'parkPigeon',
-     x:bread.x+(-1+i*2)*90,y:bread.y-30+i*10,
-     rot:i===0?-12:17,scale:.59,flip:i===0?-1:1,spawned:true};
+    const p={uid:nextPropId++,type:'parkPigeon',x:bread.x+(-1+i*2)*90,
+     y:bread.y-29+i*11,rot:i===0?-13:17,scale:.58,flip:i===0?-1:1,spawned:true};
     props.push(p);
-    tweenProp(p,{x:bread.x+(-1+i*2)*35,y:bread.y-18+i*21},720+i*110,'spring');
+    tweenProp(p,{x:bread.x+(-1+i*2)*35,y:bread.y-19+i*20},740+i*125,'spring');
    }
    fx.push({kind:'crumbs',x:bread.x,y:bread.y});
   }},
- {scene:'park',id:'park-fountain-bistro',name:'ビストロ、噴水で水没',emoji:'⛲',first:'parkFountain',second:'parkBistro',radius:1.0,
-  action:(fountain,bistro)=>{
-   fx.push({kind:'water',x:(fountain.x+bistro.x)/2,y:(fountain.y+bistro.y)/2+25});
-   tweenProp(bistro,{x:bistro.x+26,y:bistro.y+17,rot:bistro.rot+13},860,'spring');
+ {scene:'park',id:'park-fountain-table',name:'テラス席、噴水で水没',emoji:'⛲',first:'parkFountain',second:'parkTable',radius:1,
+  action:(fountain,table)=>{
+   fx.push({kind:'water',x:(fountain.x+table.x)/2,y:(fountain.y+table.y)/2+22});
+   tweenProp(table,{x:table.x+23,y:table.y+17,rot:table.rot+12},840,'spring');
   }},
- {scene:'park',id:'park-bike-flower',name:'自転車が花のアーチに突っ込む',emoji:'🚲',first:'parkBike',second:'parkFlower',radius:.95,
+ {scene:'park',id:'park-bike-flower',name:'自転車が花のアーチに突っ込む',emoji:'🚲',first:'parkBike',second:'parkFlower',radius:1,
   action:(bike,flowers)=>{
-   fx.push({kind:'glitter',x:flowers.x,y:flowers.y-24});
-   tweenProp(bike,{rot:bike.rot-29,x:bike.x+20,y:bike.y-10},820,'bounce');
+   fx.push({kind:'petals',x:flowers.x,y:flowers.y-36});
+   tweenProp(bike,{rot:bike.rot-30,x:bike.x+22,y:bike.y-10},810,'bounce');
   }},
- {scene:'park',id:'park-dog-table',name:'犬、テラス席を乗っ取る',emoji:'🐕',first:'parkDog',second:'parkTable',radius:.99,
+ {scene:'park',id:'park-dog-table',name:'犬、テラス席を占領',emoji:'🐕',first:'parkDog',second:'parkTable',radius:1,
   action:(dog,table)=>{
-   fx.push({kind:'glitter',x:dog.x,y:dog.y-35});
-   tweenProp(dog,{x:table.x+9,y:table.y-25,scale:Math.min(1.4,dog.scale*1.18)},830,'spring');
-   tweenProp(table,{rot:table.rot+9},640,'spring');
+   fx.push({kind:'glitter',x:dog.x,y:dog.y-36});
+   tweenProp(dog,{x:table.x+11,y:table.y-33,scale:Math.min(1.38,dog.scale*1.2)},850,'spring');
+   tweenProp(table,{rot:table.rot+9},650,'spring');
   }},
- {scene:'park',id:'park-flag-poster',name:'観光ポスターがフランス国籍に',emoji:'🇫🇷',first:'parkFlag',second:'parkPoster',radius:1.05,
+ {scene:'park',id:'park-flag-poster',name:'観光ポスターがフランス国籍に',emoji:'🇫🇷',first:'parkFlag',second:'parkPoster',radius:1,
   action:(flag,poster)=>{
-   poster.french=true;
-   fx.push({kind:'glitter',x:poster.x,y:poster.y-30});
-   tweenProp(poster,{rot:poster.rot-10},620,'spring');
+   poster.french=true;fx.push({kind:'glitter',x:poster.x,y:poster.y-28});
+   tweenProp(poster,{rot:poster.rot-11},620,'spring');
   }},
- {scene:'park',id:'park-tower-lamp',name:'街灯までパリ気取り',emoji:'💡',first:'parkLamp',second:'parkTower',radius:.88,
+ {scene:'park',id:'park-tower-lamp',name:'街灯までパリ気取り',emoji:'💡',first:'parkLamp',second:'parkTower',radius:.90,
   action:(lamp,tower)=>{
-   fx.push({kind:'glitter',x:lamp.x,y:lamp.y-49});
-   tweenProp(lamp,{rot:lamp.rot-17,x:lamp.x-16},690,'spring');
+   fx.push({kind:'glitter',x:lamp.x,y:lamp.y-45});
+   tweenProp(lamp,{rot:lamp.rot-18,x:lamp.x-15},680,'spring');
+  }},
+ {scene:'park',id:'park-dog-picnic',name:'犬がピクニックを荒らす',emoji:'🐕',first:'parkDog',second:'parkPicnic',radius:1.08,
+  action:(dog,cloth)=>{
+   fx.push({kind:'crumbs',x:cloth.x,y:cloth.y-7});
+   tweenProp(cloth,{rot:cloth.rot+31,x:cloth.x+25,y:cloth.y+8},770,'bounce');
+   tweenProp(dog,{x:dog.x+31,y:dog.y-9},740,'spring');
   }}
-);
+];
 
 function tweenProp(prop,to,duration=600,motion='smooth'){
  if(typeof requestAnimationFrame!=='function'){Object.assign(prop,to);render();return}
@@ -1706,7 +1723,20 @@ function drawIncidentEffects(items=fx){
    case 'dust':for(const [x,y] of [[-37,3],[-21,-8],[0,-16],[22,-9],[39,4]]){ctx.fillStyle='#d5c5a8';ctx.beginPath();ctx.arc(x,y,16,0,Math.PI*2);ctx.fill()}break;
    case 'steam':ctx.lineWidth=3;ctx.strokeStyle='#f9fbfc';for(const x of [-13,0,13]){ctx.beginPath();ctx.moveTo(x,0);ctx.bezierCurveTo(x-10,-14,x+10,-24,x,-37);ctx.stroke()}break;
    case 'water':ctx.fillStyle='rgba(87,177,219,.52)';ctx.beginPath();ctx.ellipse(0,0,85,22,0,0,Math.PI*2);ctx.fill();for(const [x,y] of [[-40,-20],[-18,-35],[25,-28],[48,-15]]){ctx.beginPath();ctx.ellipse(x,y,5,11,-.2,0,Math.PI*2);ctx.fill()}break;
-   case 'glitter':ctx.fillStyle='#ffca4a';for(const [x,y] of [[-38,-13],[34,-23],[-18,-45],[26,17]]){ctx.beginPath();ctx.moveTo(x,y-9);ctx.lineTo(x+5,y);ctx.lineTo(x,y+9);ctx.lineTo(x-5,y);ctx.closePath();ctx.fill()}break;
+   case 'spill':
+  ctx.fillStyle='rgba(140,82,49,.71)';
+  ctx.beginPath();ctx.ellipse(0,18,53,17,-.13,0,Math.PI*2);ctx.fill();
+  for(const [dx,dy] of [[-54,5],[35,-3],[57,12]]){
+   ctx.beginPath();ctx.ellipse(dx,dy,6,4,0,0,Math.PI*2);ctx.fill();
+  }break;
+ case 'petals':
+  for(let i=0;i<19;i++){
+   const a=i*2.39,dist=12+(i%5)*15,dx=Math.cos(a)*dist,dy=Math.sin(a)*dist;
+   ctx.save();ctx.translate(dx,dy);ctx.rotate(a);
+   ctx.fillStyle=i%3===0?'#f7cfaa':i%2?'#d37e8a':'#e5a3a2';
+   ctx.beginPath();ctx.ellipse(0,0,6,3.5,0,0,Math.PI*2);ctx.fill();ctx.restore();
+  }break;
+ case 'glitter':ctx.fillStyle='#ffca4a';for(const [x,y] of [[-38,-13],[34,-23],[-18,-45],[26,17]]){ctx.beginPath();ctx.moveTo(x,y-9);ctx.lineTo(x+5,y);ctx.lineTo(x,y+9);ctx.lineTo(x-5,y);ctx.closePath();ctx.fill()}break;
   }
   ctx.restore();
  }
@@ -1715,16 +1745,15 @@ function drawIncidentEffects(items=fx){
 function showIncident(rule,x=250,y=160){
  incidents.push({id:rule.id,name:rule.name,emoji:rule.emoji});
  impact={sfx:({
-  'cat-tower':'ガシャーン!','pigeon-bread':'バサバサ!','ufo-tower':'ビーーーム!',
-  'dinosaur-arch':'ドシーン!','cafe-coffee':'ほっこり',
-  'fountain-cafe':'びしゃー!','hat-person':'キラーン!','flag-sign':'BONJOUR!',
-  'park-dog-tower':'ガシャーン!','park-pigeon-bread':'バサバサ!',
-  'park-fountain-bistro':'びしゃー!','park-bike-flower':'ガタン!',
-  'park-dog-table':'ワン!','park-flag-poster':'BONJOUR!',
-  'park-tower-lamp':'キラッ!'
+ 'cat-tower':'ガシャーン!','ufo-tower':'ビーーーム!','hat-person':'キラーン!',
+ 'coffee-croissant':'バシャッ!','cat-flowers':'バサバサ!','suitcase-postcard':'パカッ!',
+ 'park-dog-tower':'ガシャーン!','park-pigeon-bread':'バサバサ!',
+ 'park-fountain-table':'びしゃー!','park-bike-flower':'ガタン!',
+ 'park-dog-table':'ワン!','park-flag-poster':'BONJOUR!',
+ 'park-tower-lamp':'キラッ!','park-dog-picnic':'バサッ!'
  })[rule.id]||'びっくり!',x,y,start:performance.now()};
  recordIncident(rule);
- if(['cat-tower','dinosaur-arch','fountain-cafe','park-dog-tower','park-fountain-bistro'].includes(rule.id)){
+ if(['cat-tower','park-dog-tower','park-fountain-table'].includes(rule.id)){
  const wrap=document.querySelector('.stage-wrap');
  wrap.classList.remove('shaking');void wrap.offsetWidth;wrap.classList.add('shaking');
  setTimeout(()=>wrap.classList.remove('shaking'),320);
