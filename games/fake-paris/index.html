@@ -1260,6 +1260,7 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  const photoSet=makePhoto(stats);
  photoUrl=photoSet.card;
  document.getElementById('photo').src=photoSet.photo;
+ document.getElementById('photoBg').src=photoSet.photo;
  document.getElementById('shareCardImage').src=photoSet.card;
  document.getElementById('shareCardPreview').hidden=true;
  document.getElementById('previewCard').textContent='結果カードを見る';
@@ -1275,10 +1276,11 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
   li.appendChild(stamp);li.appendChild(content);review.appendChild(li);
  });
  veil.classList.add('open');
- const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
+ document.getElementById('resultDrawer').open=false;
+ const resultScroll=veil.querySelector('.result-layer');if(resultScroll)resultScroll.scrollTop=0;
  render()}
 document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
-function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.getElementById('resultDrawer').open=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
