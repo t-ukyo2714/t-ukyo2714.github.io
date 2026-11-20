@@ -528,8 +528,8 @@ function updateObjectZoom(){
 function render({clean=false,noFrame=false}={}){
  ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();
  const old=selected;if(clean)selected=null;(replayScene?replayScene.props:props).forEach(drawProp);drawIncidentEffects(replayScene?replayScene.fx:fx);selected=old;
- if(!clean&&!noFrame)drawFrame();
- if(!clean){if(!replaying)drawSelection();drawComicMoment();shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt(replaying?'REPLAY ▶':'REC ●',49,22,10,'#fff','900','center');}
+ if(!clean&&!noFrame&&mode==='camera')drawFrame();
+ if(!clean){if(!replaying)drawSelection();drawComicMoment();if(mode==='camera'){shapeRect(12,11,76,21,'rgba(33,42,53,.75)',8);txt('REC ●',49,22,10,'#fff','900','center')}}
  updateObjectZoom();
 }
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
@@ -618,22 +618,31 @@ tray.addEventListener('click',e=>{
  add(button.dataset.type);
 });
 canvas.addEventListener('pointerdown',e=>{
- if(finished||replaying)return;
+ if(!gameEntered||finished||replaying)return;
  const pt=pos(e);pointers.set(e.pointerId,pt);
  try{canvas.setPointerCapture(e.pointerId)}catch(_){}
  if(pointers.size===2){
-  const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,dist=Math.max(1,Math.hypot(dx,dy)),angle=Math.atan2(dy,dx),mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};
+  const ab=[...pointers.values()],dx=ab[1].x-ab[0].x,dy=ab[1].y-ab[0].y,
+  dist=Math.max(1,Math.hypot(dx,dy)),angle=Math.atan2(dy,dx),
+  mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};
   if(mode==='camera'){
-   gesture={kind:'camera',dist,zoom,mid,cam:{...cam}};
+   gesture={kind:'camera',dist,zoom,mid,cam:{...cam},lastCam:{...cam}};
    drag=null;go();e.preventDefault();return;
   }
-  // A pinch only affects the object being dragged, never a distant object.
-  if(mode==='prop'&&selected&&drag&&drag.kind==='move'&&drag.p===selected){
-   gesture={kind:'object',p:selected,dist,angle,mid,scale:selected.scale,rot:selected.rot,x:selected.x,y:selected.y};
+  const p=selected&&(
+    hit(selected,ab[0].x,ab[0].y)||
+    hit(selected,ab[1].x,ab[1].y)||
+    Math.hypot(selected.x-mid.x,selected.y-mid.y)<
+      Math.max(defs[selected.type].w,defs[selected.type].h)*selected.scale*.75
+  )?selected:[...props].reverse().find(o=>hit(o,mid.x,mid.y));
+  if(p){
+   if(selected!==p)choose(p);
+   gesture={kind:'object',p,dist,angle,mid,scale:p.scale,rot:p.rot,x:p.x,y:p.y};
    drag=null;go();e.preventDefault();return;
   }
+  drag=null;e.preventDefault();return;
  }
- if(pointers.size>1){drag=null;e.preventDefault();return}
+ if(pointers.size>1){e.preventDefault();return}
  if(mode==='camera'){
   go();drag={kind:'camera-pan',dx:pt.x-cam.x,dy:pt.y-cam.y,id:e.pointerId};
   canvas.classList.add('dragging');e.preventDefault();return;
@@ -647,8 +656,7 @@ canvas.addEventListener('pointerdown',e=>{
  }
  for(let i=props.length-1;i>=0;i--){
   if(hit(props[i],pt.x,pt.y)){
-   go();const o=props[i];
-   props.splice(i,1);props.push(o);choose(o);
+   go();const o=props[i];props.splice(i,1);props.push(o);choose(o);
    drag={kind:'move',p:o,dx:pt.x-o.x,dy:pt.y-o.y,id:e.pointerId};
    canvas.classList.add('dragging');e.preventDefault();return;
   }
@@ -668,20 +676,25 @@ canvas.addEventListener('pointermove',e=>{
    cam.y=clamp(gesture.cam.y+mid.y-gesture.mid.y,f.h/2,H-f.h/2);
    document.getElementById('zoom').value=String(zoom);
    document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
+   document.getElementById('cameraZoom').value=String(zoom);
+   document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
   }else{
    const g=gesture;
    g.p.scale=clamp(g.scale*dist/g.dist,.3,3.5);
    g.p.rot=g.rot+(Math.atan2(dy,dx)-g.angle)*180/Math.PI;
-   g.p.x=clamp(g.x+mid.x-g.mid.x,-80,580);
+   g.p.x=clamp(g.x+mid.x-g.mid.x,-80,W+80);
    g.p.y=clamp(g.y+mid.y-g.mid.y,-75,H+80);
   }
   render();e.preventDefault();return;
  }
  if(!drag||drag.id!==e.pointerId)return;
  if(drag.kind==='camera-pan'){
-  const f=framing();cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2);
+  const f=framing();
+  cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);
+  cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2);
  }else if(drag.kind==='move'){
-  drag.p.x=clamp(pt.x-drag.dx,-80,580);drag.p.y=clamp(pt.y-drag.dy,-75,H+80);
+  drag.p.x=clamp(pt.x-drag.dx,-80,W+80);
+  drag.p.y=clamp(pt.y-drag.dy,-75,H+80);
  }else if(drag.kind==='resize'){
   drag.p.scale=clamp(drag.scale*Math.hypot(pt.x-drag.p.x,pt.y-drag.p.y)/drag.dist,.3,3.5);
  }else if(drag.kind==='rotate'){
@@ -690,12 +703,17 @@ canvas.addEventListener('pointermove',e=>{
  render();e.preventDefault();
 });
 function endDrag(e){
- const dropped=drag&&drag.kind!=='camera-pan'?drag.p:(gesture&&gesture.kind==='object'?gesture.p:null);
+ const lastDrag=drag&&drag.id===e.pointerId?drag:null;
+ const lastGesture=gesture&&gesture.kind==='object'?gesture:null;
  pointers.delete(e.pointerId);
- const completedGesture=gesture&&gesture.kind==='object'?gesture.p:null;
- if(pointers.size<2){gesture=null;if(completedGesture&&!finished)checkReactions(completedGesture)}
- if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}
- if(pointers.size===0){drag=null;canvas.classList.remove('dragging');if((dropped||completedGesture)&&!finished)checkReactions(dropped||completedGesture)}
+ if(pointers.size<2&&gesture){
+  gesture=null;
+  if(lastGesture&&!finished)checkReactions(lastGesture.p);
+ }
+ if(pointers.size===0){
+  if(lastDrag&&lastDrag.kind!=='camera-pan'&&!finished)checkReactions(lastDrag.p);
+  drag=null;canvas.classList.remove('dragging');
+ }else if(lastDrag){drag=null;canvas.classList.remove('dragging')}
 }
 canvas.addEventListener('pointerup',endDrag);
 canvas.addEventListener('pointercancel',endDrag);
