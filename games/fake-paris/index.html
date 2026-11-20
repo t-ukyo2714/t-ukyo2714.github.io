@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v28</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v29</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -745,11 +745,35 @@ body.surprise-playback #propDragGhost{
   transform:none!important;
  }
 }
+
+/* v29: Japanese/Korean switch without duplicating the game engine. */
+.locale-switch{display:flex;align-items:center;gap:3px;flex-shrink:0;
+ border:1px solid #c7c5bb;border-radius:999px;padding:3px;background:#f8f5ed}
+.locale-switch a{display:block;min-height:31px;min-width:55px;padding:8px 10px;
+ font-size:10px;line-height:15px;letter-spacing:0;text-decoration:none;
+ font-weight:900;border-radius:999px;color:#646a69;white-space:nowrap;text-align:center}
+.locale-switch a[aria-current=page]{color:#fffaf2;background:#2d3d48}
+html[lang=ko] .cover-copy h1{letter-spacing:-.07em;word-break:keep-all}
+html[lang=ko] .cover-description,html[lang=ko] .cover-lead{
+ word-break:keep-all;line-height:1.65}
+html[lang=ko] button,html[lang=ko] .tool-label,
+html[lang=ko] .verdict-intro h2,html[lang=ko] .reveal-title{
+ word-break:keep-all}
+@media(max-width:650px){
+ .cover-nav{gap:5px;flex-wrap:wrap}
+ .cover-brand{gap:4px}
+ .cover-edition{display:none}
+ .locale-switch{margin-left:auto}
+ .locale-switch a{min-width:51px;padding:7px 8px}
+}
 </style>
 </head>
 <body>
 <section id="cover" class="cover-page">
-  <header class="cover-nav"><span class="cover-brand"><span class="cover-star">✦</span> ALIBI STUDIO</span><span class="cover-edition">写真捏造部</span></header>
+  <header class="cover-nav"><span class="cover-brand"><span class="cover-star">✦</span> ALIBI STUDIO</span><span class="cover-edition">写真捏造部</span><nav class="locale-switch" aria-label="Language / 언어">
+ <a href="?lang=ja" data-lang="ja" aria-label="日本語で遊ぶ">日本語</a>
+ <a href="?lang=ko" data-lang="ko" aria-label="한국어로 플레이">한국어</a>
+ </nav></header>
   <div class="cover-layout">
     <div class="cover-copy">
       <span class="cover-kicker">旅の証拠は、自分でつくる。</span>
@@ -757,7 +781,7 @@ body.surprise-playback #propDragGhost{
       <p class="cover-lead">「昨日までパリにいた」<br>と見栄を張ってしまった。<br>でも撮影場所は、<strong>埼玉。</strong></p>
       <p class="cover-description">ニセのエッフェル塔、フランスパン、猫まで並べて、友達に送る旅行写真をでっちあげよう。</p>
       <button type="button" id="startGame" class="cover-start">はじめる <span aria-hidden="true">→</span></button>
-      <p class="cover-note">約90秒のバカゲー ／ 時間無制限でも遊べます<br>登録不要・スマホでプレイ</p>
+      <p class="cover-note">制限時間90秒のバカゲー<br>登録不要・スマホでプレイ</p>
     </div>
     <div class="cover-visual" aria-hidden="true">
       <span class="cover-tape">PRIVATE TRAVEL ALBUM</span>
@@ -863,6 +887,82 @@ body.surprise-playback #propDragGhost{
   <button type="button" id="revealBack" class="reveal-back" hidden>← 結果に戻る</button>
  </section>
 </div>
+
+<script id="korean-localization">
+/* v29: same engine, locale-specific text, background clues and exported images. */
+(function(){
+ const params=new URLSearchParams(window.location.search);
+ const isKorean=params.get('lang')==='ko';
+ window.GAME_KO=isKorean;
+ const translations=[["パリ、行ったことにする。  ｜  #パリ行ったことにする","파리, 다녀온 척.  ｜  #파리다녀온척"],["パリ、行ったことにする。","파리, 다녀온 척."],["昨日までパリにいた","어제까지 파리에 있었어"],["「昨日までパリにいた」と見栄を張ってしまった。","“어제까지 파리에 있었어”라고 허세를 부려 버렸다."],["「昨日までパリにいた」","“어제까지 파리에 있었어”"],["と見栄を張ってしまった。","라고 허세를 부려 버렸다."],["でも撮影場所は、","그런데 촬영 장소는"],["埼玉県立の公園看板","부천시립공원 안내판"],["埼玉と書かれたベンチ","부천이라고 적힌 벤치"],["100円の自販機","1,000원짜리 자판기"],["日本語のごみ箱","한글이 적힌 쓰레기통"],["TOKYOカレンダー","SEOUL 달력"],["埼玉の表記","부천이라는 글자"],["埼玉の公園 / STUDIO","부천 공원 / STUDIO"],["実家 / STUDIO","우리 집 / STUDIO"],["埼玉県立","부천시립"],["さくら公園","벚꽃공원"],["もえるごみ","일반쓰레기"],["もえる","일반"],["ごみ","쓰레기"],["100円","1,000원"],["TOKYO","SEOUL"],["コンビニ袋","편의점 봉투"],["コンビニ","편의점"],["宅配の箱","택배 상자"],["宅配","택배"],["日本","한국"],["埼玉","부천"],["SAITAMA","BUCHEON"],["お土産","기념품"],["ちょっと待って。後ろに「埼玉県立」って書いてある！","잠깐만, 뒤에 '부천시립'이라고 적혀 있잖아!"],["パリの公園に100円の自販機ある？","파리 공원에 1,000원짜리 자판기가 있어?"],["ゴミ箱に「もえるごみ」って日本語が見えるけど。","쓰레기통에 한글로 '일반쓰레기'라고 쓰여 있는데?"],["ベンチに埼玉って書いてない？","벤치에 부천이라고 적혀 있지 않아?"],["そのコンビニ袋、フランスで買ったの？","그 편의점 봉투, 프랑스에서 산 거야?"],["え、カレンダーにTOKYOって書いてない？","어? 달력에 SEOUL이라고 적혀 있는데?"],["フランスで部屋干ししてるの？","프랑스 여행 가서 빨래를 널어놨어?"],["え、その電子レンジ実家のと同じなんだけど。","어? 저 전자레인지 우리 집에 있는 거랑 똑같아."],["パリで「宅配」って書いた段ボールあるんだ。","파리에도 '택배'라고 적힌 상자가 있네?"],["お土産に埼玉って書いてあるんだけ。","기념품에 부천이라고 적혀 있는데?"],["写真捏造部","여행사진 조작부"],["旅の証拠は、自分でつくる。","여행 인증샷은 직접 만드는 거야."],["パリ、","파리,"],["行ったことにする。","다녀온 척."],["ニセのエッフェル塔、フランスパン、猫まで並べて、友達に送る旅行写真をでっちあげよう。","가짜 에펠탑에 크루아상, 고양이까지! 친구에게 보낼 그럴듯한 파리 인증샷을 만들어 보자."],["はじめる","시작하기"],["制限時間90秒のバカゲー","제한시간 90초, 황당한 사진 게임"],["登録不要・スマホでプレイ","가입 없이 스마트폰으로 바로 플레이"],["100% フィクション / 0% 海外旅行","허구 100% / 해외여행 0%"],["これで","이걸로"],["行ったことに","다녀온"],["する。","척!"],["⌂ タイトルへ","⌂ 처음으로"],["友達に写真を送るまで、あと90秒。","친구에게 사진을 보내기까지 90초 남았다."],["実家の一角でパリを捏造せよ。写真に写ったものしか判定されない。","우리 집을 파리처럼 꾸며라. 사진에 나온 것만 점수에 반영된다."],["それっぽい旅の写真を撮れ","그럴듯한 파리 인증샷을 찍어라"],["残り時間","남은 시간"],["自由に小道具を配置できる撮影スタジオ","소품을 자유롭게 배치하는 촬영 공간"],["撮影プレビュー。ドラッグで画角移動、二本指でズーム","촬영 미리보기. 드래그로 이동, 두 손가락으로 확대"],["小道具の編集","소품 편집"],["小道具選択と撮影","소품 선택 및 촬영"],["小道具トレイを下げる","소품 목록 접기"],["撮影モードへ進む","촬영 모드로 이동"],["画角を変える（任意）","구도 조정(선택)"],["手前へ","앞으로"],["複製","복제"],["削除","삭제"],["手前","앞"],["画角","구도"],["小道具を選ぶ","소품 고르기"],["小道具を選択","소품 선택"],["小道具をタップして操作","소품을 눌러 조작"],["長押しせず、そのまま上へドラッグして置けます。タップでも追加。","길게 누르지 말고 위로 끌어서 놓으세요. 터치해서 추가해도 됩니다."],["🎨 イラストを準備中…","🎨 그림을 불러오는 중…"],["専用水彩イラスト","전용 수채화 소품"],["🏠 部屋","🏠 집"],["🌳 公園","🌳 공원"],["🏙 建物・背景","🏙 배경 · 장식"],["🥖 小道具","🥖 소품"],["すべて","전체"],["下げる","접기"],["開く","펼치기"],["撮影へ","촬영하기"],["📷 撮影へ →","📷 촬영하러 가기 →"],["📷 撮影へ","📷 촬영하기"],["📸 全画面で撮影中","📸 전체 화면 촬영"],["LIVE / 全画面で撮影","LIVE / 전체 화면"],["そのまま撮影OK。画面を動かすと画角も変えられます.","바로 찍어도 OK! 화면을 움직이면 구도를 바꿀 수 있어요."],["そのまま撮影OK。画面を動かすと画角も変えられます。","이대로 찍어도 OK! 화면을 움직이면 구도를 조정할 수 있어요."],["このままパシャ！ 画面をドラッグ／ピンチすると画角を変更できます。","이대로 찰칵! 드래그하거나 두 손가락으로 구도를 바꿔 보세요."],["画面全体を撮影できます。ドラッグ・ピンチで画角を変えることもできます。","전체 화면을 찍습니다. 드래그 · 핀치로 구도를 조정할 수도 있어요."],["小道具を動かして、パリっぽく偽装しよう。","소품을 옮겨서 파리처럼 꾸며 보세요."],["画角を調整中。全画面に戻すこともできます。","구도를 조정 중입니다. 전체 화면으로 되돌릴 수도 있어요."],["ドラッグで移動・ピンチでズーム","드래그로 이동 · 핀치로 확대"],["そのまま撮影OK。触ると画角も変えられます。","바로 찍어도 OK! 화면을 움직이면 구도를 바꿀 수 있어요."],["↺ 全画面に戻す","↺ 전체 화면으로"],["ズーム","확대"],["撮影ズーム","촬영 확대"],["⚙️ 撮影・小道具の詳細調整","⚙️ 촬영 · 소품 세부 조정"],["操作モード","조작 모드"],["✋ 小道具を動かす","✋ 소품 이동"],["📷 カメラを動かす","📷 카메라 이동"],["小道具の拡大縮小","소품 크기 조정"],["まずは小道具を置いて、カメラで「実家の証拠」を隠そう。","우선 소품을 놓고 우리 집의 흔적을 숨겨 보자."],["✋ 小道具はドラッグ・↗・↻・2本指で操作できます。","✋ 드래그 · 확대 · 회전 · 두 손가락으로 소품을 조작할 수 있어요."],["左に回転","왼쪽 회전"],["右に回転","오른쪽 회전"],["小さくする","축소"],["大きくする","확대"],["左右反転","좌우 반전"],["反転","뒤집기"],["奥へ","뒤로"],["最初から","처음부터"],["✋ 配置へ戻る","✋ 배치로 돌아가기"],["📸 パシャ！","📸 찰칵!"],["📷 画角変更","📷 구도 조정"],["🎨 イラスト","🎨 그림"],["撮影写真だけで判定。通信不要・登録不要。何が起きるかは遊んでからのお楽しみ。","사진에 찍힌 것만 채점! 가입 필요 없어요. 무슨 일이 일어날지는 직접 확인해 보세요."],["⚡ まさかのサプライズ！","⚡ 뜻밖의 사건 발생!"],["🔒 関係した小道具は、この場で固定！","🔒 사건에 휘말린 소품은 이제 움직일 수 없어요!"],["サプライズ発生：","깜짝 사건: "],["！　関係した小道具は固定された。","! 관련 소품은 그 자리에 고정됐어요."],["は動かせない！","은(는) 더 이상 움직일 수 없어요!"],["ガシャーン!","와장창!"],["ビーーーム!","삐이이잉!"],["キラーン!","반짝!"],["バシャッ!","촤악!"],["バサバサ!","파닥파닥!"],["パカッ!","벌컥!"],["びしゃー!","촤아악!"],["ガタン!","쿵!"],["ワン!","멍!"],["キラッ!","반짝!"],["バサッ!","휙!"],["びっくり!","깜짝!"],["猫がミニ塔を倒した","고양이가 미니 에펠탑을 쓰러뜨렸다"],["ミニ塔、UFOに誘拐される","UFO가 미니 에펠탑을 납치했다"],["本人、急にパリジェンヌになる","갑자기 파리지앵으로 변신"],["エスプレッソが大惨事","에스프레소 대참사"],["猫、花束を散らかす","고양이가 꽃다발을 난장판으로"],["トランクからパリが飛び出す","여행 가방에서 파리가 튀어나왔다"],["犬、ニセ塔をなぎ倒す","강아지가 가짜 에펠탑을 박살 냈다"],["バゲット争奪！鳩が大集合","바게트를 노린 비둘기 떼 출동"],["テラス席、噴水で水没","테라스 자리가 분수에 침수됐다"],["自転車が花のアーチに突っ込む","자전거가 장미 아치에 돌진"],["犬、テラス席を占領","강아지가 테라스 자리를 점령"],["観光ポスターがフランス国籍に","관광 포스터가 프랑스 국적을 얻었다"],["街灯までパリ気取り","가로등까지 파리인 척"],["犬がピクニックを荒らす","강아지가 피크닉을 난장판으로"],["ミニエッフェル塔","미니 에펠탑"],["パリの大判ポスター","파리 대형 포스터"],["パリのポストカード","파리 엽서"],["レースカーテン","레이스 커튼"],["白いテーブルクロス","하얀 테이블보"],["クロワッサン","크루아상"],["エスプレッソ","에스프레소"],["ベレー帽","베레모"],["香水","향수"],["花束","꽃다발"],["旅行トランク","여행 가방"],["サングラス","선글라스"],["折りたたみニセ塔","접이식 가짜 에펠탑"],["パリ観光ポスター","파리 관광 포스터"],["フランス国旗","프랑스 국기"],["レトロ自転車","빈티지 자전거"],["バゲットの籠","바게트 바구니"],["テラス席セット","테라스 테이블"],["石造りの噴水","돌 분수대"],["パリ風ガス灯","파리풍 가로등"],["バラのアーチ","장미 아치"],["フレンチブルドッグ","프렌치 불도그"],["公園の鳩","공원의 비둘기"],["ピクニッククロス","피크닉 매트"],["猫、ミニ塔を倒す。","고양이, 미니 에펠탑을 무너뜨리다."],["実家の小さなパリに、猫の巨大災害。","우리 집 작은 파리에 고양이 재난 발생."],["塔が猫に負けてるんだけど。","에펠탑이 고양이한테 졌잖아."],["パリ、宇宙人に占拠される。","파리, 외계인에게 점령당하다."],["ミニチュアの塔でもUFOにはさらわれる。","미니어처 에펠탑도 UFO는 못 피하네."],["パリよりまずUFOを説明して。","파리 얘기 전에 UFO부터 설명해 줘."],["ベレー帽、本人に勝手に装着。","베레모가 저절로 머리에 착!"],["突然始まる実家のパリコレ。","느닷없이 시작된 우리 집 파리 패션쇼."],["帽子だけでフランスに行った気になるのやめて。","모자 썼다고 프랑스 다녀온 척하지 마."],["パリの朝食、コーヒーまみれ。","파리식 아침, 커피 범벅."],["上品な朝食は3秒で崩壊した。","우아한 아침 식사가 3초 만에 망했다."],["コーヒーこぼれてるよ。","커피 다 쏟았는데?"],["花束、猫に敗れる。","꽃다발, 고양이에게 패배."],["花束を飾った瞬間に猫がやってきた。","꽃다발을 놓자마자 고양이가 달려들었다."],["猫が花を散らかしてるんだけど。","고양이가 꽃 다 흩뜨려 놨잖아."],["トランクからパリが飛び出す。","여행 가방에서 파리가 튀어나오다."],["旅に出る前にポストカードが出国した。","본인은 집인데 엽서만 출국했다."],["その旅行、ポストカードだけでは？","너 말고 엽서만 여행 다녀온 거 아니야?"],["エッフェル塔、犬に敗北。","에펠탑, 강아지에게 패배."],["偽パリの記念撮影が犬の大事件に。","가짜 파리 인증샷이 강아지 대참사가 됐다."],["パリより犬が塔を倒してることが気になる。","파리보다 강아지가 탑을 쓰러뜨리는 게 더 신경 쓰여."],["鳩に乗っ取られたパリ。","비둘기에게 점령당한 파리."],["バゲットを置いたら鳩のパーティーが始まった。","바게트를 놓자마자 비둘기 파티가 열렸다."],["旅行写真じゃなくて鳩の集会だよね。","여행 사진이 아니라 비둘기 모임 아니야?"],["パリカフェ、本日水没。","파리 카페, 오늘 침수."],["おしゃれなテラス席が水浸しに。","멋진 테라스 자리가 물바다가 됐다."],["噴水が席にかかってるんだけど。","분수 물이 테이블에 다 튀잖아."],["パリの自転車、花に突撃。","파리 자전거, 꽃밭으로 돌진."],["優雅な散策の予定が花壇への特攻に。","우아한 산책이 꽃밭 돌진으로 끝났다."],["自転車どうしてそこに突っ込んだの？","자전거가 왜 거기로 들어가?"],["テラス席、犬が貸し切り。","테라스는 강아지가 전세 냈다."],["旅の主役が完全にフレンチブルドッグ。","여행의 주인공이 완전히 프렌치 불도그야."],["あなたどこ？ 犬が旅行してる写真？","넌 어디 있어? 강아지가 여행 간 사진이야?"],["看板、急にフランス国籍を取得。","포스터, 갑자기 프랑스 국적 취득."],["国旗とポスターで地元公園を海外認定。","국기랑 포스터로 동네 공원을 프랑스로 둔갑시켰다."],["国旗を置くだけでパリになると思ってる？","국기 하나 꽂으면 파리가 되는 줄 알아?"],["街灯までパリ気取り。","가로등까지 파리인 척."],["公園の街灯もパリに染まったつもり。","동네 가로등도 혼자 파리인 척한다."],["パリ風を重ねすぎて逆に気になる。","너무 파리풍이라 오히려 수상한데."],["犬、ピクニックを占拠。","강아지, 피크닉을 점령하다."],["旅先の優雅なランチは犬のものになった。","우아한 피크닉은 강아지 차지가 됐다."],["ちょっと、犬がピクニックを荒らしてる。","잠깐, 강아지가 피크닉 다 엎었잖아."],["パリ郊外（","파리 근교 ("],["一瞬だけパリっぽい。よく見ると、ただの","잠깐 파리 같았는데, 자세히 보니 그냥 "],["これ、本当にフランスで撮った？","이거 진짜 프랑스에서 찍은 거야?"],["写真、撮る意味あった？","이걸 굳이 찍은 이유가 뭐야?"],["まだ何も偽装していない。","아직 아무것도 꾸미지 않았어요."],["近所の公園だよね？","그냥 동네 공원 아니야?"],["いや、普通に実家なんだけど。","아니, 그냥 우리 집이잖아."],["エッフェル塔、増殖中。","에펠탑 대량 증식 중."],["塔を置きすぎて新しい国ができそう。","에펠탑이 너무 많아서 새 나라가 생기겠네."],["パリってエッフェル塔が3本あるんだっけ？","파리에 에펠탑이 세 개나 있었어?"],["パリコレ（実家会場）。","파리 패션쇼 (우리 집 개최)."],["旅行の証拠よりファッションへの情熱が強い。","여행 인증보다 패션에 더 진심이다."],["旅行っていうか、家でコーディネートしてない？","여행이 아니라 집에서 패션쇼 한 거 아니야?"],["鳩たちのパリ旅行。","비둘기들의 파리 여행."],["カメラに写っている主役は鳩。","카메라의 주인공은 비둘기다."],["あなたより鳩の方が楽しんでない？","너보다 비둘기가 더 신나 보이는데?"],["隠す気があるようで全部バレている。","가린 줄 알았는데 다 들켰다."],["その嘘、ギリギリ通る。","이 거짓말, 아슬아슬하게 통한다."],["からの出国に成功したかもしれない。","에서 탈출한 것처럼 보일지도."],["……待って、本当にパリ？ ちょっと信じた。","…잠깐, 진짜 파리야? 조금 믿었어."],["異国情緒より生活感の勝利。","이국적인 분위기보다 생활감이 압승."],["海外旅行、どこの","해외여행? 어느 "],["で撮った？","에서 찍은 거야?"],["犬に倒されるパリの塔は初めて見た。","강아지한테 쓰러지는 에펠탑은 처음 봐."],["鳩、ちょっと多すぎない？","비둘기 좀 너무 많지 않아?"],["テラス席が噴水に近すぎない？","테이블이 분수에 너무 가깝지 않아?"],["ポスターでパリって言い張りすぎ。","포스터만으로 파리라고 우기는 거 너무해."],["UFOがエッフェル塔を連れていってるけど。","UFO가 에펠탑을 납치하고 있는데?"],["猫が花束を散らかしてない？","고양이가 꽃을 다 흩뜨려 놓았잖아?"],["コーヒーがクロワッサンにかかってる。","크루아상에 커피 다 쏟아졌는데?"],["背景がパリのポスターなの分かるよ。","뒤에 파리 포스터 붙인 거 다 보이거든."],[" しかも"," 게다가 "],["も写ってるよ。","도 찍혔어."],[" あと"," 그리고 "],["も見えてる。","도 보여."],["パリの写真・ポスター","파리 사진·포스터"],["が写真に写っている。パリらしさの手がかり。","이 사진에 찍혀 있어요. 파리 분위기를 만드는 단서예요."],["パリと分かるシンボルがほぼ写っていない。","파리임을 알 수 있는 상징이 거의 없어요."],["の証拠が露出。特に「","의 흔적이 보여요. 특히 “"],["」が致命的。","”이 치명적이에요."],["の証拠を小道具で隠した。","의 흔적을 소품으로 가렸어요."],["の証拠は撮影枠の外に避けられた。","의 흔적은 촬영 화면 밖으로 빠졌어요."],["塔を置きすぎて逆に不自然。","에펠탑이 너무 많아 오히려 부자연스러워요."],["UFOは写真の信憑性を崩す。","UFO 때문에 사진이 믿기 어려워요."],["パンに集まった鳩が主役を奪っている。","빵을 노린 비둘기가 주인공이 됐어요."],["小道具の組み合わせで場面に統一感が生まれた。","소품 조합 덕분에 전체 분위기가 자연스러워졌어요."],["種類の小道具で場面を作っている。","종류의 소품으로 장면을 연출했어요."],["画面内の小道具は","화면 속 소품은 "],["個。配置次第で見え方が変わる.","개. 배치에 따라 분위기가 달라져요."],["個。配置次第で見え方が変わる。","개. 배치에 따라 분위기가 달라져요."],["ズームが強く、写真の情報量が不足。","너무 확대해서 사진의 정보가 부족해요."],["小道具を詰め込みすぎて不自然。","소품을 너무 많이 넣어 부자연스러워요."],["隠す位置と画角を変えてみよう。","소품 위치와 카메라 구도를 바꿔 보세요."],["あなたの偽旅行写真が完成","가짜 파리 인증샷 완성!"],["▶ 直前の事件を再生（約1.5秒）","▶ 방금 일어난 사건 다시 보기 (약 1.5초)"],["▶ 再生中…","▶ 재생 중…"],["写真審査中","사진 심사 중"],["まさかの、パリ。","설마, 진짜 파리?"],["パリっぽさ","파리 느낌"],["地元感","동네 느낌"],["実家感","우리 집 느낌"],["写真の審査メモ・珍事件を見る","사진 심사 · 깜짝 사건 보기"],["📋 写真審査メモ","📋 사진 심사 메모"],["写り込み・配置から判定","사진 속 배치로 판정"],["※実際の画像認識ではなく、小道具の配置・写真の範囲に基づいたゲーム内判定です。","※ 실제 이미지 인식이 아니라 소품 배치와 촬영 범위에 따른 게임 내 판정입니다."],["↗ 結果カードをシェア","↗ 결과 카드 공유"],["↓ 結果カードを保存","↓ 결과 카드 저장"],["結果カードを見る","결과 카드 보기"],["結果カードを閉じる","결과 카드 닫기"],["↻ もう一回","↻ 다시 하기"],["結果をコピー","결과 복사"],["📸 写真審査の結果","📸 사진 심사 결과"],["撮影成功！","촬영 성공!"],["↗ 結果をシェア","↗ 결과 공유"],["写真をじっくり見る","사진만 보기"],["審査メモ・保存","심사 메모 · 저장"],["← 結果に戻る","← 결과로 돌아가기"],["写真の審査理由","사진 심사 이유"],["あなたが撮影した偽パリ写真","내가 찍은 가짜 파리 사진"],["SNSに共有できる結果カード","SNS에 공유할 수 있는 결과 카드"],["完成写真と撮影結果","완성 사진과 촬영 결과"],["撮影した偽パリ写真","촬영한 가짜 파리 사진"],["友達からの返信","친구의 답장"],["友達「","친구 “"],["友","친"],["🎞 発見したエンディング：","🎞 발견한 엔딩: "],["/12　／　違う小道具の組み合わせで新しい結末が出るよ。","/12 · 다른 소품 조합으로 새로운 엔딩을 찾아보세요."],["⚡ 撮影中の珍事件：","⚡ 촬영 중 깜짝 사건: "],["撮影中に予期せぬ出来事は起きませんでした。","촬영 중 특별한 사건은 없었어요."],["写ってしまった","사진에 찍힌 "],["の証拠は全部フレーム外か小道具で隠せた！","의 흔적을 전부 화면 밖으로 빼거나 소품으로 가렸어요!"],["の証拠：","의 흔적: "],["ALIBI STUDIO / 偽旅行の証拠","ALIBI STUDIO / 가짜 여행 인증샷"],["撮影判定 / END ","사진 심사 / END "],["撮影判定  /  END ","사진 심사  /  END "],["✓ コピーしました","✓ 복사했어요"],["保存できませんでした","저장에 실패했어요"],["#パリ行ったことにする","#파리다녀온척"],["パリ、行ったことにする。\\n","파리, 다녀온 척.\\n"],["の証拠","의 흔적"],["地元","동네"],["実家","우리 집"],["近所の公園","동네 공원"],["電子レンジ","전자레인지"],["洗濯物","빨래"],["写真","사진"],["旅行","여행"],["撮影","촬영"],["珍事件","깜짝 사건"],["小道具","소품"],["公園","공원"],["部屋","방"],["パリ","파리"],["フランス","프랑스"],["猫","고양이"],["犬","강아지"],["鳩","비둘기"],["エッフェル塔","에펠탑"],["塔","탑"],["国旗","국기"],["ポスター","포스터"],["コーヒー","커피"],["おしゃれ","멋진"],["証拠","흔적"],["完全に","완전히 "],["です。","입니다."],["が発生。"," 발생."],["撮影中に","촬영 중 "],["件の","건의 "],["種類の","종류의 "],["を隠した"," 숨겼어요"]];
+ translations.sort((a,b)=>b[0].length-a[0].length);
+ const cache=new Map();
+ function koText(value){
+  const source=String(value);
+  if(!isKorean||!/[\u3040-\u30ff\u3400-\u9fff]|SAITAMA|TOKYO/.test(source))return source;
+  if(cache.has(source))return cache.get(source);
+  let text=source;
+  for(const [jp,ko] of translations)if(text.includes(jp))text=text.split(jp).join(ko);
+  if(cache.size>1400)cache.clear();
+  cache.set(source,text);
+  return text;
+ }
+ window.koText=koText;
+ for(const a of document.querySelectorAll('.locale-switch a')){
+  if(a.dataset.lang===(isKorean?'ko':'ja'))a.setAttribute('aria-current','page');
+ }
+ if(!isKorean)return;
+ document.documentElement.lang='ko';
+ document.title='파리, 다녀온 척. | 90초 사진 게임';
+ const proto=window.CanvasRenderingContext2D&&CanvasRenderingContext2D.prototype;
+ if(proto){
+  const fill=proto.fillText,stroke=proto.strokeText,measure=proto.measureText;
+  proto.fillText=function(text,...args){return fill.call(this,koText(text),...args)};
+  proto.strokeText=function(text,...args){return stroke.call(this,koText(text),...args)};
+  proto.measureText=function(text){return measure.call(this,koText(text))};
+ }
+ function translateNode(node){
+  if(!node)return;
+  if(node.nodeType===3){
+   if(node.parentElement&&node.parentElement.closest('script,style,noscript,textarea'))return;
+   const translated=koText(node.nodeValue);
+   if(translated!==node.nodeValue)node.nodeValue=translated;
+  }else if(node.nodeType===1){
+   const el=node;
+   for(const attr of ['title','aria-label','placeholder','alt']){
+    if(el.hasAttribute(attr)){
+     const previous=el.getAttribute(attr),translated=koText(previous);
+     if(translated!==previous)el.setAttribute(attr,translated);
+    }
+   }
+  }
+ }
+ function translateTree(root){
+  if(!root)return;
+  if(root.nodeType===3){translateNode(root);return}
+  if(root.nodeType!==1)return;
+  translateNode(root);
+  if(root.matches('script,style,noscript,textarea'))return;
+  for(const el of root.querySelectorAll('[title],[aria-label],[placeholder],[alt]'))translateNode(el);
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let node;
+  while((node=walker.nextNode()))translateNode(node);
+ }
+ translateTree(document.body);
+ if(typeof MutationObserver!=='undefined'){
+  const observer=new MutationObserver(records=>{
+   for(const record of records){
+    if(record.type==='characterData')translateNode(record.target);
+    else if(record.type==='childList'){
+     for(const node of record.addedNodes)translateTree(node);
+    }else if(record.type==='attributes')translateNode(record.target);
+   }
+  });
+  observer.observe(document.body,{subtree:true,childList:true,characterData:true,
+   attributes:true,attributeFilter:['title','aria-label','placeholder','alt']});
+ }
+})();
+</script>
 <script>
 (() => {
 'use strict';
@@ -2318,7 +2418,7 @@ function evaluate(){
 }
 
 function drawTextWrapped(ctx,text,x,y,maxWidth,lineHeight,maxLines=3){
- const chars=Array.from(text);let line='',count=0;
+ const chars=Array.from(window.koText(text));let line='',count=0;
  for(let i=0;i<chars.length;i++){
   const next=line+chars[i];
   if(ctx.measureText(next).width>maxWidth&&line){
@@ -2499,8 +2599,8 @@ function reset(){hideResultReveal();hideSurprise();cropEnabled=false;previewPoin
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
-document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris-result-card.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
-document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」\n'+location.href;try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
+document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg=window.koText('パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする');const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris-result-card.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:window.koText('パリ、行ったことにする。'),text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:window.koText('パリ、行ったことにする。'),text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
+document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」\n'+location.href;msg=window.koText(msg);try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
 ['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=true);
 render();
 })();
