@@ -500,7 +500,7 @@
  <div class="camera-preview-foot">↔ ドラッグで構図を調整　↕ 2本指でズーム</div>
 </div><span class="hud">実家 / STUDIO</span><div id="incidentToast" class="incident-toast" role="status" aria-live="polite" hidden></div>
  <div class="stage-actions" role="group" aria-label="小道具の編集">
- <button type="button" id="mobileCamera" class="mobile-camera" title="撮影範囲を動かす" aria-label="撮影範囲を動かす" aria-pressed="false">📷<small>画角</small></button>
+ <button type="button" id="mobileCamera" class="mobile-camera" title="画角を変える（任意）" aria-label="画角を変える（任意）" aria-pressed="false">📷<small>画角</small></button>
  <button type="button" data-quick="front" title="手前へ" aria-label="手前へ">▣<small>手前</small></button>
  <button type="button" data-quick="duplicate" title="複製" aria-label="複製">⧉<small>複製</small></button>
  <button type="button" data-quick="del" title="削除" aria-label="削除">×<small>削除</small></button>
@@ -527,8 +527,8 @@
 <div id="categorytabs" class="categorytabs"><button class="active" data-filter="all">すべて</button><button data-filter="scenery">🏙 建物・背景</button><button data-filter="item">🥖 小道具</button><button data-filter="chaos">🐈 事件</button></div>
 <div class="tools" id="tools"></div><div class="tray-hint">長押しせず、そのまま上へドラッグして置けます。タップでも追加。</div></div>
 <div id="cameraPanel" class="camera-panel" hidden>
-<strong>📷 写真に写す範囲を決めよう</strong>
-<p>画面をドラッグして移動。ピンチでズーム。</p>
+<strong>📷 画角を変更（任意）</strong>
+<p>通常は全画面で撮影。ここでは写真に写す部分を切り取れます。</p>
 <label class="camera-zoom-label">ズーム <input id="cameraZoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="cameraZoomText">1.35×</span></label>
 </div>
 <details id="advancedControls" class="advanced-controls">
@@ -538,7 +538,7 @@
 <div class="howto">✋ 小道具を近づけて珍事件を起こそう。事件のリプレイは撮影結果から見られるよ。↗・↻・2本指操作もOK。</div>
 <div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint" id="editHint">小道具をタップして操作</span></div><label id="objzoomwrap" class="object-zoom" hidden>小道具の大きさ <input id="objectZoom" aria-label="小道具の拡大縮小" type="range" min="0.3" max="3.5" step="0.05" value="1"><span id="objZoomVal">100%</span></label><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div></div>
 </details>
-<div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📷 撮影へ →</button></div>
+<div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📸 この画面を撮る</button></div>
 </section>
 <div class="foot">撮影写真だけで判定。通信不要・登録不要。8つの珍事件。直前の事件を見逃したらリプレイ！</div>
 </main>
@@ -653,7 +653,7 @@ if(typeof ResizeObserver!=='undefined'){
 
 const SCALE=2,W=500,SHOT_H=340;let H=560,ROOM_SHIFT=110;const defs={tower:{label:'ニセ塔',w:115,h:198},cloth:{label:'青空の布',w:215,h:160},sign:{label:'パリ看板',w:165,h:85},plant:{label:'観葉植物',w:95,h:145},bread:{label:'フランスパン',w:105,h:42},hat:{label:'ベレー帽',w:99,h:52}};
 let props=[],selected=null,drag=null,started=false,finished=false,left=90,interval=null,shootCount=0,photoUrl='';
-let mode='prop',zoom=1.35,cam={x:255,y:ROOM_SHIFT+172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
+let mode='prop',cropEnabled=false,zoom=1.35,cam={x:255,y:ROOM_SHIFT+172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
 let nextPropId=1,fx=[],incidents=[],triggered=new Set(),toastHide=null;
 let animationClock=0;const animating=new Set();let recording=null,lastReplay=null,replaying=false,replayScene=null,impact=null,gameEntered=false;
 const evidencePoints=[{name:'TOKYOカレンダー',x:225,y:ROOM_SHIFT+70,penalty:21,reply:'え、カレンダーにTOKYOって書いてない？'},{name:'洗濯物',x:357,y:ROOM_SHIFT+93,penalty:15,reply:'フランスで部屋干ししてるの？'},{name:'電子レンジ',x:418,y:ROOM_SHIFT+209,penalty:22,reply:'え、その電子レンジ実家のと同じなんだけど。'},{name:'宅配の箱',x:53,y:ROOM_SHIFT+303,penalty:12,reply:'パリで「宅配」って書いた段ボールあるんだ。'},{name:'埼玉の表記',x:419,y:ROOM_SHIFT+327,penalty:15,reply:'お土産に埼玉って書いてあるんだけ。'}];
@@ -695,7 +695,7 @@ function cameraUI(){
  if(gameEntered)scheduleStageFit();
  document.getElementById('editor').classList.toggle('camera-phase',camera);
  document.getElementById('cameraPanel').hidden=!camera;
- document.getElementById('snap').textContent=camera?'📸 写真を撮る':'📷 撮影へ →';
+ document.getElementById('snap').textContent=camera?'📸 この画角で撮る':'📸 この画面を撮る';
  document.getElementById('reset').textContent=camera?'✋ 配置へ戻る':'最初から';
  document.getElementById('mobileCamera').hidden=camera;
  document.getElementById('cameraPreviewWrap').hidden=!camera;
@@ -790,7 +790,11 @@ function drawProp(p){
  }
  ctx.restore();
 }
-function framing(){const vw=W/zoom,vh=SHOT_H/zoom;return{x:clamp(cam.x-vw/2,0,W-vw),y:clamp(cam.y-vh/2,0,H-vh),w:vw,h:vh}}
+function framing(){
+ if(!cropEnabled)return{x:0,y:0,w:W,h:H};
+ const vw=W/zoom,vh=SHOT_H/zoom;
+ return{x:clamp(cam.x-vw/2,0,W-vw),y:clamp(cam.y-vh/2,0,H-vh),w:vw,h:vh};
+}
 function drawFrame(){
  if(mode!=='camera')return;
  const f=framing();ctx.save();
@@ -938,8 +942,8 @@ function render({clean=false,noFrame=false}={}){
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
 function hit(p,x,y){const t=-(p.rot||0)*Math.PI/180,dx=x-p.x,dy=y-p.y,c=Math.cos(t),s=Math.sin(t),xx=(dx*c-dy*s)/p.scale,yy=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(xx)<d.w/2+9&&Math.abs(yy)<d.h/2+9}
 function choose(p){selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';document.querySelectorAll('[data-quick]').forEach(b=>{b.disabled=!p});render()}
-function setMode(next){mode=next;selected=null;choose(null);cameraUI();modeButtons.forEach((b,i)=>{const active=(i===0)===(mode==='prop');b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.getElementById('feedback').textContent=mode==='camera'?'撮影枠をドラッグして、電子レンジや洗濯物を画角から追い出そう。':'小道具を動かして、パリっぽく偽装しよう。';
- const mobile=document.getElementById('mobileCamera');mobile.setAttribute('aria-pressed',String(mode==='camera'));mobile.classList.toggle('is-camera',mode==='camera');mobile.innerHTML=mode==='camera'?'✋<small>配置</small>':'📷<small>画角</small>';
+function setMode(next){mode=next;cropEnabled=next==='camera';selected=null;choose(null);cameraUI();modeButtons.forEach((b,i)=>{const active=(i===0)===(mode==='prop');b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.getElementById('feedback').textContent=mode==='camera'?'撮影枠をドラッグして、電子レンジや洗濯物を画角から追い出そう。':'小道具を動かして、パリっぽく偽装しよう。';
+ const mobile=document.getElementById('mobileCamera');mobile.setAttribute('aria-pressed',String(mode==='camera'));mobile.classList.toggle('is-camera',mode==='camera');mobile.innerHTML=mode==='camera'?'✋<small>配置</small>':'📷<small>画角変更</small>';
 }
 modeButtons[0].addEventListener('click',()=>setMode('prop'));
 modeButtons[1].addEventListener('click',()=>setMode('camera'));
@@ -965,18 +969,18 @@ function tapPlacement(type){
  const xcoords=[155,274,210,335,130,260];
  for(let row=0;row<3;row++)for(let column=0;column<xcoords.length;column++){
   const y=top+(bottom-top)*([.30,.57,.78][row]);
-  candidates.push({x:xcoords[(column+row)%xcoords.length],y:Math.min(y,bottom-12)});
+  candidates.push({x:xcoords[(column+row)%xcoords.length],y:Math.min(y,bottom-12),rank:row*xcoords.length+column});
  }
- // Choose a spot with least overlap, but always above the overlay.
- const preference=(place,index)=>{
-  const size=defs[type];const minDistance=props.reduce((best,p)=>{
+ const preference=place=>{
+  const size=defs[type];
+  const minDistance=props.reduce((best,p)=>{
    const d=defs[p.type],dx=place.x-p.x,dy=place.y-p.y;
    const clearance=Math.hypot(dx,dy)-Math.max(size.w,size.h)*.25-Math.max(d.w,d.h)*p.scale*.25;
    return Math.min(best,clearance);
   },999);
-  return minDistance*1.0-index*.7;
+  return minDistance-place.rank*.7;
  };
- candidates.sort((a,b)=>preference(b,candidates.indexOf(b))-preference(a,candidates.indexOf(a)));
+ candidates.sort((a,b)=>preference(b)-preference(a));
  return candidates[0]||{x:210,y:cam.y-50};
 }
 function add(type,point=null){
@@ -1230,7 +1234,7 @@ function replayIncident(){
   while(index<frames.length-1&&frames[index+1].ms<=ms)index++;
   replayScene=frames[index];
   render({clean:true,noFrame:true});drawComicMoment();
-  pctx.clearRect(0,0,1000,680);const view=framing();pctx.drawImage(canvas,view.x*SCALE,view.y*SCALE,view.w*SCALE,view.h*SCALE,0,0,1000,680);
+  pctx.clearRect(0,0,player.width,player.height);const view=framing();pctx.drawImage(canvas,view.x*SCALE,view.y*SCALE,view.w*SCALE,view.h*SCALE,0,0,player.width,player.height);
   if(ms<clip.length+160)requestAnimationFrame(frame);
   else{
    replayScene=null;replaying=false;btn.disabled=false;btn.textContent='▶ 直前の事件を再生（約1.5秒）';
@@ -1542,9 +1546,33 @@ function drawTextWrapped(ctx,text,x,y,maxWidth,lineHeight,maxLines=3){
 function makePhoto(stats){
  selected=null;render({clean:true,noFrame:true});
  const f=framing();
- const raw=document.createElement('canvas');raw.width=1000;raw.height=680;
+ const raw=document.createElement('canvas');raw.width=1000;raw.height=Math.round(raw.width*f.h/f.w);
  const rc=raw.getContext('2d');
- rc.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
+ rc.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,raw.width,raw.height);
+ if(!cropEnabled){
+  // Portrait share card preserves the entire phone view without distortion.
+  const card=document.createElement('canvas');
+  card.width=1080;
+  const photoW=996,photoH=Math.round(photoW*raw.height/raw.width);
+  card.height=photoH+555;
+  const c=card.getContext('2d');
+  c.fillStyle='#faf6ec';c.fillRect(0,0,card.width,card.height);
+  c.fillStyle='#303746';c.font='900 29px system-ui,sans-serif';
+  c.fillText('ALIBI STUDIO / 偽旅行の証拠',45,78);
+  c.textAlign='right';c.fillStyle='#a35f4f';c.font='900 23px system-ui,sans-serif';c.fillText('MISSION 01',1034,78);c.textAlign='left';
+  c.fillStyle='#d7d0c4';c.fillRect(37,112,1007,photoH+9);
+  c.drawImage(raw,42,116,photoW,photoH);
+  const tail=photoH+175;
+  c.fillStyle='#d86452';c.font='900 26px system-ui,sans-serif';c.fillText('撮影判定 / END '+stats.ending.id,47,tail);
+  c.fillStyle='#29323d';c.font='900 40px system-ui,sans-serif';
+  drawTextWrapped(c,stats.title,45,tail+66,988,47,2);
+  c.font='900 26px system-ui,sans-serif';c.fillText('パリっぽさ '+stats.score+'%   ／   実家感 '+stats.home+'%',45,tail+144);
+  c.fillStyle='#e2eedc';c.beginPath();c.roundRect(40,tail+185,1000,174,17);c.fill();
+  c.fillStyle='#40564b';c.font='900 23px system-ui,sans-serif';c.fillText('友達からの返信',64,tail+226);
+  c.fillStyle='#26372c';c.font='800 28px system-ui,sans-serif';drawTextWrapped(c,'「'+stats.reply+'」',64,tail+273,930,38,3);
+  c.fillStyle='#9a9386';c.font='700 19px system-ui,sans-serif';c.fillText('パリ、行ったことにする。  ｜  #パリ行ったことにする',45,card.height-35);
+  return{photo:raw.toDataURL('image/png'),card:card.toDataURL('image/png')};
+ }
  const card=document.createElement('canvas');card.width=1080;card.height=1350;
  const c=card.getContext('2d');
  c.fillStyle='#faf6ec';c.fillRect(0,0,1080,1350);
@@ -1583,6 +1611,9 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  document.getElementById('evidence').textContent=stats.exposed.length?'写ってしまった実家の証拠：'+stats.exposed.map(p=>p.name).join('・'):'実家の証拠は全部フレーム外か小道具で隠せた！';
  document.getElementById('incidentResult').textContent=incidents.length?'⚡ 撮影中の珍事件：'+[...new Set(incidents.map(i=>i.name))].join(' ／ '):'⚡ 珍事件：なし（小道具同士を近づけると起きるかも）';
  const photoSet=makePhoto(stats);
+ const replayCanvas=document.getElementById('resultReplay');
+ replayCanvas.width=1000;
+ replayCanvas.height=Math.round(1000*framing().h/framing().w);
  photoUrl=photoSet.card;
  document.getElementById('photo').src=photoSet.photo;
  document.getElementById('shareCardImage').src=photoSet.card;
@@ -1602,8 +1633,8 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  veil.classList.add('open');
  const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
  render()}
-document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
-function reset(){clearIncidentNudge();activeHintIndex=0;setHintPanel(false);previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+document.getElementById('snap').addEventListener('click',()=>shoot());
+function reset(){cropEnabled=false;clearIncidentNudge();activeHintIndex=0;setHintPanel(false);previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
