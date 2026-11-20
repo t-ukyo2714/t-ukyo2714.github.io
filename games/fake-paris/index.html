@@ -125,7 +125,7 @@ function drawProp(p){const {type,x,y,rot=0,scale=1}=p;ctx.save();ctx.translate(x
  case 'cloth':{
  ctx.fillStyle='#94c5de';ctx.strokeStyle='#688fa7';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-101,-69);ctx.quadraticCurveTo(-20,-95,107,-65);ctx.lineTo(100,70);ctx.quadraticCurveTo(13,57,-102,72);ctx.closePath();ctx.fill();ctx.stroke();line(-95,-60,96,-60,'#e6eef0',2);for(let i=-65;i<=65;i+=50)ellipse(i,-28,22,7,'#f5faf8');txt('☁',18,21,38,'#f4f9fc','700','center');break}
  case 'sign':{
- shapeRect(-9,-7,18,85,'#9c7452',3,'#4f4b3b',2);ctx.beginPath();ctx.moveTo(-79,-44);ctx.lineTo(55,-44);ctx.lineTo(79,-23);ctx.lineTo(55,-2);ctx.lineTo(-79,-2);ctx.closePath();ctx.fillStyle='#355e72';ctx.fill();ctx.strokeStyle='#233f53';ctx.lineWidth=3;ctx.stroke();txt('PARIS  ➜',-5,-23,18,'#fff8e8','900','center');break}
+ shapeRect(-9,-7,18,85,'#9c7452',3,'#4f4b3b',2);ctx.beginPath();ctx.moveTo(-79,-44);ctx.lineTo(55,-44);ctx.lineTo(79,-23);ctx.lineTo(55,-2);ctx.lineTo(-79,-2);ctx.closePath();ctx.fillStyle='#355e72';ctx.fill();ctx.strokeStyle='#233f53';ctx.lineWidth=3;ctx.stroke();txt(p.french?'BONJOUR!':'PARIS  ➜',-5,-23,p.french?15:18,'#fff8e8','900','center');if(p.french){ellipse(59,-24,13,13,'#f1cf6d');txt('★',59,-24,15,'#274f69','900','center')}break}
  case 'plant':{
  shapeRect(-30,29,60,52,'#c58265',7,'#93654f',2);shapeRect(-34,26,68,10,'#e2a188',3);line(0,31,0,-60,'#486a4f',6);line(0,-10,-34,-40,'#486a4f',5);line(0,-28,36,-63,'#486a4f',5);
  for(const [x,y,r] of [[0,-67,-.3],[-29,-40,.7],[29,-65,-.7],[32,-22,-.1],[-15,-73,1.1]]){ctx.save();ctx.translate(x,y);ctx.rotate(r);ellipse(0,0,17,31,'#4d936d');ellipse(1,-7,8,19,'#71a17b');ctx.restore()}break}
@@ -272,9 +272,10 @@ canvas.addEventListener('pointermove',e=>{
 function endDrag(e){
  const dropped=drag&&drag.kind!=='camera-pan'?drag.p:(gesture&&gesture.kind==='object'?gesture.p:null);
  pointers.delete(e.pointerId);
+ const completedGesture=gesture&&gesture.kind==='object'?gesture.p:null;
  if(pointers.size<2)gesture=null;
  if(drag&&e.pointerId===drag.id){drag=null;canvas.classList.remove('dragging')}
- if(pointers.size===0){drag=null;canvas.classList.remove('dragging');if(dropped&&!finished)checkReactions(dropped)}
+ if(pointers.size===0){drag=null;canvas.classList.remove('dragging');if((dropped||completedGesture)&&!finished)checkReactions(dropped||completedGesture)}
 }
 canvas.addEventListener('pointerup',endDrag);
 canvas.addEventListener('pointercancel',endDrag);
@@ -417,6 +418,7 @@ function evaluate(){
 function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const f=framing();const off=document.createElement('canvas');off.width=1000;off.height=885;const c=off.getContext('2d');c.fillStyle='#fffdf8';c.fillRect(0,0,1000,885);
  // Only the viewfinder contents appear in the exported image.
  c.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
+ if(incidents.length){const event=incidents.at(-1);c.fillStyle='rgba(34,40,51,.87)';c.beginPath();c.roundRect(17,18,700,66,13);c.fill();c.font='bold 27px sans-serif';c.fillStyle='#fff1bc';c.fillText('事件発生：'+event.name,37,61,660)}
  c.fillStyle='#fffdf8';c.fillRect(0,680,1000,205);
  c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
  c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
