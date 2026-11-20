@@ -1010,25 +1010,42 @@ function isCovered(point){
  // The prop needs to actually cover the evidence on screen, not merely exist nearby.
  return props.some(p=>{const dx=point.x-p.x,dy=point.y-p.y,angle=-p.rot*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle),lx=(dx*c-dy*s)/p.scale,ly=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(lx)<d.w*.39&&Math.abs(ly)<d.h*.39})}
 function inFrame(x,y){const f=framing();return x>=f.x&&x<=f.x+f.w&&y>=f.y&&y<=f.y+f.h}
+
+/* Rule-based review of what is inside the final camera frame.
+   Bounding-box overlap is used only as a lightweight approximation; it is
+   deliberately not called computer vision or image recognition. */
+function propFrameShare(p){
+ const f=framing(),d=defs[p.type],theta=(p.rot||0)*Math.PI/180;
+ const w=d.w*p.scale,h=d.h*p.scale;
+ const bw=Math.abs(w*Math.cos(theta))+Math.abs(h*Math.sin(theta));
+ const bh=Math.abs(w*Math.sin(theta))+Math.abs(h*Math.cos(theta));
+ const x0=p.x-bw/2,y0=p.y-bh/2;
+ const visibleW=Math.max(0,Math.min(x0+bw,f.x+f.w)-Math.max(x0,f.x));
+ const visibleH=Math.max(0,Math.min(y0+bh,f.y+f.h)-Math.max(y0,f.y));
+ return bw*bh>0?visibleW*visibleH/(bw*bh):0;
+}
 function evaluate(){
- const visibleProps=props.filter(p=>inFrame(p.x,p.y));
+ const visibleProps=props.filter(p=>propFrameShare(p)>.22);
  const counts={};visibleProps.forEach(p=>counts[p.type]=(counts[p.type]||0)+1);
  const C=t=>counts[t]||0;
  const exposed=evidencePoints.filter(p=>inFrame(p.x,p.y)&&!isCovered(p)).sort((a,b)=>b.penalty-a.penalty);
- const hidden=evidencePoints.filter(p=>!inFrame(p.x,p.y)||isCovered(p));
- const unique=[...new Set(visibleProps.map(p=>p.type))];
+ const covered=evidencePoints.filter(p=>inFrame(p.x,p.y)&&isCovered(p));
+ const cropped=evidencePoints.filter(p=>!inFrame(p.x,p.y));
+ const hidden=[...covered,...cropped],unique=[...new Set(visibleProps.map(p=>p.type))];
  const values={tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,pigeon:2,cat:2,dinosaur:-12,ufo:-12};
- const covered=evidencePoints.filter(p=>inFrame(p.x,p.y)&&isCovered(p));const cropped=evidencePoints.filter(p=>!inFrame(p.x,p.y));let score=45+covered.length*10+cropped.length*3-exposed.reduce((n,p)=>n+p.penalty*.55,0);
+ let score=45+covered.length*10+cropped.length*3-exposed.reduce((n,p)=>n+p.penalty*.55,0);
  score+=unique.reduce((n,type)=>n+(values[type]||0),0);
  if(C('tower')+C('arch')===0)score-=18;
  if(C('tower')>=3)score-=15;
  if(C('sign')>=3||C('flag')>=3)score-=12;
  if(C('pigeon')+C('cat')>=4)score-=12;
- if(visibleProps.length>10)score-=4*(visibleProps.length-10);if(unique.length<3)score-=10*(3-unique.length);if(zoom>1.75)score-=Math.round((zoom-1.75)*24);
- if(visibleProps.length===0)score-=22;
+ if(visibleProps.length>10)score-=4*(visibleProps.length-10);
+ if(unique.length<3)score-=10*(3-unique.length);
+ if(zoom>1.75)score-=Math.round((zoom-1.75)*24);
+ if(!visibleProps.length)score-=22;
  score=Math.round(clamp(score,2,99));
  let ending={id:'12',title:'パリ郊外（実家）',quip:'一瞬だけパリっぽい。よく見ると、全部実家。',reply:'え、これってどこで撮ったの？'};
- if(visibleProps.length===0)ending={id:'01',title:'写真、撮る意味あった？',quip:'カメラだけ起動して、パリに行ったことにした。',reply:'いや、普通に実家なんだけど。'};
+ if(!visibleProps.length)ending={id:'01',title:'写真、撮る意味あった？',quip:'カメラだけ起動して、パリに行ったことにした。',reply:'いや、普通に実家なんだけど。'};
  else if(C('ufo')&&C('tower'))ending={id:'02',title:'パリ、宇宙人に占拠される。',quip:'観光写真を捏造するはずが、未確認飛行物体のスクープになった。',reply:'パリよりまずUFOを説明して。'};
  else if(C('dinosaur'))ending={id:'03',title:'ジュラシック・パリ。',quip:'フランス旅行の話が、突然6500万年前になった。',reply:'エッフェル塔より後ろの恐竜が気になる。'};
  else if(C('cat')>=2)ending={id:'04',title:'パリ、猫共和国になる。',quip:'人間が観光する場所ではなくなった。',reply:'旅行っていうか、猫カフェの宣伝写真？'};
@@ -1041,19 +1058,88 @@ function evaluate(){
  else if(exposed.length>=3)ending={id:'11',title:'実家の証拠、流出事件。',quip:'隠す気があるようで、全部バレている。',reply:exposed[0].reply};
  else if(score>=85)ending={id:'12',title:'その嘘、ギリギリ通る。',quip:'実家からの出国に成功。あなたには才能がある。',reply:'……待って、本当にパリ？ ちょっと信じた。'};
  else if(score<35)ending={id:'12',title:'完全に実家です。',quip:'異国情緒より、生活感の勝利。',reply:exposed.length?exposed[0].reply:'海外旅行、どこの部屋で撮った？'};
- if(ending.id==='12'&&exposed.length&&score<85)ending.reply=exposed[0].reply;
- return{score,home:100-score,title:ending.title,quip:ending.quip,reply:ending.reply,ending,exposed,hidden,zoom};
+
+ const funny=
+  C('ufo')&&C('tower')?'エッフェル塔がUFOに連れ去られてるんだけど、フランスどうなった？':
+  C('dinosaur')?'恐竜ってパリの何区にいるの？':
+  C('tower')>=3?'パリってエッフェル塔が3本あるんだっけ？':
+  C('pigeon')>=2&&C('bread')?'フランスパンの奪い合いで観光どころじゃないじゃん。':
+  C('cat')>=2?'猫の旅行写真になってるけど、あなたはどこ？':
+  C('postcard')>=2?'背景のパリが写真なの、さすがに分かるよ。':
+  C('cafe')&&C('croissant')&&C('coffee')?'旅行って言ってたのに、実家でカフェ始めた？':
+  C('hat')&&C('sunglasses')&&C('perfume')?'旅先よりもコーディネートが主役じゃない？':
+  C('sign')>=3||C('flag')>=3?'PARISって3回書けばパリになると思ってる？':'';
+ if(exposed.length){
+  ending.reply=funny
+   ?funny+' しかも'+exposed[0].name+'も写ってるよ。'
+   :exposed.length>=2
+    ?exposed[0].reply+' あと'+exposed[1].name+'も見えてる。'
+    :exposed[0].reply;
+ }else if(funny)ending.reply=funny;
+
+ const report=[];
+ if(C('tower')||C('arch'))report.push({type:'good',text:(C('tower')?'エッフェル塔':'凱旋門')+'が写真内に。パリの手がかりとして有効。'});
+ else report.push({type:'bad',text:'パリだと分かる建物がほぼ写っていない。'});
+ if(exposed.length)report.push({type:'bad',text:exposed.length+'件の実家の証拠が露出。特に「'+exposed[0].name+'」が致命的。'});
+ else if(covered.length)report.push({type:'good',text:covered.length+'件の実家の証拠を小道具で隠した。'});
+ else report.push({type:'neutral',text:'実家の証拠は撮影枠の外に避けられている。'});
+ if(C('tower')>=3)report.push({type:'bad',text:'エッフェル塔を'+C('tower')+'本設置。物量が逆に嘘っぽい。'});
+ else if(C('ufo')||C('dinosaur'))report.push({type:'bad',text:'UFOや恐竜が旅行写真の信憑性を崩している。'});
+ else if(C('pigeon')>=2&&C('bread'))report.push({type:'neutral',text:'パンに集まった鳩が主役を奪っている。'});
+ else if(C('cafe')&&C('croissant')&&C('coffee'))report.push({type:'good',text:'カフェ＋コーヒー＋パンで、旅行の場面に統一感がある。'});
+ else if(unique.length>=4)report.push({type:'good',text:unique.length+'種類の異なる小道具で場面を作れている。'});
+ else report.push({type:'neutral',text:'画面内の小道具は'+visibleProps.length+'個。組み合わせると写真の説得力が変わる。'});
+ if(zoom>1.75)report.push({type:'bad',text:'ズームが強く、写真の情報量が不足している。'});
+ if(visibleProps.length>10)report.push({type:'bad',text:'小道具を詰め込みすぎて、不自然な構図になっている。'});
+ if(incidents.length)report.push({type:'neutral',text:'撮影中に'+[...new Set(incidents.map(i=>i.name))].slice(0,2).join('・')+'が発生。'});
+ while(report.length<3)report.push({type:'neutral',text:'写真を見比べながら、隠す位置と画角を工夫してみよう。'});
+ return{score,home:100-score,title:ending.title,quip:ending.quip,reply:ending.reply,ending,
+  exposed,hidden,covered,cropped,zoom,report,visiblePropsCount:visibleProps.length};
 }
-function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const f=framing();const off=document.createElement('canvas');off.width=1000;off.height=885;const c=off.getContext('2d');c.fillStyle='#fffdf8';c.fillRect(0,0,1000,885);
- // Only the viewfinder contents appear in the exported image.
- c.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
- if(incidents.length){const event=incidents.at(-1);c.fillStyle='rgba(34,40,51,.87)';c.beginPath();c.roundRect(17,18,700,66,13);c.fill();c.font='bold 27px sans-serif';c.fillStyle='#fff1bc';c.fillText('事件発生：'+event.name,37,61,660)}
- c.fillStyle='#fffdf8';c.fillRect(0,680,1000,205);
- c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
- c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
- c.fillStyle='#66727b';c.font='19px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
- c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v14',969,866);
- return off.toDataURL('image/png')}
+
+function drawTextWrapped(ctx,text,x,y,maxWidth,lineHeight,maxLines=3){
+ const chars=Array.from(text);let line='',count=0;
+ for(let i=0;i<chars.length;i++){
+  const next=line+chars[i];
+  if(ctx.measureText(next).width>maxWidth&&line){
+   ctx.fillText(line,x,y+count*lineHeight,maxWidth);
+   line=chars[i];count++;
+   if(count>=maxLines-1){line+=chars.slice(i+1).join('');break;}
+  }else line=next;
+ }
+ if(line)ctx.fillText(line,x,y+count*lineHeight,maxWidth);
+ return count+1;
+}
+function makePhoto(stats){
+ selected=null;render({clean:true,noFrame:true});
+ const f=framing();
+ const raw=document.createElement('canvas');raw.width=1000;raw.height=680;
+ const rc=raw.getContext('2d');
+ rc.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
+ const card=document.createElement('canvas');card.width=1080;card.height=1350;
+ const c=card.getContext('2d');
+ c.fillStyle='#faf6ec';c.fillRect(0,0,1080,1350);
+ c.fillStyle='#303746';c.font='900 29px system-ui,sans-serif';c.fillText('ALIBI STUDIO / 偽旅行の証拠',45,80);
+ c.textAlign='right';c.fillStyle='#a35f4f';c.font='900 23px system-ui,sans-serif';c.fillText('MISSION 01',1034,80);
+ c.textAlign='left';
+ c.fillStyle='#d7d0c4';c.fillRect(37,123,1007,688);
+ c.drawImage(raw,42,121,996,678);
+ c.fillStyle='rgba(33,43,54,.83)';c.fillRect(62,735,286,40);
+ c.fillStyle='#fff7dc';c.font='900 19px system-ui,sans-serif';c.fillText('PARIS?  /  SAITAMA?',80,762);
+ c.fillStyle='#d86452';c.font='900 26px system-ui,sans-serif';c.fillText('撮影判定  /  END '+stats.ending.id,47,855);
+ c.fillStyle='#29323d';c.font='900 43px system-ui,sans-serif';
+ drawTextWrapped(c,stats.title,45,919,986,49,2);
+ c.fillStyle='#303b43';c.font='900 26px system-ui,sans-serif';
+ c.fillText('パリっぽさ '+stats.score+'%   ／   実家感 '+stats.home+'%',46,1024);
+ c.fillStyle='#e2eedc';c.beginPath();c.roundRect(40,1070,1000,191,17);c.fill();
+ c.fillStyle='#40564b';c.font='900 23px system-ui,sans-serif';c.fillText('友達からの返信',64,1114);
+ c.fillStyle='#26372c';c.font='800 30px system-ui,sans-serif';
+ drawTextWrapped(c,'「'+stats.reply+'」',64,1163,930,39,3);
+ c.fillStyle='#9a9386';c.font='700 19px system-ui,sans-serif';
+ c.fillText('パリ、行ったことにする。  ｜  #パリ行ったことにする',45,1310);
+ c.textAlign='right';c.font='700 17px system-ui,sans-serif';c.fillText('t-ukyo2714.github.io',1034,1311);
+ return{photo:raw.toDataURL('image/png'),card:card.toDataURL('image/png')};
+}
 function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  for(const task of animating){Object.assign(task.prop,task.to)}animating.clear();
  if(recording){recording.frames.push(snapshot(recording.length));lastReplay=recording;recording=null}
@@ -1067,12 +1153,32 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  document.getElementById('friend').textContent='「'+stats.reply+'」';
  document.getElementById('evidence').textContent=stats.exposed.length?'写ってしまった実家の証拠：'+stats.exposed.map(p=>p.name).join('・'):'実家の証拠は全部フレーム外か小道具で隠せた！';
  document.getElementById('incidentResult').textContent=incidents.length?'⚡ 撮影中の珍事件：'+[...new Set(incidents.map(i=>i.name))].join(' ／ '):'⚡ 珍事件：なし（小道具同士を近づけると起きるかも）';
- photoUrl=makePhoto(stats);document.getElementById('photo').src=photoUrl;veil.classList.add('open');render()}
+ const photoSet=makePhoto(stats);
+ photoUrl=photoSet.card;
+ document.getElementById('photo').src=photoSet.photo;
+ document.getElementById('shareCardImage').src=photoSet.card;
+ document.getElementById('shareCardPreview').hidden=true;
+ document.getElementById('previewCard').textContent='結果カードを見る';
+ document.getElementById('previewCard').setAttribute('aria-expanded','false');
+ document.getElementById('verdictBadge').textContent=stats.score>=80?'パリ認定（仮）':stats.score>=50?'惜しい！実家の気配':'これは実家です';
+ const review=document.getElementById('reviewReasons');
+ review.replaceChildren();
+ stats.report.slice(0,5).forEach(item=>{
+  const li=document.createElement('li');
+  const stamp=document.createElement('span');stamp.className='judge '+item.type;
+  stamp.textContent=item.type==='good'?'＋':item.type==='bad'?'−':'・';
+  const content=document.createElement('span');content.textContent=item.text;
+  li.appendChild(stamp);li.appendChild(content);review.appendChild(li);
+ });
+ veil.classList.add('open');
+ const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
+ render()}
 document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
 function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
-document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-photo.png';document.body.appendChild(a);a.click();a.remove()});
-document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
+document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
+document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
+document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris-result-card.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
 document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」\n'+location.href;try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
 ['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=true);
 render();
