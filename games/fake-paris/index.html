@@ -517,7 +517,7 @@
  <div class="camera-preview-head"><span><span class="camera-live-dot">●</span> LIVE / 全画面で撮影</span><span id="cameraStatus">FULL FRAME</span></div>
  <canvas id="cameraPreview" width="1000" height="680" aria-label="撮影プレビュー。ドラッグで画角移動、二本指でズーム"></canvas>
  <div class="camera-preview-foot" id="cameraGestureHint">そのまま撮影OK。画面を動かすと画角も変えられます。</div>
-</div><span class="hud">実家 / STUDIO</span><div id="incidentToast" class="incident-toast" role="status" aria-live="polite" hidden></div>
+</div><span class="hud" id="sceneLabel">実家 / STUDIO</span><div id="incidentToast" class="incident-toast" role="status" aria-live="polite" hidden></div>
  <div class="stage-actions" role="group" aria-label="小道具の編集">
  <button type="button" id="mobileCamera" class="mobile-camera" title="画角を変える（任意）" aria-label="画角を変える（任意）" aria-pressed="false">📷<small>画角</small></button>
  <button type="button" data-quick="front" title="手前へ" aria-label="手前へ">▣<small>手前</small></button>
@@ -586,6 +586,7 @@ function paintCoverPreview(){
  render();
 }
 function enterGame(){
+ randomScene();
  document.body.classList.add('editing-paris');
  document.getElementById('cover').hidden=true;
  document.getElementById('editor').hidden=false;
@@ -664,7 +665,33 @@ let props=[],selected=null,drag=null,started=false,finished=false,left=90,interv
 let mode='prop',cropEnabled=false,zoom=1,cam={x:255,y:ROOM_SHIFT+172},lastStats=null,freeMode=false;const pointers=new Map();let gesture=null;
 let nextPropId=1,fx=[],incidents=[],triggered=new Set(),toastHide=null;
 let animationClock=0;const animating=new Set();let recording=null,lastReplay=null,replaying=false,replayScene=null,impact=null,gameEntered=false;
-const evidencePoints=[{name:'TOKYOカレンダー',x:225,y:ROOM_SHIFT+70,penalty:21,reply:'え、カレンダーにTOKYOって書いてない？'},{name:'洗濯物',x:357,y:ROOM_SHIFT+93,penalty:15,reply:'フランスで部屋干ししてるの？'},{name:'電子レンジ',x:418,y:ROOM_SHIFT+209,penalty:22,reply:'え、その電子レンジ実家のと同じなんだけど。'},{name:'宅配の箱',x:53,y:ROOM_SHIFT+303,penalty:12,reply:'パリで「宅配」って書いた段ボールあるんだ。'},{name:'埼玉の表記',x:419,y:ROOM_SHIFT+327,penalty:15,reply:'お土産に埼玉って書いてあるんだけ。'}];
+/* Each local location has independent photographic evidence. Scene randomizes
+   once per new game, never during a photo or an incident animation. */
+let sceneKind='room';
+function createEvidence(kind){
+ if(kind==='park')return[
+  {name:'埼玉県立の公園看板',x:84,y:ROOM_SHIFT+92,penalty:22,reply:'ちょっと待って。後ろに「埼玉県立」って書いてある！'},
+  {name:'100円の自販機',x:426,y:ROOM_SHIFT+111,penalty:18,reply:'パリの公園に100円の自販機ある？'},
+  {name:'日本語のごみ箱',x:435,y:ROOM_SHIFT+237,penalty:14,reply:'ゴミ箱に「もえるごみ」って日本語が見えるけど。'},
+  {name:'埼玉と書かれたベンチ',x:286,y:ROOM_SHIFT+274,penalty:16,reply:'ベンチに埼玉って書いてない？'},
+  {name:'コンビニ袋',x:78,y:ROOM_SHIFT+316,penalty:13,reply:'そのコンビニ袋、フランスで買ったの？'}
+ ];
+ return[
+  {name:'TOKYOカレンダー',x:225,y:ROOM_SHIFT+70,penalty:21,reply:'え、カレンダーにTOKYOって書いてない？'},
+  {name:'洗濯物',x:357,y:ROOM_SHIFT+93,penalty:15,reply:'フランスで部屋干ししてるの？'},
+  {name:'電子レンジ',x:418,y:ROOM_SHIFT+209,penalty:22,reply:'え、その電子レンジ実家のと同じなんだけど。'},
+  {name:'宅配の箱',x:53,y:ROOM_SHIFT+303,penalty:12,reply:'パリで「宅配」って書いた段ボールあるんだ。'},
+  {name:'埼玉の表記',x:419,y:ROOM_SHIFT+327,penalty:15,reply:'お土産に埼玉って書いてあるんだけ。'}
+ ];
+}
+const evidencePoints=createEvidence(sceneKind);
+function randomScene(){
+ sceneKind=Math.random()<.5?'room':'park';
+ evidencePoints.splice(0,evidencePoints.length,...createEvidence(sceneKind));
+ const name=document.getElementById('sceneLabel');
+ if(name)name.textContent=sceneKind==='park'?'埼玉の公園 / STUDIO':'実家 / STUDIO';
+}
+
 const extraDefs={"arch":{label:"自作の凱旋門",w:130,h:165,emoji:"🏛️",family:"scenery"},"lamp":{label:"パリ風街灯",w:70,h:160,emoji:"💡",family:"scenery"},"cafe":{label:"オープンカフェ",w:110,h:105,emoji:"🪑",family:"scenery"},"fountain":{label:"噴水",w:130,h:120,emoji:"⛲",family:"scenery"},"postcard":{label:"巨大パリ写真",w:180,h:130,emoji:"🖼️",family:"scenery"},"flag":{label:"フランス国旗",w:105,h:88,emoji:"🇫🇷",family:"item"},"croissant":{label:"クロワッサン",w:89,h:70,emoji:"🥐",family:"item"},"coffee":{label:"エスプレッソ",w:72,h:68,emoji:"☕",family:"item"},"cheese":{label:"チーズ",w:86,h:71,emoji:"🧀",family:"item"},"bicycle":{label:"自転車",w:140,h:100,emoji:"🚲",family:"item"},"suitcase":{label:"旅行カバン",w:90,h:103,emoji:"🧳",family:"item"},"flowers":{label:"バラの花束",w:98,h:108,emoji:"💐",family:"item"},"sunglasses":{label:"サングラス",w:98,h:61,emoji:"🕶️",family:"item"},"perfume":{label:"香水",w:68,h:87,emoji:"🧴",family:"item"},"pigeon":{label:"パリの鳩",w:90,h:85,emoji:"🐦",family:"item"},"cat":{label:"なぜか猫",w:104,h:105,emoji:"🐈",family:"item"},"dinosaur":{label:"恐竜",w:158,h:145,emoji:"🦖",family:"item"},"ufo":{label:"UFO",w:135,h:91,emoji:"🛸",family:"item"}};Object.assign(defs,extraDefs);
 const initialFamily={tower:'scenery',cloth:'scenery',sign:'scenery',plant:'item',bread:'item',hat:'item'};
 const initialEmoji={tower:'🗼',cloth:'🟦',sign:'🪧',plant:'🪴',bread:'🥖',hat:'🎩'};
@@ -748,7 +775,108 @@ function line(x1,y1,x2,y2,color,width=2){ctx.strokeStyle=color;ctx.lineWidth=wid
 function ellipse(x,y,rx,ry,fill,stroke=null){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.5;ctx.stroke()}}
 function txt(text,x,y,size=12,color='#263240',weight='700',align='left'){ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillStyle=color;ctx.font=`${weight} ${size}px -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', sans-serif`;ctx.fillText(text,x,y)}
 
+
+/* An illustrated, full-height neighborhood park. Props and 5 local clues
+   deliberately sit above the background; all geometry is deterministic. */
+function drawParkBackground(){
+ const sy=ROOM_SHIFT;
+ // Atmospheric bands across the whole portrait viewport.
+ shapeRect(0,0,W,H,'#c5e2e8');
+ for(let y=0;y<sy+165;y+=19){
+  ctx.fillStyle=(Math.floor(y/19)%2)?'rgba(255,251,226,.09)':'rgba(233,251,253,.075)';
+  ctx.fillRect(0,y,W,19);
+ }
+ for(const [x,y,r] of [[65,sy-115,56],[161,sy-82,40],[383,sy-115,64],[475,sy-40,39]]){
+  ellipse(x,y,r,16,'rgba(255,254,241,.53)');
+  ellipse(x-r*.3,y+7,r*.69,11,'rgba(255,254,241,.39)');
+ }
+ // A low skyline across a green horizon.
+ for(let i=0;i<12;i++){
+  const x=i*47-10,bh=24+(i*19)%56;
+  shapeRect(x,sy+133-bh,36,bh,'#a6c6c2');
+  for(let j=0;j<3;j++)shapeRect(x+8+j*10,sy+141-bh,3,7,'#d9e7dc');
+ }
+ shapeRect(0,sy+144,W,H-sy-144,'#9fbd8c');
+ for(let y=sy+145;y<H;y+=20){
+  line(0,y,W,y,'rgba(239,255,218,.13)',2);
+ }
+ // A curved gravel footpath opens into the foreground.
+ ctx.fillStyle='#d8c9aa';ctx.beginPath();
+ ctx.moveTo(185,sy+194);ctx.lineTo(305,sy+194);
+ ctx.bezierCurveTo(278,sy+320,370,sy+415,500,H);
+ ctx.lineTo(0,H);ctx.bezierCurveTo(128,sy+450,158,sy+306,185,sy+194);ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#bbad8b';ctx.lineWidth=2;ctx.beginPath();
+ ctx.moveTo(185,sy+194);ctx.bezierCurveTo(145,sy+350,117,sy+447,0,H);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(305,sy+194);ctx.bezierCurveTo(278,sy+320,370,sy+415,500,H);ctx.stroke();
+ // Watercolor-style scattered grass and flower clusters, fixed pattern.
+ for(let i=0;i<100;i++){
+  const x=(i*73+19)%W,y=sy+190+(i*53)%(Math.max(200,H-sy-195));
+  if(x>150&&x<375&&y>sy+245)continue;
+  line(x,y,x-3,y-6,i%3?'#729b6f':'#dfc960',1.4);
+  line(x,y,x+4,y-5,'#8fb071',1);
+ }
+ // Two large shade trees with layered pastel foliage.
+ for(const [tx,ty,scale] of [[42,sy+180,1],[481,sy+190,1.16]]){
+  ctx.save();ctx.translate(tx,ty);ctx.scale(scale,scale);
+  shapeRect(-12,-125,24,175,'#90785c',6);
+  line(0,-108,-43,-157,'#90785c',9);line(0,-91,39,-140,'#90785c',9);
+  for(const [x,y,rx,ry,color] of [
+   [-39,-148,49,40,'#81a687'],[24,-173,55,39,'#749e86'],[-9,-192,65,46,'#83ad91'],
+   [59,-143,43,31,'#82ae91'],[-51,-183,35,32,'#98baa0'],[5,-214,34,24,'#acc9ab']
+  ])ellipse(x,y,rx,ry,color);
+  ctx.restore();
+ }
+ // Garden fence and park fence-posts.
+ for(let x=0;x<540;x+=32){shapeRect(x-4,sy+193,8,38,'#9a8e6f',2)}
+ line(0,sy+205,W,sy+205,'#a89c82',4);
+ line(0,sy+225,W,sy+225,'#a89c82',4);
+ // Distinctive park entrance notice: easy to spot as un-French.
+ shapeRect(41,sy+40,9,142,'#8c7558',2);
+ shapeRect(112,sy+40,9,142,'#8c7558',2);
+ shapeRect(21,sy+38,129,82,'#fff7dc',8,'#8d9d79',3);
+ txt('埼玉県立',86,sy+69,15,'#476b60','900','center');
+ txt('さくら公園',86,sy+92,14,'#61826d','900','center');
+ // Vending machine that clearly signals a local Japanese park.
+ shapeRect(382,sy+43,99,121,'#f9f7ec',7,'#77929a',3);
+ shapeRect(390,sy+51,68,74,'#a9d0d6',3,'#728d98',2);
+ for(let row=0;row<3;row++)for(let col=0;col<5;col++){
+  shapeRect(396+col*12,sy+60+row*19,7,13,
+   ['#edb77d','#d8e2c8','#d2827b','#f1dfaa','#a8c2ba'][(row+col)%5],2);
+ }
+ shapeRect(396,sy+131,48,19,'#d8d5c7',2);
+ txt('100円',461,sy+144,13,'#bb5654','900','center');
+ // A bench with a tiny Japanese location plaque.
+ shapeRect(227,sy+250,139,18,'#916f56',4);
+ for(let n=0;n<3;n++)shapeRect(227,sy+221+n*13,139,8,'#ac8861',3);
+ line(244,sy+260,239,sy+304,'#6b675e',7);line(349,sy+260,355,sy+304,'#6b675e',7);
+ shapeRect(270,sy+267,42,17,'#e3d0a3',2);
+ txt('埼玉',291,sy+279,11,'#644e3c','900','center');
+ // The same person anchor as the room allows the hat accident in either place.
+ ellipse(215,sy+168,26,32,'#383e40');
+ ellipse(215,sy+177,22,28,'#e9bea0');
+ ctx.fillStyle='#383d41';ctx.beginPath();ctx.moveTo(192,sy+168);
+ ctx.quadraticCurveTo(197,sy+139,220,sy+149);
+ ctx.quadraticCurveTo(242,sy+154,239,sy+172);
+ ctx.lineTo(223,sy+157);ctx.quadraticCurveTo(210,sy+171,192,sy+168);ctx.fill();
+ line(205,sy+183,210,sy+183,'#5c514d',1.5);
+ line(223,sy+183,228,sy+183,'#5c514d',1.5);
+ shapeRect(189,sy+208,54,49,'#ead18a',13);
+ line(196,sy+238,185,sy+254,'#ddad8d',7);
+ line(235,sy+237,247,sy+253,'#ddad8d',7);
+ // Japanese recycling-bin lettering.
+ shapeRect(410,sy+199,54,78,'#829f8c',6,'#577d72',2);
+ shapeRect(416,sy+207,42,13,'#516e66',4);
+ txt('もえる',438,sy+237,12,'#fffcef','900','center');
+ txt('ごみ',438,sy+252,12,'#fffcef','900','center');
+ // Grocery bag carried from home, painted in the foreground.
+ shapeRect(52,sy+293,56,44,'#f3efe0',4,'#b8aa93',2);
+ ctx.strokeStyle='#b8aa93';ctx.lineWidth=3;ctx.beginPath();
+ ctx.arc(80,sy+292,12,Math.PI,0);ctx.stroke();
+ txt('コンビニ',80,sy+316,10,'#a47369','900','center');
+}
+
 function background(){
+ if(sceneKind==='park'){drawParkBackground();return}
  // The original intentionally cheap room keeps its 500×340 design
  // within a taller 500×560 world, adding genuine free placement space.
  shapeRect(0,0,W,H,'#e5eee8');
@@ -1653,7 +1781,7 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
  render()}
 document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
-function reset(){cropEnabled=false;previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;zoom=1;cam={x:W/2,y:H/2};document.getElementById('zoom').value='1';document.getElementById('zoomlabel').textContent='1.00×';document.getElementById('cameraZoom').value='1';document.getElementById('cameraZoomText').textContent='1.00×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+function reset(){cropEnabled=false;previewPointers.clear();previewDrag=null;previewPinch=null;clearTrayDrag();dockManuallyClosed=false;setDockDragging(false);finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;randomScene();zoom=1;cam={x:W/2,y:H/2};document.getElementById('zoom').value='1';document.getElementById('zoomlabel').textContent='1.00×';document.getElementById('cameraZoom').value='1';document.getElementById('cameraZoomText').textContent='1.00×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
