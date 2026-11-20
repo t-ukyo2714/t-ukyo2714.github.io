@@ -168,13 +168,13 @@ function evaluate(){
  const hidden=evidencePoints.filter(p=>!inFrame(p.x,p.y)||isCovered(p));
  const unique=[...new Set(visibleProps.map(p=>p.type))];
  const values={tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,pigeon:2,cat:2,dinosaur:-12,ufo:-12};
- let score=54+hidden.length*7-exposed.reduce((n,p)=>n+p.penalty*.7,0);
+ const covered=evidencePoints.filter(p=>inFrame(p.x,p.y)&&isCovered(p));const cropped=evidencePoints.filter(p=>!inFrame(p.x,p.y));let score=45+covered.length*10+cropped.length*3-exposed.reduce((n,p)=>n+p.penalty*.55,0);
  score+=unique.reduce((n,type)=>n+(values[type]||0),0);
  if(C('tower')+C('arch')===0)score-=18;
  if(C('tower')>=3)score-=15;
  if(C('sign')>=3||C('flag')>=3)score-=12;
  if(C('pigeon')+C('cat')>=4)score-=12;
- if(visibleProps.length>10)score-=4*(visibleProps.length-10);
+ if(visibleProps.length>10)score-=4*(visibleProps.length-10);if(unique.length<3)score-=10*(3-unique.length);if(zoom>1.75)score-=Math.round((zoom-1.75)*24);
  if(visibleProps.length===0)score-=22;
  score=Math.round(clamp(score,2,99));
  let ending={id:'12',title:'パリ郊外（実家）',quip:'一瞬だけパリっぽい。よく見ると、全部実家。',reply:'え、これってどこで撮ったの？'};
