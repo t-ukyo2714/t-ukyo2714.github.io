@@ -820,7 +820,7 @@ dockToggle.addEventListener('click',()=>{
  updateDock();
 });
 document.getElementById('quickShoot').addEventListener('click',()=>{
- if(!gameEntered||mode!=='prop'||dockGestureActive||finished)return;
+ if(!gameEntered||mode!=='prop'||!dockManuallyClosed||dockGestureActive||finished)return;
  document.getElementById('snap').click();
 });
 const tray=document.getElementById('tools');
