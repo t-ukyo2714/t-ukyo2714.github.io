@@ -583,14 +583,17 @@ function paintCoverPreview(){
  if(!roomReady||gameEntered)return;
  const out=document.getElementById('coverCanvas');
  if(!out)return;
+ const originalScene=sceneKind;
+ sceneKind='room'; // The cover teaser always shows the indoor photo idea.
  ctx.setTransform(SCALE,0,0,SCALE,0,0);ctx.clearRect(0,0,W,H);background();
  [
-  {type:'tower',x:115,y:312,rot:-8,scale:1.05,flip:1},
-  {type:'cloth',x:290,y:184,rot:5,scale:.64,flip:1},
-  {type:'cat',x:333,y:378,rot:0,scale:.9,flip:1},
-  {type:'bread',x:215,y:433,rot:-24,scale:1,flip:1}
+  {type:'tower',x:117,y:310,rot:-8,scale:1.12,flip:1},
+  {type:'postcard',x:290,y:183,rot:5,scale:1,flip:1},
+  {type:'cat',x:334,y:380,rot:0,scale:.9,flip:1},
+  {type:'suitcase',x:218,y:432,rot:-11,scale:.85,flip:1}
  ].forEach(drawProp);
  out.getContext('2d').drawImage(canvas,0,0,out.width,out.height);
+ sceneKind=originalScene;
  render();
 }
 function enterGame(){
@@ -1074,7 +1077,7 @@ function drawProp(p){
  ctx.save();ctx.translate(x,y);ctx.rotate(rot*Math.PI/180);
  ctx.scale(scale*(p.flip||1),scale);
  if(ready&&cell){
-  const tile=110; // 440px wide atlas, 4 columns
+  const tile=160; // high-resolution 640px AVIF atlas, 4 columns
   const fit=Math.min(d.w/tile,d.h/tile);
   const dw=tile*fit,dh=tile*fit;
   ctx.shadowColor='rgba(52,38,26,.16)';ctx.shadowBlur=3;ctx.shadowOffsetY=2;
@@ -1896,7 +1899,15 @@ function evaluate(){
  else if(incidents.length){
   const last=incidents.at(-1);
   const e=endingByEvent[last.id];
-  if(e)ending={id:'02',title:e[0],quip:e[1],reply:e[2]};
+  const eventEndingIds={
+   'cat-tower':'02','ufo-tower':'03','hat-person':'04',
+   'coffee-croissant':'05','cat-flowers':'06','suitcase-postcard':'07',
+   'park-dog-tower':'02','park-pigeon-bread':'03',
+   'park-fountain-table':'04','park-bike-flower':'05',
+   'park-dog-table':'06','park-flag-poster':'07',
+   'park-tower-lamp':'08','park-dog-picnic':'09'
+  };
+  if(e)ending={id:eventEndingIds[last.id]||'02',title:e[0],quip:e[1],reply:e[2]};
  }
  if(ending.id==='12'){
   if((C('tower')+C('parkTower'))>=3)ending={id:'07',title:'エッフェル塔、増殖中。',
