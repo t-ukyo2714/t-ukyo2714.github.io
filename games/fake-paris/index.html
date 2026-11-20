@@ -725,6 +725,7 @@ body.surprise-playback #propDragGhost{
 /* v28: an in-place cinematic push-in on the incident, no gameplay mutation.
    Stage clipping and movement clamps keep the zoomed image edge-to-edge. */
 #editor .stage-wrap > canvas#scene{
+ transform-origin:var(--surprise-origin-x,50%) var(--surprise-origin-y,50%);
  transform:translate3d(0,0,0) scale(1);
  transition:transform .44s cubic-bezier(.2,.72,.2,1);
 }
