@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v31</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v32</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -2760,6 +2760,47 @@ function selectVariedReply(key,variants){
  return Array.isArray(phrase)?(window.GAME_KO?phrase[1]:phrase[0]):phrase;
 }
 
+
+/* Photo-relative giant-prop detection. Intentional scene-covering materials
+   (curtains, large posters, picnic mats, furniture) are excluded; only
+   whimsical objects are eligible. Camera crop counts because the verdict
+   describes the resulting photo, not hidden world coordinates. */
+const giantEligibleTypes=new Set([
+ 'tower','roomPostcard','croissant','coffee','hat','perfume','flowers',
+ 'suitcase','sunglasses','cat','ufo','parkTower','parkFlag',
+ 'parkBike','parkBaguette','parkLamp','parkDog','parkPigeon'
+]);
+function largestRidiculousProp(visibleProps){
+ const f=framing();let strongest=null;
+ for(const p of visibleProps){
+  if(!giantEligibleTypes.has(p.type))continue;
+  const d=defs[p.type],theta=(p.rot||0)*Math.PI/180;
+  const width=p.scale*(Math.abs(d.w*Math.cos(theta))+Math.abs(d.h*Math.sin(theta)));
+  const height=p.scale*(Math.abs(d.w*Math.sin(theta))+Math.abs(d.h*Math.cos(theta)));
+  const widthShare=width/f.w,heightShare=height/f.h;
+  const apparentScale=p.scale*(cropEnabled?zoom:1);
+  // Both visual impact and abnormal enlargement must be present.
+  if(apparentScale<1.55||Math.max(widthShare,heightShare)<.33)continue;
+  const impact=Math.max(widthShare,heightShare)*apparentScale;
+  if(!strongest||impact>strongest.impact)strongest={prop:p,impact};
+ }
+ return strongest?.prop||null;
+}
+function giantPropReplyVariants(name){
+ if(window.GAME_KO)return[
+  name+'만 크기 이상한데? ㅋㅋ',
+  name+', 원래 이렇게 컸어?',
+  name+' 때문에 파리가 하나도 안 보여.',
+  '잠깐, '+name+'가 왜 이렇게 커?!'
+ ];
+ return[
+  name+'だけサイズ感バグってない？w',
+  name+'、そんなデカかったっけ？',
+  name+'が主役すぎてパリが見えない。',
+  'ちょっと待って、'+name+'デカすぎるだろ！'
+ ];
+}
+
 /* Review only what is visible in the final photo. Both scenes get matching
    scoring principles, but different plausible props, evidence and punchlines. */
 function evaluate(){
@@ -2851,21 +2892,117 @@ function evaluate(){
    quip:'異国情緒より生活感の勝利。',
    reply:exposed.length?exposed[0].reply:'海外旅行、どこの'+(park?'公園':'部屋')+'で撮った？'};
  }
- const funny=park
-  ?(C('parkDog')&&C('parkTower')?'犬に倒されるパリの塔は初めて見た。':
-    C('parkPigeon')>=2?'鳩、ちょっと多すぎない？':
-    C('parkFountain')&&C('parkTable')?'テラス席にCLOSEDの札。水が止まらない！':
-    C('parkPoster')>=3?'ポスターでパリって言い張りすぎ。':'')
-  :(C('ufo')&&C('tower')?'UFOがエッフェル塔を連れていってるけど。':
-    C('cat')&&C('flowers')?'猫がリボンつけて、花束の主役になってる。':
-    C('coffee')&&C('croissant')?'クロワッサンがコーヒーまみれで大惨事。':
-    C('postcard')>=2?'背景がパリのポスターなの分かるよ。':'');
- if(exposed.length){
-  ending.reply=funny?funny+' しかも'+exposed[0].name+'も写ってるよ。'
-   :exposed.length>=2?exposed[0].reply+' あと'+exposed[1].name+'も見えてる。'
-   :exposed[0].reply;
- }else if(funny)ending.reply=funny;
+ // Each completed photo gets one natural, contextual friend reply. A specific
+ // surprise wins over generic props; gigantic props are meaningful even
+ // without an incident. Exposed real-world clues have the highest priority.
+ const lastVisibleIncident=visibleIncidents.length?visibleIncidents.at(-1):null;
+ const eventPool=lastVisibleIncident?incidentReplyPools[lastVisibleIncident.id]:null;
+ const eventReply=eventPool?selectVariedReply('event:'+lastVisibleIncident.id,eventPool):'';
+ const giant=largestRidiculousProp(visibleProps);
+ const giantName=giant?(window.GAME_KO?window.koText(defs[giant.type].label):defs[giant.type].label):'';
+ const giantPool=giant?giantPropReplyVariants(giantName):null;
+ const firstClue=exposed[0],secondClue=exposed[1];
+ if(!visibleProps.length){
+  ending.reply=selectVariedReply(sceneKind+':empty',gradeReplyPools[sceneKind].empty);
+ }else if(firstClue){
+  const clueName=window.GAME_KO?window.koText(firstClue.name):firstClue.name;
+  const otherName=secondClue?(window.GAME_KO?window.koText(secondClue.name):secondClue.name):'';
+  const quoted=window.GAME_KO?window.koText(firstClue.reply):firstClue.reply;
+  if(eventPool){
+   const pool=window.GAME_KO?[
+    eventReply+' 게다가 '+clueName+'도 보이네.',
+    clueName+'도 찍혔는데 저 사건은 또 뭐야?',
+    giant?giantName+'도 너무 크고 '+clueName+'까지 보여.':quoted
+   ]:[
+    eventReply+' しかも'+clueName+'まで写ってる。',
+    clueName+'が写ってる上に事件まで起きてるw',
+    giant?giantName+'はデカすぎるし、'+clueName+'まで写ってる。':quoted
+   ];
+   ending.reply=selectVariedReply('event-clue:'+lastVisibleIncident.id+':'+firstClue.name,pool);
+  }else if(giant){
+   const pool=window.GAME_KO?[
+    giantName+'도 너무 크고 '+clueName+'까지 보여.',
+    quoted,
+    clueName+'도 찍혔는데 '+giantName+' 크기는 또 왜 이래?'
+   ]:[
+    giantName+'がデカすぎるし、'+clueName+'まで写ってる。',
+    quoted,
+    clueName+'も写ってるけど、'+giantName+'のサイズおかしくない？'
+   ];
+   ending.reply=selectVariedReply('giant-clue:'+giant.type+':'+firstClue.name,pool);
+  }else{
+   const pool=window.GAME_KO?[
+    quoted,
+    clueName+'까지 찍혔는데 파리라고?',
+    secondClue?clueName+'에 '+otherName+'까지? 다 들켰어.':clueName+'부터 좀 숨기고 말해.'
+   ]:[
+    quoted,
+    clueName+'まで写ってるのにパリって言う？',
+    secondClue?clueName+'に'+otherName+'まで？バレバレだよ。':'まず'+clueName+'を隠した方がよくない？'
+   ];
+   ending.reply=selectVariedReply('clue:'+sceneKind+':'+firstClue.name,pool);
+  }
+ }else if(eventPool&&giant){
+  const pool=window.GAME_KO?[
+   eventReply,
+   giantName+' 크기도 이상한데 저 사건은 또 뭐야?',
+   giantName+'가 엄청 커졌는데 '+eventReply
+  ]:[
+   eventReply,
+   giantName+'デカすぎるし、事件まで起きてるw',
+   giantName+'のサイズもおかしいけど、'+eventReply
+  ];
+  ending.reply=selectVariedReply('giant-event:'+lastVisibleIncident.id+':'+giant.type,pool);
+ }else if(eventPool){
+  ending.reply=eventReply;
+ }else if(giant){
+  ending.reply=selectVariedReply('giant:'+giant.type,giantPool);
+ }else if(!parisMarks){
+  ending.reply=selectVariedReply(sceneKind+':noLandmark',gradeReplyPools[sceneKind].noLandmark);
+ }else if(visibleProps.length>10){
+  const pool=window.GAME_KO?[
+   '파리 소품을 다 놓는다고 되는 게 아니야 ㅋㅋ',
+   '소품이 너무 많아서 무슨 사진인지 모르겠어.',
+   '여행 사진보다 잡화점 진열대 같아.'
+  ]:[
+   'パリの物を全部置けばいいわけじゃないw',
+   '小道具が渋滞して、何の写真か分からん。',
+   '旅行写真より雑貨屋の棚みたい。'
+  ];
+  ending.reply=selectVariedReply('clutter',pool);
+ }else if(C('tower')+C('parkTower')>=3){
+  const pool=window.GAME_KO?[
+   '에펠탑이 원래 그렇게 여러 개였어?',
+   '탑이 너무 많아서 파리보다 테마파크 같아.',
+   '에펠탑 늘어놓는 게임은 아니잖아?'
+  ]:[
+   'エッフェル塔って何本も建ってたっけ？',
+   '塔が増殖しててパリというよりテーマパーク。',
+   'エッフェル塔を並べるゲームじゃないよね？'
+  ];
+  ending.reply=selectVariedReply('towers',pool);
+ }else if(C('ufo')){
+  const pool=window.GAME_KO?[
+   'UFO가 찍힌 순간 이미 여행 사진이 아니야 ㅋㅋ',
+   '프랑스보다 우주가 더 가까워 보이는데.',
+   '저 비행물체는 어느 나라 관광 명소야?'
+  ]:[
+   'UFOが写ってる時点で旅行写真じゃないw',
+   'フランスより宇宙の方が近そう。',
+   'その飛行物体はどこの観光名所？'
+  ];
+  ending.reply=selectVariedReply('ufo',pool);
+ }else{
+  const grade=score>=85?'high':score>=65?'mid':score>=40?'low':'veryLow';
+  ending.reply=selectVariedReply(sceneKind+':'+grade,gradeReplyPools[sceneKind][grade]);
+ }
  const report=[];
+ if(giant){
+  const giantLabel=window.GAME_KO?window.koText(defs[giant.type].label):defs[giant.type].label;
+  report.push({type:'bad',text:window.GAME_KO
+   ?giantLabel+' 크기가 비현실적으로 커 보여요.'
+   :giantLabel+'が大きすぎて、写真の縮尺が不自然。'});
+ }
  if(parisMarks){
   const landmark=C('tower')||C('parkTower')?'エッフェル塔'
    :C('parkFountain')?'噴水':C('parkLamp')?'ガス灯':'パリの写真・ポスター';
