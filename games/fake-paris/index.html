@@ -168,7 +168,7 @@ function evaluate(){
  const hidden=evidencePoints.filter(p=>!inFrame(p.x,p.y)||isCovered(p));
  const unique=[...new Set(visibleProps.map(p=>p.type))];
  const values={tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,pigeon:2,cat:2,dinosaur:-12,ufo:-12};
- let score=27+hidden.length*6-exposed.reduce((n,p)=>n+p.penalty,0);
+ let score=54+hidden.length*7-exposed.reduce((n,p)=>n+p.penalty*.7,0);
  score+=unique.reduce((n,type)=>n+(values[type]||0),0);
  if(C('tower')+C('arch')===0)score-=18;
  if(C('tower')>=3)score-=15;
@@ -198,9 +198,9 @@ function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const 
  // Only the viewfinder contents appear in the exported image.
  c.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
  c.fillStyle='#fffdf8';c.fillRect(0,680,1000,205);
- c.fillStyle='#252a35';c.font='bold 41px sans-serif';c.fillText('パリ、行ったことにする。',34,746);
- c.fillStyle='#d55e50';c.font='bold 32px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
- c.fillStyle='#66727b';c.font='20px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
+ c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
+ c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
+ c.fillStyle='#66727b';c.font='19px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
  c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v3',969,866);
  return off.toDataURL('image/png')}
 function shoot(){if(finished)return;finished=true;clearInterval(interval);const stats=evaluate();lastStats=stats;document.getElementById('endingTag').textContent='END '+stats.ending.id+' / 12';let collected=[];try{collected=JSON.parse(localStorage.getItem('fake-paris-endings-v3')||'[]');if(!Array.isArray(collected))collected=[];if(!collected.includes(stats.ending.id))collected.push(stats.ending.id);localStorage.setItem('fake-paris-endings-v3',JSON.stringify(collected))}catch(_){}document.getElementById('collection').textContent='🎞 発見したエンディング：'+collected.length+'/12　／　違う小道具の組み合わせで新しい結末が出るよ。';
@@ -216,7 +216,7 @@ function reset(){finished=false;started=false;left=90;clearInterval(interval);pr
 document.getElementById('reset').addEventListener('click',reset);document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-photo.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
-document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」';try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
+document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」\n'+location.href;try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
 ['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=true);
 render();
 })();
