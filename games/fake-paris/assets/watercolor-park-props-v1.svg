@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="960" height="720" viewBox="0 0 960 720">
+<title>Park-only watercolor travel photo props - 12 transparent sprites, four columns by three rows</title>
+<defs>
+<linearGradient id="gold" x2="0.65" y2="1"><stop stop-color="#edcd92"/><stop offset=".6" stop-color="#cca075"/><stop offset="1" stop-color="#a97c61"/></linearGradient>
+<linearGradient id="sage" x2=".8" y2="1"><stop stop-color="#aec6af"/><stop offset=".55" stop-color="#7fa098"/><stop offset="1" stop-color="#55756e"/></linearGradient>
+<radialGradient id="lamp"><stop stop-color="#fff6bd"/><stop offset=".6" stop-color="#efd3a0"/><stop offset="1" stop-color="#c6a47b"/></radialGradient>
+<filter id="paper" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="8" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale="1.35" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs>
+<style>.sticker{filter:url(#paper);stroke:#806e60;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill}.sticker line{fill:none}</style>
+<g transform="translate(0 0)" class="sticker"><g transform="translate(120,118)">
+<!-- portable Eiffel-style tower -->
+<path d="M0-96 8-61 26-22 55 80H-55L-26-22 -8-61Z" fill="url(#gold)" stroke-width="5"/>
+<path d="M0-90 0 51 M-20-25H20 M-37 42H37 M-49 70H49" fill="none" stroke="#845f47" stroke-width="5"/>
+<path d="M-17-49 16-49 M-35 3 33 3 M-25 32 25 32" stroke="#ab8055" stroke-width="4"/>
+<path d="M-15-41 16-4 M15-41-16-4 M-29 10 29 40 M29 10-29 40" stroke="#ba8b60" stroke-width="3"/>
+<path d="M-51 79 Q0 48 51 79" fill="#faf1d8" stroke="#8a6954" stroke-width="5"/>
+<ellipse cy="86" rx="70" ry="10" fill="#a7b8a1" opacity=".29"/> </g></g>
+<g transform="translate(240 0)" class="sticker"><g transform="translate(120,124)">
+<!-- limestone fountain, turquoise water -->
+<path d="M-76 18Q0 45 76 18L65 55Q0 81-65 55Z" fill="#a9c3c5"/>
+<ellipse cy="18" rx="77" ry="24" fill="#e1ded0"/><ellipse cy="17" rx="66" ry="16" fill="#88cddd" stroke="#669fba" stroke-width="2"/>
+<path d="M-15 17L-24-23H24L15 17Z" fill="#d9d1bb"/><ellipse cy="-24" rx="33" ry="11" fill="#e9e1ca"/>
+<path d="M-9-29-14-61H14L9-29Z" fill="#c9c4ae"/><ellipse cy="-63" rx="18" ry="8" fill="#eee3c8"/>
+<path d="M0-65Q-48-115-57-21 M0-65Q49-116 57-21 M0-66Q-25-110-20-34 M0-67Q24-107 20-34" stroke="#81bbcb" fill="none" stroke-width="5" opacity=".83"/>
+<path d="M-56 49L-61 76H61L56 49" fill="#d0cbb9"/>
+<ellipse cy="82" rx="75" ry="8" fill="#a2b5a8" opacity=".25"/></g></g>
+<g transform="translate(480 0)" class="sticker"><g transform="translate(120,113)">
+<!-- three-head Paris gas lamp -->
+<path d="M-10 89H10L6-24H-6Z" fill="url(#sage)"/><path d="M-33 93H33L21 80H-21Z" fill="#638077"/>
+<path d="M-5-39H5L8-61H-8Z" fill="#657c75"/>
+<path d="M0-63V-86 M-54-65Q-31-87 0-65Q33-87 55-65" fill="none" stroke="#607b72" stroke-width="8"/>
+<path d="M-67-61L-57-85-47-61-49-36H-65Z M-14-84L0-107 14-84 12-42H-12Z M47-61L57-85 67-61 65-36H49Z" fill="url(#lamp)" stroke="#53635b" stroke-width="4"/>
+<path d="M-59-83V-39 M0-102V-45 M57-83V-39" stroke="#bd8257" stroke-width="2"/>
+<path d="M-76-35H-38 M-22-42H22 M38-35H76" stroke="#52645e" stroke-width="5"/>
+<ellipse cy="99" rx="52" ry="7" fill="#bbc9ac" opacity=".3"/></g></g>
+<g transform="translate(720 0)" class="sticker"><g transform="translate(120,123)">
+<!-- pop-up striped bistro stall -->
+<rect x="-79" y="-39" width="158" height="107" rx="7" fill="#f6e6ce" stroke="#916f5a"/>
+<path d="M-90-46L-73-93H74L90-46Z" fill="#f0b4a4"/>
+<path d="M-75-93H-45L-49-46H-90Z M-14-93H17L16-46H-17Z M45-93H75L90-46H47Z" fill="#f9f0dc"/>
+<path d="M-90-46Q-76-31-59-46Q-42-29-24-46Q-8-29 9-46Q25-29 41-46Q59-29 75-46Q82-31 90-46" fill="#e3a091" stroke="#986c5d" stroke-width="3"/>
+<rect x="-85" y="16" width="170" height="53" rx="5" fill="#b99a78"/>
+<rect x="-78" y="26" width="156" height="36" rx="4" fill="#dbbc93"/>
+<path d="M-49 15V63 M0 15V63 M49 15V63" stroke="#987554" stroke-width="3"/>
+<rect x="-28" y="-21" width="56" height="21" rx="3" fill="#fffaf0" stroke="#aa8c75" stroke-width="2"/>
+<text x="0" y="-6" font-size="18" font-family="serif" font-weight="bold" text-anchor="middle" fill="#8f6a54">BISTRO</text>
+<ellipse cx="-36" cy="12" rx="13" ry="7" fill="#ecbf75"/><ellipse cx="-8" cy="11" rx="15" ry="6" fill="#dfa968"/><ellipse cx="33" cy="9" rx="13" ry="8" fill="#ecbf75"/>
+</g></g>
+<g transform="translate(0 240)" class="sticker"><g transform="translate(120,126)">
+<!-- cafe seating under ochre parasol -->
+<path d="M0-98V82" stroke="#887667" stroke-width="7"/>
+<path d="M-84-48Q-56-112 0-112Q56-112 84-48Z" fill="#d67569"/>
+<path d="M-83-48Q-55-100-28-109L-17-48Z M17-48L28-109Q56-100 83-48Z" fill="#f3e8cf"/>
+<path d="M-85-48Q-64-30-42-48Q-20-31 0-48Q22-31 43-48Q67-30 85-48" fill="none" stroke="#a45f59" stroke-width="4"/>
+<ellipse cy="27" rx="51" ry="13" fill="#b5906d"/>
+<path d="M0 34V84 M-7 82H7" stroke="#806751" stroke-width="7"/>
+<path d="M-57 31V81 M-96 26V81 M-96 26H-55 M-96 57H-55" fill="none" stroke="#779c98" stroke-width="7"/>
+<path d="M57 31V81 M96 26V81 M96 26H55 M96 57H55" fill="none" stroke="#779c98" stroke-width="7"/>
+<ellipse cx="-17" cy="21" rx="10" ry="5" fill="#f5f2e8"/><path d="M-10 20Q-3 16-4 26" fill="none" stroke="#dfd5b8" stroke-width="3"/>
+<ellipse cx="20" cy="13" rx="9" ry="14" fill="#e9b096"/><circle cx="20" cy="-4" r="6" fill="#d88c7c"/>
+</g></g>
+<g transform="translate(240 240)" class="sticker"><g transform="translate(120,121)">
+<!-- travel poster on sturdy stand -->
+<path d="M-55-58L-70 94 M55-58L70 94 M-69 73H69" stroke="#96795c" stroke-width="8" fill="none"/>
+<rect x="-78" y="-95" width="156" height="162" rx="7" fill="#c2a07e"/>
+<rect x="-68" y="-85" width="136" height="142" rx="3" fill="#f9f1dd"/>
+<path d="M-60-76H61V-11H-60Z" fill="#bedce0" stroke="none"/>
+<path d="M-60-28Q-30-63 2-36Q31-69 61-34V-10H-60Z" fill="#8eae9b" stroke="none"/>
+<path d="M0-66L-7-45-21-11H21L7-45Z" fill="#ae8866" stroke-width="2"/>
+<path d="M-15-28H16 M-20-15H20" stroke="#8b6f59" stroke-width="3"/>
+<text x="0" y="18" font-size="26" font-family="serif" font-weight="bold" text-anchor="middle" fill="#b06761">PARIS</text>
+<path d="M-40 32H40 M-32 41H32" stroke="#c7b09b" stroke-width="2"/>
+</g></g>
+<g transform="translate(480 240)" class="sticker"><g transform="translate(120,124)">
+<!-- French flag on freestanding pole -->
+<ellipse cy="87" rx="44" ry="9" fill="#9eaa9d" opacity=".26"/>
+<path d="M-69-94V85" stroke="#836e5c" stroke-width="7"/>
+<path d="M-93 85H-44 M-69 75V87" stroke="#736555" stroke-width="8"/>
+<circle cx="-69" cy="-100" r="8" fill="#d8b477"/>
+<path d="M-65-93Q-20-108 23-89Q64-76 93-92V20Q53 40 14 18Q-30 2-65 21Z" fill="#f7f0de"/>
+<path d="M-65-93Q-27-106-10-98V15Q-41 0-65 21Z" fill="#6e91a8"/>
+<path d="M44-83Q71-79 93-92V20Q68 37 44 30Z" fill="#ce827e"/>
+<path d="M-65-93Q-20-108 23-89Q64-76 93-92V20Q53 40 14 18Q-30 2-65 21" fill="none" stroke="#9b8573" stroke-width="3"/>
+</g></g>
+<g transform="translate(720 240)" class="sticker"><g transform="translate(120,126)">
+<!-- rose-covered garden arch -->
+<path d="M-82 86V-24Q-80-92 0-92Q82-92 82-24V86" fill="none" stroke="#779073" stroke-width="13"/>
+<path d="M-72 82V-23Q-68-79 0-79Q70-79 72-23V82" fill="none" stroke="#a5b99b" stroke-width="6"/>
+<path d="M-91 86H-65 M65 86H91" stroke="#817669" stroke-width="9"/>
+<g transform="translate(-73.0,-8.5)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-68.6,-26.3)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-62.4,-42.7)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-54.6,-57.4)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-45.3,-69.9)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-34.9,-80.0)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-23.5,-87.3)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(-11.5,-91.7)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(0.8,-93.0)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(13.1,-91.2)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(25.0,-86.5)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(36.3,-78.8)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(46.6,-68.4)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(55.7,-55.5)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(63.4,-40.6)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(69.3,-24.0)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#ecc4a3"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g><g transform="translate(73.4,-6.1)"><ellipse cx="-13" cy="10" rx="11" ry="5" fill="#82a784" transform="rotate(-36)"/><ellipse cx="12" cy="-1" rx="10" ry="5" fill="#9db99a" transform="rotate(28)"/><circle r="9" fill="#d98f8c"/><path d="M-7 0Q0-9 7 0Q0 8-7 0" fill="none" stroke="#b96d70" stroke-width="2"/><circle r="3" fill="#dfbb62"/></g>
+</g></g>
+<g transform="translate(0 480)" class="sticker"><g transform="translate(120,139)">
+<!-- classic step-through bicycle with basket -->
+<circle cx="-69" cy="36" r="42" fill="none" stroke="#7195a3" stroke-width="7"/>
+<circle cx="66" cy="36" r="42" fill="none" stroke="#7195a3" stroke-width="7"/>
+<circle cx="-69" cy="36" r="35" fill="none" stroke="#d4c9b6" stroke-width="2"/>
+<circle cx="66" cy="36" r="35" fill="none" stroke="#d4c9b6" stroke-width="2"/>
+<path d="M-69 36L-14 36L17-26L66 36L-14 36L-39-25L17-26" fill="none" stroke="#bd786b" stroke-width="8"/>
+<path d="M-39-25L-48-41 M9-29L26-46 M26-46H43" fill="none" stroke="#697d7b" stroke-width="7"/>
+<path d="M-61-45H-26" stroke="#67524b" stroke-width="9"/>
+<path d="M66 36L56-57 M49-57H79" stroke="#72847b" stroke-width="6"/>
+<path d="M57-51L99-48L95-14L60-14Z" fill="#d7ad7d" stroke="#a38163" stroke-width="3"/>
+<path d="M61-42H96 M61-31H96 M69-48V-17 M83-47V-16" stroke="#a27b55" stroke-width="2"/>
+<circle cx="-14" cy="36" r="9" fill="#f7eed9"/><path d="M-14 36L2 51" stroke="#776451" stroke-width="4"/>
+</g></g>
+<g transform="translate(240 480)" class="sticker"><g transform="translate(120,130)">
+<!-- French bulldog with bat ears and friendly face -->
+<ellipse cx="0" cy="55" rx="64" ry="10" fill="#acbaa5" opacity=".26"/>
+<path d="M-52 25Q-60-11-21-19L26-19Q55-10 55 25L45 57Q0 76-45 57Z" fill="#bfa889"/>
+<path d="M-38-47L-46-91Q-22-85-10-48 M38-47L49-90Q19-84 11-49" fill="#ac937b" stroke="#886e5c" stroke-width="6"/>
+<path d="M-32-54L-38-77Q-23-70-19-52 M32-54L40-75Q25-68 19-52" fill="#e4bdad" stroke-width="3"/>
+<ellipse cy="-30" rx="53" ry="49" fill="#d2baa0"/>
+<path d="M-12-62Q0-73 12-62" fill="none" stroke="#a48a75" stroke-width="3"/>
+<ellipse cx="-21" cy="-35" rx="9" ry="11" fill="#f7ead8"/><ellipse cx="21" cy="-35" rx="9" ry="11" fill="#f7ead8"/>
+<circle cx="-21" cy="-35" r="4" fill="#3f4445"/><circle cx="21" cy="-35" r="4" fill="#3f4445"/>
+<path d="M-25-13Q0 15 25-13Q21-32 0-25Q-19-29-25-13" fill="#f4e2d4"/>
+<path d="M-14-11Q0-18 14-11Q12-1 0 1Q-12-1-14-11" fill="#585152"/>
+<path d="M0 1Q0 14-12 13 M0 1Q0 14 12 13" fill="none" stroke="#615250" stroke-width="2.5"/>
+<ellipse cx="-34" cy="50" rx="18" ry="12" fill="#d1b79b"/>
+<ellipse cx="34" cy="50" rx="18" ry="12" fill="#d1b79b"/>
+<path d="M-39 53V61 M-30 54V62 M30 54V62 M39 53V61" stroke="#987c65" stroke-width="2"/>
+<path d="M51 18Q75 3 66-18" fill="none" stroke="#bfa889" stroke-width="8"/>
+</g></g>
+<g transform="translate(480 480)" class="sticker"><g transform="translate(120,127)">
+<!-- plump street pigeon, flying wing and orange feet -->
+<ellipse cx="-6" cy="40" rx="66" ry="9" fill="#9eae9d" opacity=".22"/>
+<path d="M-65 19Q-45-11-9-22Q36-33 67 10Q45 55 5 56Q-47 59-65 19Z" fill="#98aeb5"/>
+<path d="M-25 2Q-37-47 2-55Q19-20 41 2Q11 34-25 2" fill="#b2c3c9"/>
+<path d="M-19-6Q0 3 28 7 M-24 4Q-3 15 22 15" stroke="#77929c" stroke-width="3"/>
+<path d="M-59 21L-91-7L-74 34" fill="#7f9ea9"/>
+<ellipse cx="37" cy="-30" rx="31" ry="33" fill="#a2b8c1"/>
+<ellipse cx="47" cy="-35" rx="7" ry="7" fill="#f8f1de"/>
+<circle cx="48" cy="-35" r="3" fill="#373f47"/>
+<path d="M67-29L91-21L68-14Z" fill="#dcab6e"/>
+<path d="M-13 51L-17 70L-29 73 M5 51L8 69L22 74" stroke="#b88568" stroke-width="5" fill="none"/>
+<path d="M-15 69L-8 76 M8 69L0 74" stroke="#b88568" stroke-width="3"/>
+</g></g>
+<g transform="translate(720 480)" class="sticker"><g transform="translate(120,133)">
+<!-- wicker basket with French baguettes -->
+<g transform="rotate(-25 -34 -20)">
+<rect x="-61" y="-104" width="27" height="138" rx="13" fill="#dca764"/>
+<path d="M-56-76L-41-60 M-56-43L-41-27 M-56-10L-41 6" stroke="#b7834a" stroke-width="5"/>
+</g>
+<g transform="rotate(5)">
+<rect x="-15" y="-110" width="30" height="145" rx="15" fill="#e7b675"/>
+<path d="M-10-79L6-63 M-11-45L6-29 M-11-10L6 7" stroke="#be8d52" stroke-width="5"/>
+</g>
+<g transform="rotate(24 45 -30)">
+<rect x="31" y="-97" width="29" height="135" rx="14" fill="#dca66b"/>
+<path d="M35-66L52-51 M35-31L52-16 M35 5L52 20" stroke="#ba8650" stroke-width="5"/>
+</g>
+<path d="M-83 15Q0-8 83 15L69 75Q0 103-69 75Z" fill="#c99a6e"/>
+<path d="M-87 14Q0-1 86 14" fill="none" stroke="#98724f" stroke-width="9"/>
+<path d="M-68 22Q-72 46 -65 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M-50 22Q-54 46 -47 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M-32 22Q-36 46 -29 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M-14 22Q-18 46 -11 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M4 22Q0 46 7 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M22 22Q18 46 25 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M40 22Q36 46 43 78" fill="none" stroke="#aa8058" stroke-width="3"/><path d="M58 22Q54 46 61 78" fill="none" stroke="#aa8058" stroke-width="3"/>
+<path d="M-73 39Q0 57 73 39 M-72 63Q0 82 72 63" fill="none" stroke="#e2bc8e" stroke-width="3"/>
+</g></g>
+</svg>
