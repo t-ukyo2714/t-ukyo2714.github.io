@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v22</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v22.1</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -779,101 +779,174 @@ function txt(text,x,y,size=12,color='#263240',weight='700',align='left'){ctx.tex
 
 /* An illustrated, full-height neighborhood park. Props and 5 local clues
    deliberately sit above the background; all geometry is deterministic. */
+
+function drawApartmentBlock(x,y,w,h,wall,accent){
+ // Low-to-mid-rise Japanese apartments; softened so props stay prominent.
+ shapeRect(x+3,y+4,w,h,'rgba(87,116,112,.10)',2);
+ shapeRect(x,y,w,h,wall,2,'#96a9a3',1);
+ shapeRect(x-2,y-4,w+4,5,accent,1);
+ const floors=Math.floor((h-10)/17),columns=Math.floor((w-13)/17);
+ for(let r=0;r<floors;r++){
+  const floorY=y+8+r*17;
+  shapeRect(x+2,floorY+10,w-4,3,'rgba(110,121,116,.36)',0);
+  for(let c=0;c<columns;c++){
+   const xx=x+8+c*17;
+   shapeRect(xx,floorY,10,9,(r+c)%4===0?'#ece9cf':'#bdcfd0',1);
+   line(xx+5,floorY,xx+5,floorY+9,'#9db3b6',.8);
+  }
+ }
+ // Roof rail and exterior drain pipe.
+ line(x+5,y-8,x+w-6,y-8,accent,1.5);
+ line(x+w-7,y+2,x+w-7,y+h-2,accent,1.5);
+}
+function parkGroundShadow(x,y,rx,ry){
+ ellipse(x,y,rx,ry,'rgba(60,73,67,.19)');
+}
+function drawParkTree(tx,ty,scale=1){
+ ctx.save();ctx.translate(tx,ty);ctx.scale(scale,scale);
+ parkGroundShadow(0,42,37,9);
+ shapeRect(-12,-126,24,170,'#947a60',6);
+ line(0,-107,-44,-153,'#947a60',9);
+ line(0,-92,40,-139,'#947a60',9);
+ for(const [x,y,rx,ry,c] of [
+  [-41,-148,48,40,'#84a989'],[21,-177,54,39,'#769e86'],
+  [-10,-193,65,45,'#83af92'],[54,-146,45,32,'#86b096'],
+  [-53,-179,37,31,'#9cbba0'],[4,-214,36,25,'#accaaa']
+ ])ellipse(x,y,rx,ry,c);
+ ctx.restore();
+}
+function drawParkPerson(cx,sy){
+ // Full standing adult: neck, distinct torso, both arms, long legs and shoes.
+ // Head at sy+177 to preserve the hat/person surprise collision geometry.
+ ctx.save();ctx.translate(cx,sy);
+ parkGroundShadow(0,335,29,8);
+ // Legs and trousers: positioned firmly on the footpath.
+ ctx.lineCap='round';ctx.lineJoin='round';
+ ctx.strokeStyle='#566976';ctx.lineWidth=13;
+ ctx.beginPath();ctx.moveTo(-11,268);ctx.lineTo(-14,295);ctx.lineTo(-23,327);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(9,268);ctx.lineTo(13,298);ctx.lineTo(19,326);ctx.stroke();
+ // Trouser seams and separate shoes.
+ line(-14,296,-22,327,'#435760',3);
+ line(13,298,19,325,'#435760',3);
+ ellipse(-26,330,14,5,'#454a4f');
+ ellipse(24,329,14,5,'#454a4f');
+ // Shoulder and natural coat silhouette.
+ ctx.fillStyle='#d6b36d';ctx.strokeStyle='#a38353';ctx.lineWidth=1.5;
+ ctx.beginPath();
+ ctx.moveTo(-11,205);ctx.quadraticCurveTo(-25,207,-26,220);
+ ctx.lineTo(-22,266);ctx.quadraticCurveTo(0,278,23,266);
+ ctx.lineTo(26,221);ctx.quadraticCurveTo(24,207,11,205);
+ ctx.closePath();ctx.fill();ctx.stroke();
+ // Coat opening, buttons and scarf.
+ line(0,214,1,269,'#aa8d5d',1.7);
+ for(let y=229;y<=256;y+=13)ellipse(5,y,2,2,'#886b46');
+ shapeRect(-7,203,16,24,'#e1e5d8',5);
+ line(-5,210,12,229,'#c18579',5);
+ // Arms to the side, hands visible.
+ ctx.strokeStyle='#d3af75';ctx.lineWidth=13;
+ ctx.beginPath();ctx.moveTo(-22,218);ctx.lineTo(-28,245);ctx.lineTo(-32,261);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(22,217);ctx.lineTo(28,240);ctx.lineTo(34,254);ctx.stroke();
+ ellipse(-33,265,5.5,8,'#e2b69c');ellipse(35,259,5.5,8,'#e2b69c');
+ // Neck and properly shaped face.
+ shapeRect(-6,193,12,17,'#e6bda2',4);
+ ellipse(0,176,17,22,'#e8c1a6');
+ ellipse(-16,179,4,7,'#e2b69c');ellipse(16,179,4,7,'#e2b69c');
+ // Hair: leave most of the face visible.
+ ctx.fillStyle='#3d4043';ctx.beginPath();
+ ctx.moveTo(-18,175);ctx.quadraticCurveTo(-21,155,-6,152);
+ ctx.quadraticCurveTo(12,145,20,164);ctx.lineTo(17,179);
+ ctx.lineTo(13,168);ctx.quadraticCurveTo(0,166,-6,172);
+ ctx.quadraticCurveTo(-13,176,-18,175);ctx.fill();
+ line(-9,182,-4,182,'#675550',1.4);
+ line(4,182,9,182,'#675550',1.4);
+ line(-3,191,3,191,'#b87874',1.2);
+ ctx.restore();
+}
 function drawParkBackground(){
  const sy=ROOM_SHIFT;
- // Atmospheric bands across the whole portrait viewport.
- shapeRect(0,0,W,H,'#c5e2e8');
- for(let y=0;y<sy+165;y+=19){
-  ctx.fillStyle=(Math.floor(y/19)%2)?'rgba(255,251,226,.09)':'rgba(233,251,253,.075)';
-  ctx.fillRect(0,y,W,19);
+ // Soft sky and clouds.
+ shapeRect(0,0,W,H,'#c7e4e9');
+ for(let y=0;y<sy+162;y+=22){
+  shapeRect(0,y,W,22,Math.floor(y/22)%2?'rgba(238,252,247,.08)':'rgba(255,247,218,.08)');
  }
- for(const [x,y,r] of [[65,sy-115,56],[161,sy-82,40],[383,sy-115,64],[475,sy-40,39]]){
-  ellipse(x,y,r,16,'rgba(255,254,241,.53)');
-  ellipse(x-r*.3,y+7,r*.69,11,'rgba(255,254,241,.39)');
+ for(const [x,y,rx] of [[75,sy-105,53],[170,sy-81,40],[380,sy-110,59],[480,sy-65,37]]){
+  ellipse(x,y,rx,15,'rgba(255,254,242,.54)');
+  ellipse(x-20,y+7,rx*.68,10,'rgba(255,254,242,.28)');
  }
- // A low skyline across a green horizon.
- for(let i=0;i<12;i++){
-  const x=i*47-10,bh=24+(i*19)%56;
-  shapeRect(x,sy+133-bh,36,bh,'#a6c6c2');
-  for(let j=0;j<3;j++)shapeRect(x+8+j*10,sy+141-bh,3,7,'#d9e7dc');
+ // Distinct apartment buildings in the residential neighborhood.
+ drawApartmentBlock(8,sy+75,91,85,'#c1cecb','#9aaba9');
+ drawApartmentBlock(101,sy+57,100,102,'#bccaca','#98a8ac');
+ drawApartmentBlock(204,sy+69,83,92,'#d3cbc1','#afa294');
+ drawApartmentBlock(289,sy+51,106,110,'#c9d2d0','#9daeb0');
+ drawApartmentBlock(398,sy+67,93,95,'#d2d0c6','#a6a59a');
+ // Grass line and curved pedestrian path in foreground.
+ shapeRect(0,sy+157,W,H-sy-157,'#9ebc8d');
+ for(let y=sy+160;y<H;y+=23)line(0,y,W,y,'rgba(234,251,210,.13)',2);
+ ctx.fillStyle='#d9c9a9';ctx.beginPath();
+ ctx.moveTo(181,sy+192);ctx.lineTo(310,sy+192);
+ ctx.bezierCurveTo(283,sy+333,372,sy+426,500,H);
+ ctx.lineTo(0,H);ctx.bezierCurveTo(117,sy+462,152,sy+303,181,sy+192);
+ ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#b8a988';ctx.lineWidth=2;
+ ctx.beginPath();ctx.moveTo(181,sy+192);
+ ctx.bezierCurveTo(144,sy+333,117,sy+461,0,H);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(310,sy+192);
+ ctx.bezierCurveTo(283,sy+333,372,sy+426,500,H);ctx.stroke();
+ // Repeated flowering weeds, deterministic and behind playable props.
+ for(let i=0;i<86;i++){
+  const x=(i*73+19)%W,y=sy+198+(i*47)%Math.max(180,H-sy-205);
+  if(x>145&&x<375&&y>sy+245)continue;
+  line(x,y,x-3,y-6,i%3?'#739b6c':'#dfc964',1.3);
+  line(x,y,x+4,y-5,'#91ae79',1);
  }
- shapeRect(0,sy+144,W,H-sy-144,'#9fbd8c');
- for(let y=sy+145;y<H;y+=20){
-  line(0,y,W,y,'rgba(239,255,218,.13)',2);
+ drawParkTree(40,sy+179,1);
+ drawParkTree(472,sy+184,1.11);
+ // Timber rail and park sign.
+ for(let x=0;x<W+25;x+=32)shapeRect(x-4,sy+195,8,36,'#9b9074',2);
+ line(0,sy+207,W,sy+207,'#aa9c80',4);
+ line(0,sy+226,W,sy+226,'#aa9c80',4);
+ shapeRect(42,sy+40,9,144,'#8c775c',2);
+ shapeRect(115,sy+40,9,144,'#8c775c',2);
+ shapeRect(21,sy+38,131,83,'#fff8e1',8,'#8b9e82',3);
+ txt('埼玉県立',86,sy+68,15,'#496c60','900','center');
+ txt('さくら公園',86,sy+93,14,'#64816b','900','center');
+ // Vending machine sits ON the path/grass with a visible footing and cast shadow.
+ // Source evidence at (426, sy+111) remains within the machine.
+ parkGroundShadow(415,sy+232,70,12);
+ shapeRect(360,sy+55,109,164,'#f8f6ed',7,'#779199',3);
+ shapeRect(367,sy+62,76,101,'#a8d2d8',4,'#748f99',2);
+ for(let row=0;row<4;row++)for(let col=0;col<5;col++){
+  shapeRect(375+col*13,sy+72+row*21,8,14,
+   ['#eab77e','#d4e1c9','#d48078','#f2e2a8','#a8c3ba'][(row+col)%5],2);
  }
- // A curved gravel footpath opens into the foreground.
- ctx.fillStyle='#d8c9aa';ctx.beginPath();
- ctx.moveTo(185,sy+194);ctx.lineTo(305,sy+194);
- ctx.bezierCurveTo(278,sy+320,370,sy+415,500,H);
- ctx.lineTo(0,H);ctx.bezierCurveTo(128,sy+450,158,sy+306,185,sy+194);ctx.closePath();ctx.fill();
- ctx.strokeStyle='#bbad8b';ctx.lineWidth=2;ctx.beginPath();
- ctx.moveTo(185,sy+194);ctx.bezierCurveTo(145,sy+350,117,sy+447,0,H);ctx.stroke();
- ctx.beginPath();ctx.moveTo(305,sy+194);ctx.bezierCurveTo(278,sy+320,370,sy+415,500,H);ctx.stroke();
- // Watercolor-style scattered grass and flower clusters, fixed pattern.
- for(let i=0;i<100;i++){
-  const x=(i*73+19)%W,y=sy+190+(i*53)%(Math.max(200,H-sy-195));
-  if(x>150&&x<375&&y>sy+245)continue;
-  line(x,y,x-3,y-6,i%3?'#729b6f':'#dfc960',1.4);
-  line(x,y,x+4,y-5,'#8fb071',1);
- }
- // Two large shade trees with layered pastel foliage.
- for(const [tx,ty,scale] of [[42,sy+180,1],[481,sy+190,1.16]]){
-  ctx.save();ctx.translate(tx,ty);ctx.scale(scale,scale);
-  shapeRect(-12,-125,24,175,'#90785c',6);
-  line(0,-108,-43,-157,'#90785c',9);line(0,-91,39,-140,'#90785c',9);
-  for(const [x,y,rx,ry,color] of [
-   [-39,-148,49,40,'#81a687'],[24,-173,55,39,'#749e86'],[-9,-192,65,46,'#83ad91'],
-   [59,-143,43,31,'#82ae91'],[-51,-183,35,32,'#98baa0'],[5,-214,34,24,'#acc9ab']
-  ])ellipse(x,y,rx,ry,color);
-  ctx.restore();
- }
- // Garden fence and park fence-posts.
- for(let x=0;x<540;x+=32){shapeRect(x-4,sy+193,8,38,'#9a8e6f',2)}
- line(0,sy+205,W,sy+205,'#a89c82',4);
- line(0,sy+225,W,sy+225,'#a89c82',4);
- // Distinctive park entrance notice: easy to spot as un-French.
- shapeRect(41,sy+40,9,142,'#8c7558',2);
- shapeRect(112,sy+40,9,142,'#8c7558',2);
- shapeRect(21,sy+38,129,82,'#fff7dc',8,'#8d9d79',3);
- txt('埼玉県立',86,sy+69,15,'#476b60','900','center');
- txt('さくら公園',86,sy+92,14,'#61826d','900','center');
- // Vending machine that clearly signals a local Japanese park.
- shapeRect(382,sy+43,99,121,'#f9f7ec',7,'#77929a',3);
- shapeRect(390,sy+51,68,74,'#a9d0d6',3,'#728d98',2);
- for(let row=0;row<3;row++)for(let col=0;col<5;col++){
-  shapeRect(396+col*12,sy+60+row*19,7,13,
-   ['#edb77d','#d8e2c8','#d2827b','#f1dfaa','#a8c2ba'][(row+col)%5],2);
- }
- shapeRect(396,sy+131,48,19,'#d8d5c7',2);
- txt('100円',461,sy+144,13,'#bb5654','900','center');
- // A bench with a tiny Japanese location plaque.
- shapeRect(227,sy+250,139,18,'#916f56',4);
- for(let n=0;n<3;n++)shapeRect(227,sy+221+n*13,139,8,'#ac8861',3);
- line(244,sy+260,239,sy+304,'#6b675e',7);line(349,sy+260,355,sy+304,'#6b675e',7);
- shapeRect(270,sy+267,42,17,'#e3d0a3',2);
- txt('埼玉',291,sy+279,11,'#644e3c','900','center');
- // The same person anchor as the room allows the hat accident in either place.
- ellipse(215,sy+168,26,32,'#383e40');
- ellipse(215,sy+177,22,28,'#e9bea0');
- ctx.fillStyle='#383d41';ctx.beginPath();ctx.moveTo(192,sy+168);
- ctx.quadraticCurveTo(197,sy+139,220,sy+149);
- ctx.quadraticCurveTo(242,sy+154,239,sy+172);
- ctx.lineTo(223,sy+157);ctx.quadraticCurveTo(210,sy+171,192,sy+168);ctx.fill();
- line(205,sy+183,210,sy+183,'#5c514d',1.5);
- line(223,sy+183,228,sy+183,'#5c514d',1.5);
- shapeRect(189,sy+208,54,49,'#ead18a',13);
- line(196,sy+238,185,sy+254,'#ddad8d',7);
- line(235,sy+237,247,sy+253,'#ddad8d',7);
- // Japanese recycling-bin lettering.
- shapeRect(410,sy+199,54,78,'#829f8c',6,'#577d72',2);
- shapeRect(416,sy+207,42,13,'#516e66',4);
- txt('もえる',438,sy+237,12,'#fffcef','900','center');
- txt('ごみ',438,sy+252,12,'#fffcef','900','center');
- // Grocery bag carried from home, painted in the foreground.
- shapeRect(52,sy+293,56,44,'#f3efe0',4,'#b8aa93',2);
- ctx.strokeStyle='#b8aa93';ctx.lineWidth=3;ctx.beginPath();
- ctx.arc(80,sy+292,12,Math.PI,0);ctx.stroke();
- txt('コンビニ',80,sy+316,10,'#a47369','900','center');
+ shapeRect(371,sy+170,46,20,'#dad7c7',2);
+ shapeRect(421,sy+173,19,16,'#81929a',2);
+ txt('100円',442,sy+208,12,'#b95c58','900','center');
+ shapeRect(362,sy+219,105,9,'#88918c',2);
+ shapeRect(368,sy+225,14,6,'#737b78',2);
+ shapeRect(443,sy+225,14,6,'#737b78',2);
+ // Bench sits slightly behind the foreground pedestrian.
+ parkGroundShadow(297,sy+308,84,10);
+ for(let row=0;row<3;row++)shapeRect(229,sy+220+row*13,135,8,'#a9825f',3);
+ shapeRect(227,sy+253,140,16,'#967357',3);
+ line(244,sy+268,240,sy+305,'#666c68',7);
+ line(348,sy+268,354,sy+305,'#666c68',7);
+ shapeRect(270,sy+270,42,16,'#e4d1a5',2);
+ txt('埼玉',291,sy+282,11,'#6a513d','900','center');
+ // A recognizably human passerby with feet resting on the paved path.
+ drawParkPerson(215,sy);
+ // Recycling bin intentionally stands IN FRONT of the vending machine.
+ parkGroundShadow(467,sy+280,34,8);
+ shapeRect(442,sy+213,51,64,'#819f8b',6,'#567a72',2);
+ shapeRect(448,sy+221,40,12,'#536d65',4);
+ txt('もえる',467,sy+249,10,'#fffcef','900','center');
+ txt('ごみ',467,sy+262,11,'#fffcef','900','center');
+ // Convenience bag with ground shadow.
+ parkGroundShadow(80,sy+339,39,8);
+ shapeRect(52,sy+294,56,45,'#f3efe2',4,'#b8aa95',2);
+ ctx.strokeStyle='#b9ad99';ctx.lineWidth=3;ctx.beginPath();
+ ctx.arc(80,sy+293,12,Math.PI,0);ctx.stroke();
+ txt('コンビニ',80,sy+317,10,'#a1756d','900','center');
 }
 
 function background(){
