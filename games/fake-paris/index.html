@@ -361,29 +361,33 @@ function drawComicMoment(){
    Their positions and transformations persist in the exported photograph. */
 const reactionCatalog=[
  {id:'cat-tower',name:'猫の塔倒し',emoji:'🐈',first:'cat',second:'tower',radius:1.0,
-  action:(cat,tower)=>{const sign=tower.x<cat.x?-1:1;tweenProp(tower,{rot:tower.rot+sign*72,x:tower.x+sign*24,y:tower.y+13},850);fx.push({kind:'debris',x:tower.x,y:tower.y+45});}},
+  action:(cat,tower)=>{const sign=tower.x<cat.x?-1:1;tweenProp(tower,{rot:tower.rot+sign*72,x:tower.x+sign*24,y:tower.y+13},900,'bounce');fx.push({kind:'debris',x:tower.x,y:tower.y+45});}},
  {id:'pigeon-bread',name:'パンに鳩が大集合',emoji:'🐦',first:'pigeon',second:'bread',radius:.92,
-  action:(bird,bread)=>{for(let j=0;j<2;j++){const p={uid:nextPropId++,type:'pigeon',x:bread.x+(-1+j*2)*86,y:bread.y+(-22+j*16),rot:(j===0?-18:16),scale:.54,flip:j===0?-1:1,spawned:true};props.push(p);tweenProp(p,{x:bread.x+(-1+j*2)*39,y:bread.y-19+j*24},620+j*140)}fx.push({kind:'crumbs',x:bread.x,y:bread.y});}},
+  action:(bird,bread)=>{for(let j=0;j<2;j++){const p={uid:nextPropId++,type:'pigeon',x:bread.x+(-1+j*2)*86,y:bread.y+(-22+j*16),rot:(j===0?-18:16),scale:.54,flip:j===0?-1:1,spawned:true};props.push(p);tweenProp(p,{x:bread.x+(-1+j*2)*39,y:bread.y-19+j*24},720+j*140,'spring')}fx.push({kind:'crumbs',x:bread.x,y:bread.y});}},
  {id:'ufo-tower',name:'エッフェル塔、誘拐される',emoji:'🛸',first:'ufo',second:'tower',radius:1.10,
-  action:(ufo,tower)=>{const x=ufo.x;fx.push({kind:'beam',x,y:ufo.y+26,base:tower.y+50});tweenProp(tower,{x,y:ufo.y+54,rot:tower.rot+23,scale:Math.max(.36,tower.scale*.64)},1100);}},
+  action:(ufo,tower)=>{const x=ufo.x;fx.push({kind:'beam',x,y:ufo.y+26,base:tower.y+50});tweenProp(tower,{x,y:ufo.y+54,rot:tower.rot+23,scale:Math.max(.36,tower.scale*.64)},1350,'float');}},
  {id:'dinosaur-arch',name:'凱旋門、踏みつぶされる',emoji:'🦖',first:'dinosaur',second:'arch',radius:1.12,
-  action:(dino,arch)=>{tweenProp(arch,{scale:Math.max(.3,arch.scale*.46),y:arch.y+42,rot:arch.rot-12},650);fx.push({kind:'dust',x:arch.x,y:arch.y+39});}},
+  action:(dino,arch)=>{tweenProp(arch,{scale:Math.max(.3,arch.scale*.46),y:arch.y+42,rot:arch.rot-12},780,'bounce');fx.push({kind:'dust',x:arch.x,y:arch.y+39});}},
  {id:'cafe-coffee',name:'実家に本格パリカフェ誕生',emoji:'☕',first:'coffee',second:'croissant',radius:.97,
-  action:(coffee,croissant)=>{fx.push({kind:'steam',x:coffee.x,y:coffee.y-26});tweenProp(croissant,{x:coffee.x+64,y:coffee.y+12,rot:-18},720);}},
+  action:(coffee,croissant)=>{fx.push({kind:'steam',x:coffee.x,y:coffee.y-26});tweenProp(croissant,{x:coffee.x+64,y:coffee.y+12,rot:-18},850,'spring');}},
  {id:'fountain-cafe',name:'カフェ、噴水で水没',emoji:'⛲',first:'fountain',second:'cafe',radius:1.00,
-  action:(fountain,cafe)=>{fx.push({kind:'water',x:(fountain.x+cafe.x)/2,y:(fountain.y+cafe.y)/2+25});tweenProp(cafe,{rot:cafe.rot+12,x:cafe.x+26,y:cafe.y+12},680);}},
+  action:(fountain,cafe)=>{fx.push({kind:'water',x:(fountain.x+cafe.x)/2,y:(fountain.y+cafe.y)/2+25});tweenProp(cafe,{rot:cafe.rot+12,x:cafe.x+26,y:cafe.y+12},800,'spring');}},
  {id:'hat-person',name:'本人、急にパリジェンヌになる',emoji:'🎩',first:'hat',special:'person',
-  action:(hat)=>{tweenProp(hat,{x:215,y:160,scale:.63,rot:-16},560);fx.push({kind:'glitter',x:215,y:165});}},
+  action:(hat)=>{tweenProp(hat,{x:215,y:160,scale:.63,rot:-16},670,'spring');fx.push({kind:'glitter',x:215,y:165});}},
  {id:'flag-sign',name:'看板、急にフランス国籍を取得',emoji:'🇫🇷',first:'flag',second:'sign',radius:1.0,
-  action:(flag,sign)=>{sign.french=true;fx.push({kind:'glitter',x:sign.x,y:sign.y-22});tweenProp(sign,{rot:-8},380);}}
+  action:(flag,sign)=>{sign.french=true;fx.push({kind:'glitter',x:sign.x,y:sign.y-22});tweenProp(sign,{rot:-8},520,'spring');}}
 ];
-function tweenProp(prop,to,duration=600){
+function tweenProp(prop,to,duration=600,motion='smooth'){
  if(typeof requestAnimationFrame!=='function'){Object.assign(prop,to);render();return}
  // Launch a new tween with an independent object snapshot. Multiple objects can animate.
  const from={};for(const k of Object.keys(to))from[k]=prop[k]??0;
  const start=performance.now();const task={prop,from,to,start,duration};animating.add(task);
  function frame(now){if(finished||!animating.has(task)){animating.delete(task);return}
-   const t=clamp((now-start)/duration,0,1);const eased=1-Math.pow(1-t,3);
+   const t=clamp((now-start)/duration,0,1);
+   let eased=1-Math.pow(1-t,3);
+   if(motion==='float')eased=(1-Math.cos(Math.PI*t))*.5;
+   if(motion==='spring')eased=t>=1?1:1-Math.exp(-6*t)*Math.cos(12*t);
+   if(motion==='bounce'){const n=7.5625,d=2.75;let v=t;if(v<1/d)eased=n*v*v;else if(v<2/d){v-=1.5/d;eased=n*v*v+.75}else if(v<2.5/d){v-=2.25/d;eased=n*v*v+.9375}else{v-=2.625/d;eased=n*v*v+.984375}}
    for(const k of Object.keys(to))prop[k]=from[k]+(to[k]-from[k])*eased;
    render();
    if(t<1)requestAnimationFrame(frame);else animating.delete(task);
