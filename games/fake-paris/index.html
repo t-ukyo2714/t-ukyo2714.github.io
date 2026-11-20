@@ -933,9 +933,13 @@ let previewDrag=null,previewPinch=null;
 function drawCameraPreview(){
  if(!gameEntered||!previewCanvas)return;
  const f=framing();
+ const targetHeight=Math.round(1000*H/W);
+ if(previewCanvas.width!==1000)previewCanvas.width=1000;
+ if(previewCanvas.height!==targetHeight)previewCanvas.height=targetHeight;
  previewCtx.setTransform(1,0,0,1,0,0);
- previewCtx.clearRect(0,0,1000,680);
- previewCtx.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,0,0,1000,680);
+ previewCtx.clearRect(0,0,previewCanvas.width,previewCanvas.height);
+ previewCtx.drawImage(canvas,f.x*SCALE,f.y*SCALE,f.w*SCALE,f.h*SCALE,
+  0,0,previewCanvas.width,previewCanvas.height);
 }
 function limitCamera(){
  const f=framing();
@@ -969,24 +973,37 @@ previewCanvas.addEventListener('pointermove',e=>{
  if(previewPinch&&previewPointers.size>=2){
   const pair=previewPair();
   zoom=clamp(previewPinch.zoom*pair.distance/previewPinch.distance,1,2.2);
-  const f=framing();
-  cam.x=previewPinch.cam.x-(pair.center.x-previewPinch.mid.x)*f.w/box.width;
-  cam.y=previewPinch.cam.y-(pair.center.y-previewPinch.mid.y)*f.h/box.height;
-  limitCamera();
+  cropEnabled=zoom>1.005;
+  if(cropEnabled){
+   const f=framing();
+   cam.x=previewPinch.cam.x-(pair.center.x-previewPinch.mid.x)*f.w/box.width;
+   cam.y=previewPinch.cam.y-(pair.center.y-previewPinch.mid.y)*f.h/box.height;
+   limitCamera();
+  }else cam={x:W/2,y:H/2};
   document.getElementById('zoom').value=String(zoom);
   document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
   document.getElementById('cameraZoom').value=String(zoom);
   document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
-  go();
+  updateCameraCompositionUI();go();
  }else if(previewDrag&&previewDrag.id===e.pointerId){
+  const dx=e.clientX-previewDrag.start.x,dy=e.clientY-previewDrag.start.y;
+  if(!cropEnabled){
+   // A stationary tap does not modify the photo. Dragging reveals crop mode.
+   if(Math.hypot(dx,dy)<10)return;
+   cropEnabled=true;zoom=1.18;
+   previewDrag.cam={x:W/2,y:H/2};
+   document.getElementById('zoom').value=String(zoom);
+   document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
+   document.getElementById('cameraZoom').value=String(zoom);
+   document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
+   updateCameraCompositionUI();
+  }
   const f=framing();
-  cam.x=previewDrag.cam.x-(e.clientX-previewDrag.start.x)*f.w/box.width;
-  cam.y=previewDrag.cam.y-(e.clientY-previewDrag.start.y)*f.h/box.height;
-  limitCamera();
-  go();
+  cam.x=previewDrag.cam.x-dx*f.w/box.width;
+  cam.y=previewDrag.cam.y-dy*f.h/box.height;
+  limitCamera();go();
  }
- render();
- e.preventDefault();
+ render();e.preventDefault();
 });
 function endPreviewPointer(e){
  if(!previewPointers.has(e.pointerId))return;
@@ -1189,7 +1206,7 @@ canvas.addEventListener('pointerdown',e=>{
  }
  if(pointers.size>1){e.preventDefault();return}
  if(mode==='camera'){
-  go();drag={kind:'camera-pan',dx:pt.x-cam.x,dy:pt.y-cam.y,id:e.pointerId};
+  go();drag={kind:'camera-pan',dx:pt.x-cam.x,dy:pt.y-cam.y,id:e.pointerId,start:pt,cam:{...cam}};
   canvas.classList.add('dragging');e.preventDefault();return;
  }
  const handle=selectionHandleAt(pt);
@@ -1217,6 +1234,7 @@ canvas.addEventListener('pointermove',e=>{
   dist=Math.max(1,Math.hypot(dx,dy)),mid={x:(ab[0].x+ab[1].x)/2,y:(ab[0].y+ab[1].y)/2};
   if(gesture.kind==='camera'){
    zoom=clamp(gesture.zoom*dist/gesture.dist,1,2.2);
+   cropEnabled=zoom>1.005;
    const f=framing();
    cam.x=clamp(gesture.cam.x+mid.x-gesture.mid.x,f.w/2,W-f.w/2);
    cam.y=clamp(gesture.cam.y+mid.y-gesture.mid.y,f.h/2,H-f.h/2);
@@ -1224,6 +1242,7 @@ canvas.addEventListener('pointermove',e=>{
    document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
    document.getElementById('cameraZoom').value=String(zoom);
    document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
+   updateCameraCompositionUI();
   }else{
    const g=gesture;
    g.p.scale=clamp(g.scale*dist/g.dist,.3,3.5);
@@ -1237,9 +1256,19 @@ canvas.addEventListener('pointermove',e=>{
  if(!drag||drag.id!==e.pointerId)return;
  if(drag.kind!=='camera-pan'&&drag.start&&Math.hypot(pt.x-drag.start.x,pt.y-drag.start.y)>6)setDockDragging(true);
  if(drag.kind==='camera-pan'){
-  const f=framing();
-  cam.x=clamp(pt.x-drag.dx,f.w/2,W-f.w/2);
-  cam.y=clamp(pt.y-drag.dy,f.h/2,H-f.h/2);
+  if(!cropEnabled&&Math.hypot(pt.x-drag.start.x,pt.y-drag.start.y)>10){
+   cropEnabled=true;zoom=1.18;drag.cam={x:W/2,y:H/2};
+   document.getElementById('zoom').value=String(zoom);
+   document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
+   document.getElementById('cameraZoom').value=String(zoom);
+   document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
+   updateCameraCompositionUI();
+  }
+  if(cropEnabled){
+   const f=framing();
+   cam.x=clamp(drag.cam.x-(pt.x-drag.start.x)*f.w/W,f.w/2,W-f.w/2);
+   cam.y=clamp(drag.cam.y-(pt.y-drag.start.y)*f.h/H,f.h/2,H-f.h/2);
+  }
  }else if(drag.kind==='move'){
   drag.p.x=clamp(pt.x-drag.dx,-80,W+80);
   drag.p.y=clamp(pt.y-drag.dy,-75,H+80);
