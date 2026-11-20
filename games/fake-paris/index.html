@@ -1654,6 +1654,56 @@ const reactionCatalog=[
  {id:'flag-sign',name:'看板、急にフランス国籍を取得',emoji:'🇫🇷',first:'flag',second:'sign',radius:1.0,
   action:(flag,sign)=>{sign.french=true;fx.push({kind:'glitter',x:sign.x,y:sign.y-22});tweenProp(sign,{rot:-8},520,'spring');}}
 ];
+
+/* Surprise events unique to the park. Scene-specific assets never leak into
+   the room; all participants and newly spawned pigeons lock on activation. */
+reactionCatalog.push(
+ {scene:'park',id:'park-dog-tower',name:'犬、ニセ塔をなぎ倒す',emoji:'🐕',first:'parkDog',second:'parkTower',radius:1.09,
+  action:(dog,tower)=>{
+   fx.push({kind:'debris',x:tower.x,y:tower.y+45});
+   tweenProp(tower,{x:tower.x+29,y:tower.y+23,rot:tower.rot+68},900,'bounce');
+   tweenProp(dog,{x:dog.x-19,rot:dog.rot-12},600,'spring');
+  }},
+ {scene:'park',id:'park-pigeon-bread',name:'バゲット争奪！鳩が大集合',emoji:'🐦',first:'parkPigeon',second:'parkBaguette',radius:1.00,
+  action:(bird,bread)=>{
+   for(let i=0;i<2;i++){
+    const p={uid:nextPropId++,type:'parkPigeon',
+     x:bread.x+(-1+i*2)*90,y:bread.y-30+i*10,
+     rot:i===0?-12:17,scale:.59,flip:i===0?-1:1,spawned:true};
+    props.push(p);
+    tweenProp(p,{x:bread.x+(-1+i*2)*35,y:bread.y-18+i*21},720+i*110,'spring');
+   }
+   fx.push({kind:'crumbs',x:bread.x,y:bread.y});
+  }},
+ {scene:'park',id:'park-fountain-bistro',name:'ビストロ、噴水で水没',emoji:'⛲',first:'parkFountain',second:'parkBistro',radius:1.0,
+  action:(fountain,bistro)=>{
+   fx.push({kind:'water',x:(fountain.x+bistro.x)/2,y:(fountain.y+bistro.y)/2+25});
+   tweenProp(bistro,{x:bistro.x+26,y:bistro.y+17,rot:bistro.rot+13},860,'spring');
+  }},
+ {scene:'park',id:'park-bike-flower',name:'自転車が花のアーチに突っ込む',emoji:'🚲',first:'parkBike',second:'parkFlower',radius:.95,
+  action:(bike,flowers)=>{
+   fx.push({kind:'glitter',x:flowers.x,y:flowers.y-24});
+   tweenProp(bike,{rot:bike.rot-29,x:bike.x+20,y:bike.y-10},820,'bounce');
+  }},
+ {scene:'park',id:'park-dog-table',name:'犬、テラス席を乗っ取る',emoji:'🐕',first:'parkDog',second:'parkTable',radius:.99,
+  action:(dog,table)=>{
+   fx.push({kind:'glitter',x:dog.x,y:dog.y-35});
+   tweenProp(dog,{x:table.x+9,y:table.y-25,scale:Math.min(1.4,dog.scale*1.18)},830,'spring');
+   tweenProp(table,{rot:table.rot+9},640,'spring');
+  }},
+ {scene:'park',id:'park-flag-poster',name:'観光ポスターがフランス国籍に',emoji:'🇫🇷',first:'parkFlag',second:'parkPoster',radius:1.05,
+  action:(flag,poster)=>{
+   poster.french=true;
+   fx.push({kind:'glitter',x:poster.x,y:poster.y-30});
+   tweenProp(poster,{rot:poster.rot-10},620,'spring');
+  }},
+ {scene:'park',id:'park-tower-lamp',name:'街灯までパリ気取り',emoji:'💡',first:'parkLamp',second:'parkTower',radius:.88,
+  action:(lamp,tower)=>{
+   fx.push({kind:'glitter',x:lamp.x,y:lamp.y-49});
+   tweenProp(lamp,{rot:lamp.rot-17,x:lamp.x-16},690,'spring');
+  }}
+);
+
 function tweenProp(prop,to,duration=600,motion='smooth'){
  if(typeof requestAnimationFrame!=='function'){Object.assign(prop,to);render();return}
  // Launch a new tween with an independent object snapshot. Multiple objects can animate.
@@ -1689,9 +1739,17 @@ function drawIncidentEffects(items=fx){
 
 function showIncident(rule,x=250,y=160){
  incidents.push({id:rule.id,name:rule.name,emoji:rule.emoji});
- impact={sfx:({'cat-tower':'ガシャーン!','pigeon-bread':'バサバサ!','ufo-tower':'ビーーーム!','dinosaur-arch':'ドシーン!','cafe-coffee':'ほっこり','fountain-cafe':'びしゃー!','hat-person':'キラーン!','flag-sign':'BONJOUR!'})[rule.id],x,y,start:performance.now()};
+ impact={sfx:({
+  'cat-tower':'ガシャーン!','pigeon-bread':'バサバサ!','ufo-tower':'ビーーーム!',
+  'dinosaur-arch':'ドシーン!','cafe-coffee':'ほっこり',
+  'fountain-cafe':'びしゃー!','hat-person':'キラーン!','flag-sign':'BONJOUR!',
+  'park-dog-tower':'ガシャーン!','park-pigeon-bread':'バサバサ!',
+  'park-fountain-bistro':'びしゃー!','park-bike-flower':'ガタン!',
+  'park-dog-table':'ワン!','park-flag-poster':'BONJOUR!',
+  'park-tower-lamp':'キラッ!'
+ })[rule.id]||'びっくり!',x,y,start:performance.now()};
  recordIncident(rule);
- if(['cat-tower','dinosaur-arch','fountain-cafe'].includes(rule.id)){
+ if(['cat-tower','dinosaur-arch','fountain-cafe','park-dog-tower','park-fountain-bistro'].includes(rule.id)){
  const wrap=document.querySelector('.stage-wrap');
  wrap.classList.remove('shaking');void wrap.offsetWidth;wrap.classList.add('shaking');
  setTimeout(()=>wrap.classList.remove('shaking'),320);
@@ -1722,6 +1780,8 @@ function lockIncidentProps(rule,participants,beforeUids){
 function checkReactions(active){
  if(!active||active.lockedBy||!props.includes(active)||finished)return;
  for(const rule of reactionCatalog){
+  if(sceneKind==='park'&&rule.scene!=='park')continue;
+  if(sceneKind==='room'&&rule.scene==='park')continue;
   if(rule.special==='person'){
    if(active.type!=='hat')continue;
    const key=rule.id+':'+active.uid;
@@ -1780,13 +1840,21 @@ function evaluate(){
  const covered=evidencePoints.filter(p=>inFrame(p.x,p.y)&&isCovered(p));
  const cropped=evidencePoints.filter(p=>!inFrame(p.x,p.y));
  const hidden=[...covered,...cropped],unique=[...new Set(visibleProps.map(p=>p.type))];
- const values={tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,pigeon:2,cat:2,dinosaur:-12,ufo:-12};
+ const values={
+ tower:20,cloth:12,sign:11,arch:17,lamp:7,cafe:13,fountain:8,
+ postcard:5,plant:4,bread:5,hat:7,flag:9,croissant:5,coffee:6,
+ cheese:4,bicycle:8,suitcase:7,flowers:5,sunglasses:6,perfume:5,
+ pigeon:2,cat:2,dinosaur:-12,ufo:-12,
+ parkTower:20,parkFountain:11,parkLamp:9,parkBistro:13,
+ parkTable:10,parkPoster:12,parkFlag:9,parkFlower:9,
+ parkBike:8,parkDog:2,parkPigeon:2,parkBaguette:5
+};
  let score=45+covered.length*10+cropped.length*3-exposed.reduce((n,p)=>n+p.penalty*.55,0);
  score+=unique.reduce((n,type)=>n+(values[type]||0),0);
- if(C('tower')+C('arch')===0)score-=18;
- if(C('tower')>=3)score-=15;
+ if((sceneKind==='park'?C('parkTower')+C('parkPoster')+C('parkFountain'):C('tower')+C('arch'))===0)score-=18;
+ if(C('tower')>=3||C('parkTower')>=3)score-=15;
  if(C('sign')>=3||C('flag')>=3)score-=12;
- if(C('pigeon')+C('cat')>=4)score-=12;
+ if(C('pigeon')+C('cat')>=4||C('parkPigeon')+C('parkDog')>=4)score-=12;
  if(visibleProps.length>10)score-=4*(visibleProps.length-10);
  if(unique.length<3)score-=10*(3-unique.length);
  if(zoom>1.75)score-=Math.round((zoom-1.75)*24);
@@ -1806,8 +1874,24 @@ function evaluate(){
  else if(exposed.length>=3)ending={id:'11',title:localLabel+'の証拠、流出事件。',quip:'隠す気があるようで、全部バレている。',reply:exposed[0].reply};
  else if(score>=85)ending={id:'12',title:'その嘘、ギリギリ通る。',quip:localLabel+'からの出国に成功。あなたには才能がある。',reply:'……待って、本当にパリ？ ちょっと信じた。'};
  else if(score<35)ending={id:'12',title:'完全に'+localLabel+'です。',quip:'異国情緒より、生活感の勝利。',reply:exposed.length?exposed[0].reply:'海外旅行、どこの'+(sceneKind==='park'?'公園':'部屋')+'で撮った？'};
+ if(sceneKind==='park'){
+  const latest=incidents.at(-1)?.id;
+  if(latest==='park-dog-tower')ending={id:'02',title:'エッフェル塔、犬に敗北。',quip:'偽パリの記念撮影が、犬の大事件になった。',reply:'パリより犬が塔を倒してることが気になる。'};
+  else if(latest==='park-pigeon-bread')ending={id:'05',title:'鳩に乗っ取られたパリ。',quip:'バゲットを置いたら鳩のパーティーが始まった。',reply:'旅行写真じゃなくて、鳩の集会じゃない？'};
+  else if(latest==='park-fountain-bistro')ending={id:'06',title:'パリカフェ、本日水没。',quip:'おしゃれなテラス席が水害現場に。',reply:'パリってこんなに水浸しになるの？'};
+  else if(latest==='park-dog-table')ending={id:'04',title:'テラス席、犬が貸し切り。',quip:'旅の主役が完全にフレンチブルドッグ。',reply:'あなたどこ？ 犬が旅行してる写真だよね。'};
+  else if(latest==='park-bike-flower')ending={id:'07',title:'パリの自転車、花に突撃。',quip:'優雅な散策の予定が、花壇への特攻に。',reply:'自転車どこで転んだの？'};
+  else if(C('parkTower')>=3)ending={id:'07',title:'塔が増殖する公園。',quip:'パリのつもりがニセ塔の展示会場。',reply:'エッフェル塔ってこんなにあるんだっけ？'};
+  else if(score>=85)ending={id:'12',title:'近所の公園、パリ化に成功。',quip:'写り込む日本語さえなければ、ちょっと信じそう。',reply:'……え、これ本当に日本の公園？'};
+  else if(score<36)ending={id:'12',title:'完全に近所の公園です。',quip:'観光の匂いより、地元の匂いがする。',reply:exposed.length?exposed[0].reply:'それ日本の公園じゃない？'};
+ }
+
 
  const funny=
+  sceneKind==='park'&&C('parkDog')&&C('parkTower')?'エッフェル塔と犬が喧嘩してる。':
+  sceneKind==='park'&&C('parkPigeon')>=2?'鳩の数、パリの名所より多くない？':
+  sceneKind==='park'&&C('parkFountain')&&C('parkBistro')?'噴水とビストロが近すぎるんだけど。':
+  sceneKind==='park'&&C('parkTower')>=3?'公園にエッフェル塔を3本置く人、初めて見た。':
   C('ufo')&&C('tower')?'エッフェル塔がUFOに連れ去られてるんだけど、フランスどうなった？':
   C('dinosaur')?'恐竜ってパリの何区にいるの？':
   C('tower')>=3?'パリってエッフェル塔が3本あるんだっけ？':
@@ -1826,15 +1910,15 @@ function evaluate(){
  }else if(funny)ending.reply=funny;
 
  const report=[];
- if(C('tower')||C('arch'))report.push({type:'good',text:(C('tower')?'エッフェル塔':'凱旋門')+'が写真内に。パリの手がかりとして有効。'});
+ if(C('tower')||C('arch')||C('parkTower')||C('parkPoster')||C('parkFountain'))report.push({type:'good',text:(C('tower')||C('parkTower')?'エッフェル塔':C('parkFountain')?'噴水':C('parkPoster')?'パリのポスター':'凱旋門')+'が写真内に。パリの手がかりとして有効。'});
  else report.push({type:'bad',text:'パリだと分かる建物がほぼ写っていない。'});
  if(exposed.length)report.push({type:'bad',text:exposed.length+'件の'+localLabel+'の証拠が露出。特に「'+exposed[0].name+'」が致命的。'});
  if(covered.length)report.push({type:'good',text:covered.length+'件の'+localLabel+'の証拠を小道具で隠せた。'});
  if(!exposed.length&&!covered.length)report.push({type:'neutral',text:localLabel+'の証拠は撮影枠の外に避けられている。'});
- if(C('tower')>=3)report.push({type:'bad',text:'エッフェル塔を'+C('tower')+'本設置。物量が逆に嘘っぽい。'});
+ if(C('tower')>=3||C('parkTower')>=3)report.push({type:'bad',text:'エッフェル塔を'+(C('tower')+C('parkTower'))+'本設置。物量が逆に嘘っぽい。'});
  else if(C('ufo')||C('dinosaur'))report.push({type:'bad',text:'UFOや恐竜が旅行写真の信憑性を崩している。'});
- else if(C('pigeon')>=2&&C('bread'))report.push({type:'neutral',text:'パンに集まった鳩が主役を奪っている。'});
- else if(C('cafe')&&C('croissant')&&C('coffee'))report.push({type:'good',text:'カフェ＋コーヒー＋パンで、旅行の場面に統一感がある。'});
+ else if((C('pigeon')>=2&&C('bread'))||(C('parkPigeon')>=2&&C('parkBaguette')))report.push({type:'neutral',text:'パンに集まった鳩が主役を奪っている。'});
+ else if((C('cafe')&&C('croissant')&&C('coffee'))||(C('parkBistro')&&C('parkTable')))report.push({type:'good',text:'ビストロとテラス席で、パリの場面に統一感がある。'});
  else if(unique.length>=4)report.push({type:'good',text:unique.length+'種類の異なる小道具で場面を作れている。'});
  else report.push({type:'neutral',text:'画面内の小道具は'+visibleProps.length+'個。組み合わせると写真の説得力が変わる。'});
  if(zoom>1.75)report.push({type:'bad',text:'ズームが強く、写真の情報量が不足している。'});
