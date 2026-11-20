@@ -1081,8 +1081,8 @@ function evaluate(){
  if(C('tower')||C('arch'))report.push({type:'good',text:(C('tower')?'エッフェル塔':'凱旋門')+'が写真内に。パリの手がかりとして有効。'});
  else report.push({type:'bad',text:'パリだと分かる建物がほぼ写っていない。'});
  if(exposed.length)report.push({type:'bad',text:exposed.length+'件の実家の証拠が露出。特に「'+exposed[0].name+'」が致命的。'});
- else if(covered.length)report.push({type:'good',text:covered.length+'件の実家の証拠を小道具で隠した。'});
- else report.push({type:'neutral',text:'実家の証拠は撮影枠の外に避けられている。'});
+ if(covered.length)report.push({type:'good',text:covered.length+'件の実家の証拠を小道具で隠せた。'});
+ if(!exposed.length&&!covered.length)report.push({type:'neutral',text:'実家の証拠は撮影枠の外に避けられている。'});
  if(C('tower')>=3)report.push({type:'bad',text:'エッフェル塔を'+C('tower')+'本設置。物量が逆に嘘っぽい。'});
  else if(C('ufo')||C('dinosaur'))report.push({type:'bad',text:'UFOや恐竜が旅行写真の信憑性を崩している。'});
  else if(C('pigeon')>=2&&C('bread'))report.push({type:'neutral',text:'パンに集まった鳩が主役を奪っている。'});
