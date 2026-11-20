@@ -221,7 +221,7 @@ document.getElementById('backToCover').addEventListener('click',returnToCover);
 document.querySelectorAll('[data-quick]').forEach(btn=>{
  btn.disabled=true;
  btn.addEventListener('click',()=>{
-  if(!gameEntered||finished)return;
+  if(!gameEntered||finished||!selected)return;
   document.getElementById(btn.dataset.quick).click();
  });
 });
@@ -526,7 +526,7 @@ function replayIncident(){
   while(index<frames.length-1&&frames[index+1].ms<=ms)index++;
   replayScene=frames[index];
   render({clean:true,noFrame:true});drawComicMoment();
-  pctx.clearRect(0,0,1000,680);pctx.drawImage(canvas,0,0,1000,680);
+  pctx.clearRect(0,0,1000,680);const view=framing();pctx.drawImage(canvas,view.x*SCALE,view.y*SCALE,view.w*SCALE,view.h*SCALE,0,0,1000,680);
   if(ms<clip.length+160)requestAnimationFrame(frame);
   else{
    replayScene=null;replaying=false;btn.disabled=false;btn.textContent='▶ 直前の事件を再生（約1.5秒）';
