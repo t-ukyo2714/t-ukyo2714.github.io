@@ -1088,6 +1088,11 @@ function drawProp(p){
   ctx.drawImage(parkAtlas,cell.column*240+10,cell.row*240+10,
    sw,sh,-dw/2,-dh/2,dw,dh);
   ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  if(type==='parkPoster'&&p.french){
+   // The flag incident physically changes the sign in the exported photo.
+   shapeRect(-d.w*.30,d.h*.07,d.w*.60,23,'#f9edda',3);
+   txt('BONJOUR!',0,d.h*.07+15,13,'#a65f57','900','center');
+  }
  }else if(d.stage==='room'&&atlasReady&&cell){
   const sx=cell.column*120,sy=cell.row*120;
   // Preserve the approved illustration's proportions, do not stretch the art.
