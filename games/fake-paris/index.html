@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v15</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v16</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -285,85 +285,6 @@
 .share-card-preview img{display:block;max-width:100%;width:min(100%,320px);height:auto;border:2px solid #313b49;box-shadow:5px 5px 0 #c1b7a7}
 @media(max-width:600px){.result{padding:12px 12px 17px}.veil{padding:9px}.review-head span{max-width:150px;text-align:right}.result .result-actions{display:grid;grid-template-columns:1fr 1fr}.result .result-actions button:last-child{grid-column:auto}.result .metric{padding:10px 12px}.photo-watermark{font-size:8px}}
 
-/* v15 photographed fullscreen result - overrides accumulated legacy result styles */
-#veil.veil{position:fixed;inset:0;z-index:100;display:none;overflow:hidden;padding:0;background:#303d3e}
-#veil.veil.open{display:block}
-#veil .result-full{position:relative;inset:0;width:100%;height:100vh;height:100dvh;max-width:none;max-height:none;overflow:hidden;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent;isolation:isolate}
-#veil .result-photo-bg{position:absolute;inset:0;overflow:hidden;z-index:0;background:#708283}
-#veil .result-photo-bg img,#veil .result-photo-bg canvas{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;max-height:none;border:0;border-radius:0;background:transparent}
-#veil .result-photo-bg [hidden]{display:none!important}
-#veil .photo-bg-blur{object-fit:cover;transform:scale(1.12);filter:blur(19px) saturate(.75);opacity:.9}
-#veil .result-photo-bg .photo-main,#veil .result-photo-bg .replay-canvas{object-fit:contain;object-position:center 14%}
-#veil .result-dim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,#1b242a1f 0%,#1b242a15 28%,#19232861 59%,#172027a9 100%)}
-#veil .result-layer{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;gap:9px;padding:calc(15px + env(safe-area-inset-top,0px)) 16px calc(11px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-#veil .result-topchips{width:min(100%,1100px);margin:0 auto auto;display:flex;align-items:center;justify-content:space-between;gap:9px;flex-shrink:0}
-#veil .glass-chip{display:inline-flex;align-items:center;gap:5px;background:#fff9e6ca;border:1px solid #ffffffb5;border-radius:999px;color:#29333b;padding:8px 11px;font-size:11px;line-height:1.2;font-weight:900;white-space:nowrap;box-shadow:0 3px 15px #18252927;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-#veil .result-brand small{font-size:9px;color:#626a6b;font-weight:800}
-#veil .result-ending{background:#f9d78bdc;border-color:#ffe8b7}
-#veil .result-content{display:flex;flex-direction:column;gap:8px;flex-shrink:0;width:min(100%,460px);margin:0 auto}
-#veil .result-card{padding:15px 16px 13px;border:1px solid #ffffffbf;border-radius:19px;background:#fff8e8dc;color:#2d353b;box-shadow:0 8px 33px #16252c42;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
-#veil .result-card-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
-#veil .result-card .verdict-badge{display:inline-flex;background:#f6d992;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900;color:#5a4e37}
-#veil .photo-credit{font-size:10px;font-weight:900;letter-spacing:.07em;color:#75807e}
-#veil .photo-credit em{font-style:normal;color:#c96c54}
-#veil .result-card h2{font-size:clamp(21px,5vw,29px);line-height:1.24;margin:9px 0 5px;letter-spacing:-.04em}
-#veil .result-card .quip{font-size:12px;line-height:1.55;font-weight:750;color:#646b70;margin:0}
-#veil .result-card .metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:11px 0 9px}
-#veil .result-card .metric{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:8px 10px;border-radius:10px;background:#e6ece2a8;border:1px solid #9dab9929}
-#veil .result-card .metric:nth-child(2){background:#f5ddcfa8}
-#veil .result-card .metric span{font-size:10px;font-weight:850;white-space:nowrap;color:#5b656b}
-#veil .result-card .metric b{font-size:23px;line-height:1.1;font-weight:950;color:#273743;letter-spacing:-.04em}
-#veil .result-card .friend-shell{display:flex;align-items:flex-start;gap:9px;margin:0}
-#veil .result-card .friend-icon{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:50%;background:#45606c;color:white;font-size:11px}
-#veil .result-card .friend-shell>div:last-child{flex:1;min-width:0}
-#veil .result-card .friend-name{font-size:10px;color:#69777c;font-weight:900}
-#veil .result-card .friend{font-size:12px;line-height:1.5;font-weight:850;background:#d6e8cea8;border:0;border-radius:3px 11px 11px 11px;margin-top:4px;padding:9px 10px}
-#veil .result-card .friend:before{display:none}
-#veil .result-replay-btn{margin:0;padding:9px 12px;min-height:39px;width:100%;border:1px solid #fff9d0b0;border-radius:12px;background:#ffedb6d6;color:#484036;font-size:11px;font-weight:900;backdrop-filter:blur(12px)}
-#veil .result-replay-btn[hidden]{display:none!important}
-#veil .result .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0}
-#veil .result .result-actions button{min-height:45px;border-radius:13px;border:1px solid #ffffffad;padding:10px 9px;font-size:12px;font-weight:900;box-shadow:0 4px 15px #1a2b3636;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-#veil .result .result-actions .share{grid-column:1/-1;background:#ec705ced;border-color:#ffb19c;color:white;min-height:50px;font-size:14px}
-#veil .result .result-actions .save,#veil .result .result-actions #retry{grid-column:auto;background:#fff8e8df;color:#26313d}
-#veil .result-drawer{margin:0;flex-shrink:0;border:1px solid #ffffffb5;border-radius:13px;overflow:hidden;background:#fff9e8df;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 5px 20px #10222c38}
-#veil .result-drawer summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;min-height:40px;cursor:pointer;list-style:none;font-size:11px;font-weight:900;color:#37434c}
-#veil .result-drawer summary::-webkit-details-marker{display:none}
-#veil .result-drawer summary span{font-size:10px;color:#718082}
-#veil .result-drawer[open] summary span{font-size:0}
-#veil .result-drawer[open] summary span:after{content:'閉じる −';font-size:10px}
-#veil .result-drawer-body{padding:4px 11px 12px;max-height:min(43dvh,420px);overflow-y:auto;overscroll-behavior:contain}
-#veil .result-drawer .review-receipt{margin:0 0 9px;background:#fffdf1b8}
-#veil .result-drawer .details,#veil .result-drawer .incident-result,#veil .result-drawer .collection{margin:7px 0;padding:10px;font-size:10px;border-radius:9px}
-#veil .result-drawer .rules-note{font-size:10px;line-height:1.6}
-#veil .preview-card-btn{width:100%;min-height:41px;border-radius:10px;border:1px solid #c6b399;background:#e8d4bb;color:#364149;font-size:11px;font-weight:900}
-#veil .share-card-preview[hidden]{display:none!important}
-#veil .share-card-preview{margin:8px 0 0;padding:10px;border-radius:10px;background:#dbd1c5a8}
-#veil .share-card-preview img{width:min(100%,280px);height:auto;box-shadow:0 6px 14px #11232c29}
-@media(min-width:700px){
- #veil .result-photo-bg .photo-main,#veil .result-photo-bg .replay-canvas{object-fit:cover;object-position:center}
- #veil .result-layer{align-items:flex-end;padding-left:max(20px,calc(50vw - 555px));padding-right:max(20px,calc(50vw - 555px))}
- #veil .result-content{width:min(100%,460px);margin:0}
-}
-@media(max-width:400px){
- #veil .result-layer{padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(8px + env(safe-area-inset-bottom,0px));gap:7px}
- #veil .result-card{padding:12px 13px 11px;border-radius:17px}
- #veil .result-card h2{font-size:21px;margin:7px 0 4px}
- #veil .result-card .quip{font-size:11px}
- #veil .result-card .metrics{margin:8px 0 7px}
- #veil .result-card .metric{padding:7px 9px}
- #veil .result-card .metric b{font-size:21px}
- #veil .result-card .friend{font-size:11px;padding:8px 9px}
- #veil .result .result-actions button{min-height:43px}
- #veil .result .result-actions .share{min-height:47px}
- #veil .result-drawer summary{min-height:36px;padding:8px 11px}
-}
-@media(max-height:660px){
- #veil .result-layer{padding-top:8px;padding-bottom:8px}
- #veil .result-card{padding:10px 12px}
- #veil .result-card .metrics{margin:6px 0}
- #veil .glass-chip{padding:6px 9px}
-}
-
 </style>
 </head>
 <body>
@@ -421,46 +342,23 @@
 <div class="foot">撮影写真だけで判定。通信不要・登録不要。8つの珍事件。直前の事件を見逃したらリプレイ！</div>
 </main>
 
-<div id="veil" class="veil" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
-  <section class="result result-full">
-    <div class="result-photo-bg" aria-label="完成した偽パリ旅行写真">
-      <img id="photoBg" class="photo-bg-blur" alt="" aria-hidden="true"/>
-      <img id="photo" class="photo photo-main" alt="あなたが撮影した偽パリ写真"/>
-      <canvas id="resultReplay" class="photo replay-canvas" width="1000" height="680" hidden></canvas>
-    </div>
-    <div class="result-dim" aria-hidden="true"></div>
-    <div class="result-layer">
-      <div class="result-topchips">
-        <span class="glass-chip result-brand">ALIBI STUDIO <small>／ 偽旅行レポート</small></span>
-        <span id="endingTag" class="glass-chip result-ending">END 00 / 12</span>
-      </div>
-      <div class="result-content">
-        <div class="result-card">
-          <div class="result-card-heading"><span id="verdictBadge" class="verdict-badge">審査完了</span><span class="photo-credit">PARIS? <em>SAITAMA.</em></span></div>
-          <h2 id="resultTitle">まさかの、パリ。</h2>
-          <p id="quip" class="quip"></p>
-          <div class="metrics"><div class="metric"><span>パリっぽさ</span><b id="score">00%</b></div><div class="metric"><span>実家感</span><b id="home">00%</b></div></div>
-          <div class="friend-shell"><div class="friend-icon">友</div><div><span class="friend-name">友達からの返信</span><div id="friend" class="friend"></div></div></div>
-        </div>
-        <button id="instantReplay" type="button" class="result-replay-btn" hidden disabled>▶ 直前の事件を再生（約1.5秒）</button>
-        <div class="result-actions"><button id="share" class="share">↗ 結果カードをシェア</button><button id="save" class="save">↓ 保存</button><button id="retry" class="again">↻ もう一回</button></div>
-        <details id="resultDrawer" class="result-drawer">
-          <summary>審査の内訳・珍事件・結果カード <span>見る ＋</span></summary>
-          <div class="result-drawer-body">
-            <section class="review-receipt" aria-label="写真の審査理由">
-              <div class="review-head"><strong>📋 写真審査メモ</strong><span>写り込み・配置から判定</span></div>
-              <ul id="reviewReasons" class="review-reasons"></ul>
-            </section>
-            <div id="evidence" class="details"></div><div id="incidentResult" class="incident-result"></div><div id="collection" class="collection"></div>
-            <p class="rules-note">※画像認識AIではなく、小道具の配置・写真の範囲に基づくゲーム内判定です。</p>
-            <button id="previewCard" class="preview-card-btn" aria-expanded="false">共有カードを見る</button>
-            <div id="shareCardPreview" class="share-card-preview" hidden><img id="shareCardImage" alt="SNSに共有できる結果カード"/></div>
-          </div>
-        </details>
-      </div>
-    </div>
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+ <div class="result">
+  <div class="result-top"><span>あなたの偽旅行写真が完成</span><span id="endingTag" class="stamp">BON VOYAGE?</span></div>
+  <div class="hero-photo"><img id="photo" class="photo" alt="あなたが撮影した偽パリ写真"/><canvas id="resultReplay" class="photo replay-canvas" width="1000" height="680" hidden></canvas><span class="photo-watermark">PARIS? / ALIBI STUDIO</span></div>
+  <button id="instantReplay" type="button" class="result-replay-btn" hidden disabled>▶ 直前の事件を再生（約1.5秒）</button>
+  <div class="verdict-intro"><span id="verdictBadge" class="verdict-badge">写真審査中</span><h2 id="resultTitle">まさかの、パリ。</h2><p id="quip" class="quip"></p></div>
+  <div class="metrics"><div class="metric"><b id="score">00%</b><span>パリっぽさ</span></div><div class="metric"><b id="home">00%</b><span>実家感</span></div></div>
+  <section class="review-receipt" aria-label="写真の審査理由">
+   <div class="review-head"><strong>📋 写真審査メモ</strong><span>写り込み・配置から判定</span></div>
+   <ul id="reviewReasons" class="review-reasons"></ul>
   </section>
+  <div class="friend-shell"><div class="friend-icon">友</div><div><span class="friend-name">友達からの返信</span><div id="friend" class="friend"></div></div></div>
+  <details class="result-details"><summary>審査の内訳・珍事件を見る</summary><div id="evidence" class="details"></div><div id="incidentResult" class="incident-result"></div><div id="collection" class="collection"></div><p class="rules-note">※実際の画像認識ではなく、小道具の配置・写真の範囲に基づいたゲーム内判定です。</p></details>
+  <div class="result-actions"><button id="share" class="share">↗ 結果カードをシェア</button><button id="save" class="save">↓ 結果カードを保存</button><button id="previewCard" class="again" aria-expanded="false">結果カードを見る</button><button id="retry" class="again">↻ もう一回</button></div>
+  <div id="shareCardPreview" class="share-card-preview" hidden><img id="shareCardImage" alt="SNSに共有できる結果カード"/></div>
   <button id="copy" class="sr-only">結果をコピー</button>
+ </div>
 </div>
 <script>
 (() => {
@@ -1260,7 +1158,6 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  const photoSet=makePhoto(stats);
  photoUrl=photoSet.card;
  document.getElementById('photo').src=photoSet.photo;
- document.getElementById('photoBg').src=photoSet.photo;
  document.getElementById('shareCardImage').src=photoSet.card;
  document.getElementById('shareCardPreview').hidden=true;
  document.getElementById('previewCard').textContent='結果カードを見る';
@@ -1276,11 +1173,10 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
   li.appendChild(stamp);li.appendChild(content);review.appendChild(li);
  });
  veil.classList.add('open');
- document.getElementById('resultDrawer').open=false;
- const resultScroll=veil.querySelector('.result-layer');if(resultScroll)resultScroll.scrollTop=0;
+ const resultScroll=veil.querySelector('.result');if(resultScroll)resultScroll.scrollTop=0;
  render()}
 document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
-function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.getElementById('resultDrawer').open=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
 document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-result-card.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('previewCard').addEventListener('click',()=>{if(!photoUrl)return;const p=document.getElementById('shareCardPreview');p.hidden=!p.hidden;document.getElementById('previewCard').textContent=p.hidden?'結果カードを見る':'結果カードを閉じる';document.getElementById('previewCard').setAttribute('aria-expanded',String(!p.hidden));});
