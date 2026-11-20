@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>パリ、行ったことにする。 | 遊べるゲーム v12</title>
+<title>パリ、行ったことにする。 | 遊べるゲーム v13</title>
 <style>
 :root{--ink:#252a35;--sub:#657081;--cream:#f7f4ed;--sky:#b4dce6;--yellow:#ffdd80;--red:#ec6c5c;--line:#292d37;--white:#fffdf8}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;min-height:100vh}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #547aa1;outline-offset:3px}.shell{width:min(900px,100%);margin:auto;padding:24px 24px 42px}.eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;letter-spacing:.1em}.micro{color:#757e89}.brand{display:flex;align-items:center;gap:8px}.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:10px;background:var(--yellow);transform:rotate(-8deg);font-size:17px}h1{font-size:clamp(27px,5vw,43px);letter-spacing:-.065em;line-height:1.25;margin:20px 0 10px;font-weight:900}h1 span{color:#d55e50}.intro{font-size:13px;line-height:1.8;margin:0 0 22px;color:#485264}.setup{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px}.brief{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.pill{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:white;padding:7px 12px;border-radius:30px;white-space:nowrap}.timer{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em}.timer.urgent{color:#d64f46}.stage-wrap{position:relative;border:3px solid var(--line);border-radius:16px;overflow:hidden;background:#e8edf0;box-shadow:8px 8px 0 #d4dbd9}.stage-wrap canvas{display:block;width:100%;aspect-ratio:500/340;touch-action:none;cursor:grab}.stage-wrap canvas.dragging{cursor:grabbing}.hud{position:absolute;inset:10px 12px auto auto;background:rgba(255,253,248,.91);backdrop-filter:blur(4px);border:1px solid #ffffff80;border-radius:999px;padding:7px 10px;font-weight:900;font-size:10px;pointer-events:none}.hud:before{content:'●';color:#ec675c;margin-right:6px}.note{display:flex;align-items:center;gap:8px;padding:12px 0 8px;font-size:12px;color:#657081}.note strong{color:var(--ink)}.tool-title{margin:17px 0 10px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900}.tool-title small{font-size:11px;font-weight:600;color:#818998}.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.tool{border:1.5px solid #d9d7d0;background:#fffdf9;border-radius:14px;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .14s,border-color .14s;box-shadow:0 3px 0 #e7e4de}.tool:hover{border-color:#252a35;transform:translateY(-2px)}.tool:active{transform:scale(.97)}.tool .tool-icon{font-size:30px;line-height:1}.tool .tool-label{font-size:11px;font-weight:850}.edit{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;background:#e9eae4;border:1px solid #d8dcd3;border-radius:12px}.selname{font-size:12px;font-weight:800;min-width:110px}.subhint{display:block;font-size:10px;color:#7b858a;margin-top:2px}.control-buttons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{min-width:38px;height:35px;border:1.5px solid #bfc7c2;border-radius:9px;background:#fffef9;color:#293340;font-weight:900}.mini:disabled{opacity:.4;cursor:not-allowed}.mini.danger{color:#c34743}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;padding:16px 18px;background:var(--red);color:white;border:2px solid var(--ink);border-radius:13px;font-size:16px;font-weight:900;box-shadow:4px 4px 0 var(--ink)}.primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.secondary{padding:14px 17px;border:2px solid var(--ink);background:#fff;border-radius:13px;font-weight:800}.foot{font-size:11px;color:#889097;text-align:center;margin-top:20px}.veil{position:fixed;inset:0;background:rgba(23,27,35,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:10;overflow:auto}.veil.open{display:flex}.result{background:var(--cream);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 #101720;max-width:560px;width:100%;padding:18px;max-height:96vh;overflow:auto}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.08em}.stamp{font-size:12px;background:var(--yellow);padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;transform:rotate(4deg)}.result h2{font-size:27px;line-height:1.35;letter-spacing:-.05em;margin:16px 0 10px}.photo{display:block;width:100%;height:auto;border:2px solid #252a35;border-radius:10px;background:#d8e8e6}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.metric{background:#e4e7e0;padding:12px;border-radius:10px}.metric:nth-child(2){background:#f8d6cc}.metric b{display:block;font-size:25px;letter-spacing:-.04em}.metric span{font-size:10px;font-weight:800;color:#626f75}.quip{font-size:13px;line-height:1.6;font-weight:700;padding:12px 2px;margin:0}.result-actions{display:flex;gap:9px}.result-actions button{min-height:46px;border-radius:11px;border:2px solid var(--ink);font-weight:900;flex:1}.save{background:var(--sky)}.again{background:white}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
@@ -206,6 +206,28 @@
  .editor-dock .advanced-controls{margin:2px 0 0}
  .editor-dock .actions .primary,.editor-dock .actions .secondary{min-height:41px}
 }
+
+/* v13: direct-from-tray placement, pinch editing, dedicated camera review */
+#propDragGhost{display:none;position:fixed;z-index:40;pointer-events:none;transform:translate(-50%,-50%);width:88px;height:88px;align-items:center;justify-content:center;border:2px solid #27313e;border-radius:18px;background:#fff8e7e8;box-shadow:0 6px 18px #19263255;opacity:.95}
+#propDragGhost .watercolor-icon{width:72px!important;height:72px!important}
+#propDragGhost.visible{display:flex}
+.editor-dock .tools .tool{touch-action:pan-x;-webkit-user-select:none;user-select:none}
+.tray-hint{font-size:10px;color:#777f84;margin:1px 0 0}
+.camera-panel{padding:8px 10px;display:grid;gap:5px;background:#e8ece9;border:1px solid #cbd4d0;border-radius:10px}
+.camera-panel[hidden]{display:none!important}
+.camera-panel strong{font-size:12px}.camera-panel p{margin:0;font-size:11px;color:#646f75}
+.camera-zoom-label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:900}
+.camera-zoom-label input{flex:1;min-width:0;accent-color:#ea7660}
+.camera-zoom-label span{min-width:40px;text-align:right}
+#editor.camera-phase .dock-main,#editor.camera-phase .advanced-controls{display:none!important}
+#editor.camera-phase .stage-actions{display:none!important}
+#editor.camera-phase .actions .secondary{background:#fff}
+@media(max-width:650px){
+ .editor-dock .tray-hint{display:none}
+ .editor-dock .camera-panel{padding:8px 10px}
+ #editor.camera-phase .camera-panel{display:grid}
+ #editor.camera-phase .actions{margin-top:6px}
+}
 </style>
 </head>
 <body>
@@ -245,7 +267,12 @@
 <section id="propDock" class="editor-dock" aria-label="小道具選択と撮影">
 <div class="dock-main"><div class="tool-title"><span>小道具を選ぶ <span id="propCount">0個</span></span><small id="assetState">🎨 イラストを準備中…</small></div>
 <div id="categorytabs" class="categorytabs"><button class="active" data-filter="all">すべて</button><button data-filter="scenery">🏙 建物・背景</button><button data-filter="item">🥖 小道具</button><button data-filter="chaos">🐈 事件</button></div>
-<div class="tools" id="tools"></div></div>
+<div class="tools" id="tools"></div><div class="tray-hint">長押しせず、そのまま上へドラッグして置けます。タップでも追加。</div></div>
+<div id="cameraPanel" class="camera-panel" hidden>
+<strong>📷 写真に写す範囲を決めよう</strong>
+<p>画面をドラッグして移動。ピンチでズーム。</p>
+<label class="camera-zoom-label">ズーム <input id="cameraZoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="cameraZoomText">1.35×</span></label>
+</div>
 <details id="advancedControls" class="advanced-controls">
 <summary>⚙️ 撮影・小道具の詳細調整 <span>開く</span></summary>
 <div class="advanced-body"><div class="modebar"><div class="modes" role="group" aria-label="操作モード"><button id="propMode" class="modebtn active" aria-pressed="true">✋ 小道具を動かす</button><button id="cameraMode" class="modebtn" aria-pressed="false">📷 カメラを動かす</button></div><label class="zoomwrap" for="zoom">📷 撮影ズーム <input id="zoom" type="range" min="1" max="2.2" step="0.05" value="1.35"/><span id="zoomlabel">1.35×</span></label></div>
@@ -253,7 +280,7 @@
 <div class="howto">✋ 小道具を近づけて珍事件を起こそう。事件のリプレイは撮影結果から見られるよ。↗・↻・2本指操作もOK。</div>
 <div class="edit"><div><div id="sel" class="selname">小道具を選択</div><span class="subhint" id="editHint">小道具をタップして操作</span></div><label id="objzoomwrap" class="object-zoom" hidden>小道具の大きさ <input id="objectZoom" aria-label="小道具の拡大縮小" type="range" min="0.3" max="3.5" step="0.05" value="1"><span id="objZoomVal">100%</span></label><div class="control-buttons"><button class="mini" id="left" title="左に回転" aria-label="左に回転">↶</button><button class="mini" id="right" title="右に回転" aria-label="右に回転">↷</button><button class="mini" id="small" title="小さくする" aria-label="小さくする">−</button><button class="mini" id="large" title="大きくする" aria-label="大きくする">＋</button><button class="mini" id="flip" aria-label="反転" title="左右反転">⇄</button><button class="mini" id="duplicate" aria-label="複製" title="複製">⧉</button><button class="mini" id="back" aria-label="奥へ" title="奥へ">↓</button><button class="mini" id="front" aria-label="手前へ" title="手前へ">↑</button><button class="mini danger" id="del" title="削除" aria-label="削除">×</button></div></div></div>
 </details>
-<div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📸 これでパリに行ったことにする</button></div>
+<div class="actions"><button class="secondary" id="reset">最初から</button><button class="primary" id="snap">📷 撮影へ →</button></div>
 </section>
 <div class="foot">撮影写真だけで判定。通信不要・登録不要。8つの珍事件。直前の事件を見逃したらリプレイ！</div>
 </main>
@@ -282,6 +309,7 @@ function enterGame(){
  document.getElementById('cover').hidden=true;
  document.getElementById('editor').hidden=false;
  gameEntered=true;
+ setMode('prop');
  try{window.scrollTo({top:0,behavior:'instant'})}catch(_){}
  render();
 }
@@ -339,6 +367,26 @@ const toolsEl=document.getElementById('tools');Object.entries(defs).forEach(([ty
  const icon=b.querySelector('.watercolor-icon');icon.style.backgroundPosition=px+'% '+py+'%';toolsEl.appendChild(b)});
 document.getElementById('categorytabs').addEventListener('click',e=>{const b=e.target.closest('button[data-filter]');if(!b)return;const f=b.dataset.filter;document.querySelectorAll('#categorytabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('#tools button').forEach(x=>x.hidden=f!=='all'&&x.dataset.family!==f)});
 const modeButtons=[document.getElementById('propMode'),document.getElementById('cameraMode')];
+function cameraUI(){
+ const camera=mode==='camera';
+ document.getElementById('editor').classList.toggle('camera-phase',camera);
+ document.getElementById('cameraPanel').hidden=!camera;
+ document.getElementById('snap').textContent=camera?'📸 写真を撮る':'📷 撮影へ →';
+ document.getElementById('reset').textContent=camera?'✋ 配置へ戻る':'最初から';
+ document.getElementById('mobileCamera').hidden=camera;
+ document.getElementById('cameraZoom').value=String(zoom);
+ document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
+}
+function syncZoom(val){
+ zoom=clamp(Number(val),1,2.2);
+ document.getElementById('zoom').value=String(zoom);
+ document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';
+ document.getElementById('cameraZoom').value=String(zoom);
+ document.getElementById('cameraZoomText').textContent=zoom.toFixed(2)+'×';
+ render();
+}
+document.getElementById('cameraZoom').addEventListener('input',e=>{go();syncZoom(e.target.value)});
+
 const rnd=(a,b)=>Math.random()*(b-a)+a, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function shapeRect(x,y,w,h,fill,r=0,stroke=null,lw=1){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.lineWidth=lw;ctx.strokeStyle=stroke;ctx.stroke()}}
 function line(x1,y1,x2,y2,color,width=2){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke()}
@@ -419,6 +467,7 @@ function drawProp(p){
 }
 function framing(){const vw=W/zoom,vh=SHOT_H/zoom;return{x:clamp(cam.x-vw/2,0,W-vw),y:clamp(cam.y-vh/2,0,H-vh),w:vw,h:vh}}
 function drawFrame(){
+ if(mode!=='camera')return;
  const f=framing();ctx.save();
  if(mode!=='camera'){
   // All of the expanded workspace stays visible while arranging props.
@@ -486,18 +535,88 @@ function render({clean=false,noFrame=false}={}){
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
 function hit(p,x,y){const t=-(p.rot||0)*Math.PI/180,dx=x-p.x,dy=y-p.y,c=Math.cos(t),s=Math.sin(t),xx=(dx*c-dy*s)/p.scale,yy=(dx*s+dy*c)/p.scale;const d=defs[p.type];return Math.abs(xx)<d.w/2+9&&Math.abs(yy)<d.h/2+9}
 function choose(p){selected=p;selEl.textContent=p?defs[p.type].label:'小道具を選択';['left','right','small','large','flip','duplicate','front','back','del'].forEach(id=>document.getElementById(id).disabled=!p);document.getElementById('propCount').textContent=props.length+'個';document.querySelectorAll('[data-quick]').forEach(b=>{b.disabled=!p});render()}
-function setMode(next){mode=next;selected=null;choose(null);modeButtons.forEach((b,i)=>{const active=(i===0)===(mode==='prop');b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.getElementById('feedback').textContent=mode==='camera'?'撮影枠をドラッグして、電子レンジや洗濯物を画角から追い出そう。':'小道具を動かして、パリっぽく偽装しよう。';
+function setMode(next){mode=next;selected=null;choose(null);cameraUI();modeButtons.forEach((b,i)=>{const active=(i===0)===(mode==='prop');b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.getElementById('feedback').textContent=mode==='camera'?'撮影枠をドラッグして、電子レンジや洗濯物を画角から追い出そう。':'小道具を動かして、パリっぽく偽装しよう。';
  const mobile=document.getElementById('mobileCamera');mobile.setAttribute('aria-pressed',String(mode==='camera'));mobile.classList.toggle('is-camera',mode==='camera');mobile.innerHTML=mode==='camera'?'✋<small>配置</small>':'📷<small>画角</small>';
 }
 modeButtons[0].addEventListener('click',()=>setMode('prop'));
 modeButtons[1].addEventListener('click',()=>setMode('camera'));
 document.getElementById('mobileCamera').addEventListener('click',()=>setMode(mode==='camera'?'prop':'camera'));
-document.getElementById('zoom').addEventListener('input',e=>{if(finished)return;zoom=Number(e.target.value);document.getElementById('zoomlabel').textContent=zoom.toFixed(2)+'×';go();render()});
+document.getElementById('zoom').addEventListener('input',e=>{if(finished)return;go();syncZoom(e.target.value)});
 function clockText(){return freeMode?'∞':String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0')}
 function go(){if(!gameEntered||started)return;started=true;if(freeMode)return;interval=setInterval(()=>{if(finished||replaying)return;left--;timerEl.textContent=clockText();timerEl.classList.toggle('urgent',left<=10);if(left<=0)shoot()},1000)}
 document.getElementById('freeplay').addEventListener('click',()=>{if(finished)return;freeMode=!freeMode;const b=document.getElementById('freeplay');b.classList.toggle('active',freeMode);b.setAttribute('aria-pressed',String(freeMode));clearInterval(interval);interval=null;started=false;left=90;timerEl.textContent=clockText();timerEl.classList.remove('urgent');document.getElementById('feedback').textContent=freeMode?'時間無制限。納得いくまでパリを捏造しよう。':'90秒でパリを捏造せよ！'});
-function add(type){if(finished||replaying||!gameEntered||!defs[type])return;setMode('prop');go();const n=props.length,p={uid:nextPropId++,type,x:clamp(160+(n*37)%195,70,425),y:clamp(ROOM_SHIFT+135+(n*23)%100,65,H-55),rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};props.push(p);choose(p);document.getElementById('feedback').textContent=defs[type].label+'を配置。好きな場所へ動かそう。'}
-document.getElementById('tools').addEventListener('click',e=>{const b=e.target.closest('button[data-type]');if(b)add(b.dataset.type)});
+function add(type,point=null){
+ if(finished||replaying||!gameEntered||mode!=='prop'||!defs[type])return null;
+ go();
+ const n=props.length;
+ const p={uid:nextPropId++,type,
+ x:clamp(point?point.x:175+(n*41)%155,25,W-25),
+ y:clamp(point?point.y:cam.y-40+(n*27)%87,28,H-28),
+ rot:type==='tower'?-8:rnd(-8,8),scale:type==='cloth'?.8:type==='tower'?.78:1,flip:1};
+ props.push(p);choose(p);
+ document.getElementById('feedback').textContent=defs[type].label+'を配置。ドラッグで好きな場所へ。';
+ return p;
+}
+// The tray doubles as a tap-to-add gallery and direct drag-and-drop source.
+// touch-action:pan-x preserves horizontal gallery scrolling on iOS.
+const tray=document.getElementById('tools');
+let trayDrag=null;let suppressTrayClick=false;
+const ghost=document.createElement('div');ghost.id='propDragGhost';ghost.setAttribute('aria-hidden','true');
+ghost.innerHTML='<span class="watercolor-icon"></span>';
+document.body.appendChild(ghost);
+function positionGhost(x,y){
+ ghost.style.left=x+'px';ghost.style.top=y+'px';
+}
+function clearTrayDrag(){
+ if(trayDrag&&trayDrag.button){
+  try{trayDrag.button.releasePointerCapture(trayDrag.id)}catch(_){}
+ }
+ trayDrag=null;ghost.classList.remove('visible');ghost.style.display='none';
+}
+function inStageViewport(x,y){
+ const box=canvas.getBoundingClientRect(),dock=document.getElementById('propDock').getBoundingClientRect();
+ return x>=box.left&&x<=box.right&&y>=box.top&&y<=Math.min(box.bottom,dock.top-5);
+}
+tray.addEventListener('pointerdown',e=>{
+ const button=e.target.closest('button[data-type]');
+ if(!button||mode!=='prop'||finished||!gameEntered)return;
+ trayDrag={id:e.pointerId,button,type:button.dataset.type,x:e.clientX,y:e.clientY,moved:false};
+ suppressTrayClick=false;
+ try{button.setPointerCapture(e.pointerId)}catch(_){}
+});
+tray.addEventListener('pointermove',e=>{
+ const d=trayDrag;if(!d||d.id!==e.pointerId)return;
+ if(!d.moved&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>12
+  &&Math.abs(e.clientY-d.y)>Math.abs(e.clientX-d.x)*.65){
+   d.moved=true;
+   const icon=d.button.querySelector('.watercolor-icon');
+   ghost.querySelector('.watercolor-icon').style.backgroundPosition=icon.style.backgroundPosition;
+   ghost.style.display='flex';ghost.classList.add('visible');
+ }
+ if(d.moved){positionGhost(e.clientX,e.clientY);e.preventDefault()}
+});
+tray.addEventListener('pointerup',e=>{
+ const d=trayDrag;if(!d||d.id!==e.pointerId)return;
+ if(d.moved){
+  suppressTrayClick=true;
+  if(inStageViewport(e.clientX,e.clientY)){
+   const p=add(d.type,pos(e));
+   if(p)checkReactions(p);
+  }
+ }else{
+  suppressTrayClick=true;add(d.type);
+ }
+ clearTrayDrag();
+ e.preventDefault();
+});
+tray.addEventListener('pointercancel',()=>{suppressTrayClick=true;clearTrayDrag()});
+tray.addEventListener('click',e=>{
+ const button=e.target.closest('button[data-type]');
+ if(!button)return;
+ if(suppressTrayClick){suppressTrayClick=false;return}
+ // Accessibility and desktop click fallback.
+ add(button.dataset.type);
+});
 canvas.addEventListener('pointerdown',e=>{
  if(finished||replaying)return;
  const pt=pos(e);pointers.set(e.pointerId,pt);
@@ -800,7 +919,7 @@ function makePhoto(stats){selected=null;render({clean:true,noFrame:true});const 
  c.fillStyle='#252a35';c.font='bold 39px sans-serif';c.fillText(stats.title,34,746,940);
  c.fillStyle='#d55e50';c.font='bold 30px sans-serif';c.fillText('ENDING '+stats.ending.id+'　パリっぽさ '+stats.score+'% / 実家感 '+stats.home+'%',36,802,930);
  c.fillStyle='#66727b';c.font='19px sans-serif';c.fillText('友達「'+stats.reply+'」',36,841,920);
- c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v11',969,866);
+ c.textAlign='right';c.fillStyle='#7c858b';c.font='bold 14px sans-serif';c.fillText('ALIBI STUDIO / GAME v13',969,866);
  return off.toDataURL('image/png')}
 function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  for(const task of animating){Object.assign(task.prop,task.to)}animating.clear();
@@ -816,9 +935,9 @@ function shoot(){if(!gameEntered||finished||replaying||!atlasReady)return;
  document.getElementById('evidence').textContent=stats.exposed.length?'写ってしまった実家の証拠：'+stats.exposed.map(p=>p.name).join('・'):'実家の証拠は全部フレーム外か小道具で隠せた！';
  document.getElementById('incidentResult').textContent=incidents.length?'⚡ 撮影中の珍事件：'+[...new Set(incidents.map(i=>i.name))].join(' ／ '):'⚡ 珍事件：なし（小道具同士を近づけると起きるかも）';
  photoUrl=makePhoto(stats);document.getElementById('photo').src=photoUrl;veil.classList.add('open');render()}
-document.getElementById('snap').addEventListener('click',shoot);
-function reset(){finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
-document.getElementById('reset').addEventListener('click',reset);document.getElementById('retry').addEventListener('click',reset);
+document.getElementById('snap').addEventListener('click',()=>{if(mode==='camera')shoot();else setMode('camera')});
+function reset(){clearTrayDrag();finished=false;started=false;left=90;clearInterval(interval);recording=null;lastReplay=null;replaying=false;replayScene=null;impact=null;document.getElementById('instantReplay').disabled=true;document.getElementById('instantReplay').hidden=true;document.getElementById('instantReplay').textContent='▶ 直前の事件を再生（約1.5秒）';document.getElementById('resultReplay').hidden=true;document.getElementById('photo').hidden=false;document.querySelector('.stage-wrap').classList.remove('replaying','shaking');props=[];selected=null;drag=null;pointers.clear();gesture=null;fx=[];incidents=[];triggered.clear();animating.clear();clearTimeout(toastHide);document.getElementById('incidentToast').hidden=true;nextPropId=1;updateIncidentUI();zoom=1.35;cam={x:255,y:ROOM_SHIFT+172};document.getElementById('zoom').value=String(zoom);document.getElementById('zoomlabel').textContent='1.35×';timerEl.textContent=clockText();timerEl.classList.remove('urgent');veil.classList.remove('open');setMode('prop');choose(null)}
+document.getElementById('reset').addEventListener('click',()=>{if(mode==='camera'&&!finished)setMode('prop');else reset()});document.getElementById('retry').addEventListener('click',reset);
 document.getElementById('save').addEventListener('click',()=>{if(!photoUrl)return;let a=document.createElement('a');a.href=photoUrl;a.download='fake-paris-photo.png';document.body.appendChild(a);a.click();a.remove()});
 document.getElementById('share').addEventListener('click',async()=>{if(!lastStats||!photoUrl)return;const msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'%　#パリ行ったことにする';const url=location.href.split('#')[0];try{const blob=await(await fetch(photoUrl)).blob();const file=new File([blob],'fake-paris.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'パリ、行ったことにする。',text:msg,url,files:[file]});return}}catch(e){if(e.name==='AbortError')return}if(navigator.share){try{await navigator.share({title:'パリ、行ったことにする。',text:msg,url});return}catch(e){if(e.name==='AbortError')return}}window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n'+url),'_blank','noopener')});
 document.getElementById('copy').addEventListener('click',async()=>{if(!lastStats)return;const b=document.getElementById('copy');let msg='パリ、行ったことにする。\n'+lastStats.title+'\nパリっぽさ '+lastStats.score+'% / 実家感 '+lastStats.home+'%\n友達「'+lastStats.reply+'」\n'+location.href;try{await navigator.clipboard.writeText(msg);b.textContent='✓ コピーしました'}catch(e){const a=document.createElement('textarea');a.value=msg;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();if(document.execCommand('copy'))b.textContent='✓ コピーしました';else b.textContent='保存できませんでした';a.remove()}});
